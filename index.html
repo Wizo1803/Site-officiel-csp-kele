@@ -61,11 +61,6 @@
 <body>
 
 <header>
-    <div class="slider">
-    <img id="slide" src="facade.jpg" style="width:100%;max-height:450px;objet-fit:cover;border-radius:10px;">
-    </div> 
-    <script>
-    const images=["facade.jpg","IMG1.jfif","IMG2.jfif","IMG3.jfi"];
     <img src="Facade.jpg"alt="Façade du Centre CSP Kele" style="width:100%;max-height:450px;object-fit:cover;border-radius:10px;">
     <h1>COORDINATION SOUS-PROVINCIALE KELE</h1>
     <h2>Site Officiel</h2>
@@ -167,7 +162,25 @@ nos actualités ainsi que nos différents services.
 </ul>
 
 </div>
+<div class="slider">
+    <img id="slide" src="facade.jpg" style="width:100%;max-height:450px;object-fit:cover;border-radius:10px;">
+</div>
 
+<script>
+const images = [
+    "facade.jpg",
+    "IMG1.jfif",
+    "IMG2.jFIF",
+    "IMG3.jfif"
+];
+
+let i = 0;
+
+setInterval(function () {
+    i = (i + 1) % images.length;
+    document.getElementById("slide").src = images[i];
+}, 3000);
+</script>
 <footer>
 
 © 2026 Coordination Sous-Provinciale de KELE/EC-CCMTF<br>
