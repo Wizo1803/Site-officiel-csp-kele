@@ -79,7 +79,6 @@
 }
 </style>
 <body>
-
 <header>
     <img src="Facade.jpg"alt="Façade du Centre CSP Kele" style="width:100%;max-height:450px;object-fit:cover;border-radius:10px;">
     <h1>COORDINATION SOUS-PROVINCIALE KELE</h1>
@@ -213,6 +212,43 @@ setInterval(function () {
 Tous droits réservés.
 
 </footer>
+<a href="#" id="retour-haut" title="Retour en haut">⬆</a>
 
+<style>
+#retour-haut{
+    position: fixed;
+    bottom: 95px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background: #0056b3;
+    color: white;
+    text-decoration: none;
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+#retour-haut:hover{
+    background: #003d80;
+}
+</style>
+
+<script>
+const boutonRetour = document.getElementById("retour-haut");
+
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        boutonRetour.style.display = "flex";
+    } else {
+        boutonRetour.style.display = "none";
+    }
+};
+</script>
 </body>
 </html>
