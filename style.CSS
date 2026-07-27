@@ -85,12 +85,15 @@ img{
     padding:0;
 }
 
-.menu a{
-    color:white;
-    font-weight:bold;
-    transition:0.3s;
+.menu{
+    display:flex;
+    list-style:none;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin:0;
+    padding:0;
 }
-
 .menu a:hover{
     color:#ffd700;
 }
