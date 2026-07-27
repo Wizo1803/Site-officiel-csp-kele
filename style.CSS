@@ -25,3 +25,26 @@ img{
     max-width:100%;
     height:auto;
 }
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    color:#333;
+}
+
+h1,h2,h3{
+    color:#0b3d91;
+}
+
+a{
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+    height:auto;
+}
