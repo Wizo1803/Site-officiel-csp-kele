@@ -246,3 +246,48 @@ rgba(255,255,255,0.4);
     background:white;
     color:#0b3d91;
 }
+/* ===== Nos Filières ===== */
+
+.filieres{
+    padding:70px 20px;
+    background:#f4f6f9;
+    text-align:center;
+}
+
+.filieres h2{
+    font-size:36px;
+    margin-bottom:40px;
+}
+
+.filieres-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.filiere{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.filiere:hover{
+    transform:translateY(-10px);
+}
+
+.filiere img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.filiere h3{
+    color:#0b3d91;
+    margin:15px 0;
+}
+
+.filiere p{
+    padding:0 15px 20px;
+}
