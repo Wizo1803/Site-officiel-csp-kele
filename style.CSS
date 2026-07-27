@@ -65,18 +65,32 @@ img{
 .logo{
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:10px;
+}
+
+.logo img{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+}
+
+.logo-text{
+    display:flex;
+    flex-direction:column;
+    line-height:1.2;
+}
+
+.logo-text span{
     color:white;
     font-size:18px;
     font-weight:bold;
 }
 
-.logo img{
-    width:30px;
-    height:30px;
-    border-radius:50%;
+.logo-text small{
+    color:#d9e6ff;
+    font-size:12px;
+    font-style:italic;
 }
-
 .menu{
     display:flex;
     list-style:none;
