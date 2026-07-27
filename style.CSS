@@ -148,3 +148,47 @@ img{
 .btn:hover{
     background:#e68900;
 }
+/* ===== Section À propos ===== */
+
+.apropos{
+    padding:60px 20px;
+    background:#ffffff;
+    text-align:center;
+}
+
+.apropos h2{
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.apropos p{
+    max-width:900px;
+    margin:auto;
+    line-height:1.8;
+    font-size:18px;
+}
+
+.cartes{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin-top:40px;
+}
+
+.carte{
+    width:300px;
+    background:#f5f5f5;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.carte:hover{
+    transform:translateY(-8px);
+}
+
+.carte h3{
+    color:#0b3d91;
+}
