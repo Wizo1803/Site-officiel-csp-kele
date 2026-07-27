@@ -54,12 +54,15 @@ img{
     position:sticky;
     top:0;
     z-index:1000;
-    background:#0b3d91;
+    background:rgba(11,61,145,0.95);
+    backdrop-filter:blur(8px);
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:12px 20px;
     box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
 }
 
 .logo{
@@ -73,7 +76,10 @@ img{
     height:35px;
     border-radius:50%;
 }
-
+.logo img{
+  box-shadow:0 0 10px
+rgba(255,255,255,0.4);
+}
 .logo-text{
     display:flex;
     flex-direction:column;
@@ -112,6 +118,23 @@ img{
 }
 .menu a:hover{
     color:#ffd700;
+}
+.menu a{
+  position:relative;
+ }
+.menu a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0;
+    height:3px;
+    background:#ffd700;
+    transition:0.3s;
+}
+
+.menu a:hover::after{
+    width:100%;
 }
 /* ===== Bannière d'accueil ===== */
 
