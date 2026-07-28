@@ -319,3 +319,8 @@ rgba(255,255,255,0.4);
 .galerie-grid img:hover{
     transform:scale(1.05);
 }
+.container{
+  max-width:1200PX;
+  margin:0 auto;
+  padding:0 20px;
+}
