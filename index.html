@@ -92,12 +92,17 @@
     </div>
 </div>
 
-    <ul class="menu">
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#apropos">À propos</a></li>
-        <li><a href="#galerie">Galerie</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+   <button class="menu-toggle" id="menu-toggle">
+☰
+</button>
+
+<ul class="menu" id="menu">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#filieres">Filières</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#contact">Contact</a></li>
+</ul>
 </nav>  
  <section id="accueil" class="hero">
 
@@ -491,5 +496,13 @@ Tous droits réservés.
 </p>
 
 </footer>
+  <script>
+const menuToggle = document.getElementById("menu-toggle");
+const menu = document.getElementById("menu");
+
+menuToggle.addEventListener("click", () => {
+    menu.classList.toggle("active");
+});
+</script>
 </body>
 </html>
