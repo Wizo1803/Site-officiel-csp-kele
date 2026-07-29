@@ -348,3 +348,51 @@ rgba(255,255,255,0.4);
 body{
   padding-top:90px;    
 }
+/* ===== Menu Hamburger ===== */
+
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+}
+
+@media (max-width:768px){
+
+    .navbar{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+        padding:15px 20px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .menu{
+        display:none;
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#0b3d91;
+        flex-direction:column;
+        text-align:center;
+        padding:15px 0;
+    }
+
+    .menu.active{
+        display:flex;
+    }
+
+    .menu li{
+        margin:12px 0;
+    }
+
+    .hero{
+        padding-top:80px;
+    }
+}
