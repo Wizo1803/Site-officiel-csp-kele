@@ -406,3 +406,34 @@ body{
         padding-top:80px;
     }
 }
+
+/* Empêche le débordement horizontal */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Barre de navigation */
+header {
+    width: 100%;
+    padding: 12px 16px;
+}
+
+/* Bouton hamburger */
+.menu-toggle {
+    margin-left: auto;
+    padding: 8px;
+    position: relative;
+    right: 0;
+}
+
+/* Bouton WhatsApp */
+.whatsapp-float {
+    right: 16px;
+    bottom: 20px;
+}
