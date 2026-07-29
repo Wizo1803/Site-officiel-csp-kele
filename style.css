@@ -265,6 +265,19 @@ rgba(255,255,255,0.4);
     background:white;
     color:#0b3d91;
 }
+.menu-toggle{
+    display:none;
+    background:none;
+    border:none;
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+
+    position: absolute;
+    right: 15px;
+    top: 18px;
+    z-index: 1001;
+}
 /* ===== Nos Filières ===== */
 
 .filieres{
@@ -342,8 +355,7 @@ rgba(255,255,255,0.4);
   max-width:1200PX;
   margin:0 auto;
   padding:0 20px;
-}
-}
+
 }
 body{
   padding-top:90px;    
@@ -366,6 +378,7 @@ body{
         justify-content:space-between;
         align-items:center;
         padding:15px 20px;
+        position:relative;
     }
 
     .menu-toggle{
