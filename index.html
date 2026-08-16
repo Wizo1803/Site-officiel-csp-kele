@@ -322,32 +322,48 @@ setInterval(function () {
 
 <h2 style="text-align:center;color:#0b3d91;">📩 Contactez-nous</h2>
 
-<form action="https://formspree.io/f/mdenldvj" method="POST" style="max-width:700px;margin:auto;">
+<div data-fs-success style="margin:15px 0;padding:12px;background:#e8f5e9;color:#2e7d32;border-radius:8px;text-align:center;"></div>
 
-<label><strong>Nom complet</strong></label><br>
-<input type="text" name="name" placeholder="Votre nom complet" required
-style="width:100%;padding:12px;margin:10px 0;"><br>
+<div data-fs-error style="margin:15px 0;padding:12px;background:#ffebee;color:#c62828;border-radius:8px;text-align:center;"></div>
 
-<label><strong>Téléphone</strong></label><br>
-<input type="tel" name="phone" placeholder="+243..."
-style="width:100%;padding:12px;margin:10px 0;"><br>
+<form id="contact-form">
 
-<label><strong>Adresse e-mail</strong></label><br>
-<input type="email" name="email" placeholder="Votre e-mail" required
-style="width:100%;padding:12px;margin:10px 0;"><br>
+    <label><strong>Nom complet</strong></label>
+    <input type="text"
+           name="name"
+           placeholder="Votre nom complet"
+           data-fs-field
+           required>
 
-<label><strong>Objet</strong></label><br>
-<input type="text" name="subject" placeholder="Objet du message" required
-style="width:100%;padding:12px;margin:10px 0;"><br>
+    <label><strong>Téléphone</strong></label>
+    <input type="tel"
+           name="phone"
+           placeholder="+243..."
+           data-fs-field>
 
-<label><strong>Votre message</strong></label><br>
-<textarea name="message" rows="6" placeholder="Écrivez votre message..." required
-style="width:100%;padding:12px;margin:10px 0;"></textarea><br>
+    <label><strong>Adresse e-mail</strong></label>
+    <input type="email"
+           name="email"
+           placeholder="Votre e-mail"
+           data-fs-field
+           required>
 
-<button type="submit"
-style="background:#0b3d91;color:white;padding:15px 30px;border:none;border-radius:8px;font-size:18px;cursor:pointer;">
-📨 Envoyer
-</button>
+    <label><strong>Objet</strong></label>
+    <input type="text"
+           name="subject"
+           placeholder="Objet du message"
+           data-fs-field
+           required>
+
+    <label><strong>Votre message</strong></label>
+    <textarea name="message"
+              placeholder="Écrivez votre message..."
+              data-fs-field
+              required></textarea>
+
+    <button type="submit" data-fs-submit-btn>
+        📨 Envoyer
+    </button>
 
 </form>
 </section> 
@@ -498,5 +514,19 @@ menuToggle.addEventListener("click", () => {
     menu.classList.toggle("active");
 });
 </script>
+<script>
+window.formspree =
+  window.formspree ||
+  function () {
+    (formspree.q = formspree.q || []).push(arguments);
+  };
+
+formspree('initForm', {
+  formElement: '#contact-form',
+  formId: 'mdenldvj'
+});
+</script>
+
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>    
 </body>
 </html>
