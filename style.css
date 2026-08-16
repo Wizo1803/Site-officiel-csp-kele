@@ -596,3 +596,17 @@ header {
     text-align: center;
     font-weight: bold;
 }
+.photo-cachee {
+    display: none;
+}
+
+#voirPlusBtn {
+    display: block;
+    margin: 25px auto;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
