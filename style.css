@@ -496,6 +496,7 @@ header {
     box-sizing: border-box;
 }
 
+/* Chaque label occupe sa propre ligne */
 #contact-form label {
     display: block;
     width: 100%;
@@ -505,10 +506,12 @@ header {
     color: #222;
 }
 
+/* Chaque champ occupe sa propre ligne */
 #contact-form input,
 #contact-form textarea {
     display: block;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     padding: 12px;
     font-size: 18px;
@@ -525,6 +528,7 @@ header {
     resize: vertical;
 }
 
+/* Bouton */
 #contact-form button {
     display: block;
     margin: 20px auto;
@@ -535,7 +539,7 @@ header {
 
 
 /* ==============================
-   AFFICHAGE SUR TELEPHONE
+   TELEPHONE
    ============================== */
 
 @media screen and (max-width: 600px) {
@@ -543,25 +547,17 @@ header {
     #contact-form {
         width: 100%;
         padding: 10px;
-        margin: 0 auto;
         box-sizing: border-box;
     }
 
     #contact-form label {
-        display: block;
-        width: 100%;
-        margin-top: 12px;
-        margin-bottom: 5px;
         font-size: 20px;
-        text-align: left;
     }
 
     #contact-form input,
     #contact-form textarea {
-        display: block;
         width: 100%;
         max-width: 100%;
-        box-sizing: border-box;
         font-size: 16px;
     }
 
@@ -574,9 +570,6 @@ header {
     }
 
     #contact-form button {
-        width: auto;
-        max-width: 100%;
-        margin: 20px auto;
         font-size: 18px;
     }
 }
