@@ -366,6 +366,13 @@ setInterval(function () {
     </button>
 
 </form>
+ <script>
+document.querySelector('form').addEventListener('submit', function() {
+    setTimeout(() => {
+        this.reset();
+    }, 1000);
+});
+</script>   
 </section> 
 
 <section style="text-align:center;padding:30px;">
