@@ -650,5 +650,14 @@ function afficherGalerie() {
     }
 }
 </script>
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js")
+            .then(() => console.log("Service Worker enregistré"))
+            .catch(error => console.error("Erreur Service Worker :", error));
+    });
+}
+</script>
 </body>
 </html>
