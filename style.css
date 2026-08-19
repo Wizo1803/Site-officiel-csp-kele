@@ -781,3 +781,69 @@ header {
         color: white;
     }
 }
+/* ===== MENU FINAL ORDINATEUR + MOBILE ===== */
+
+/* ORDINATEUR */
+@media (min-width: 769px) {
+
+    .menu {
+        display: flex !important;
+        position: static !important;
+        flex-direction: row;
+        width: auto;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        gap: 20px;
+        box-shadow: none;
+    }
+
+    .menu-toggle {
+        display: none !important;
+    }
+}
+
+/* TÉLÉPHONE */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block !important;
+        color: white;
+        font-size: 28px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 10001;
+    }
+
+    .menu {
+        display: none !important;
+        position: fixed !important;
+        top: 60px;
+        right: 0;
+        width: 240px;
+        flex-direction: column;
+        background: #004080;
+        padding: 10px 0;
+        margin: 0;
+        gap: 0;
+        z-index: 10000;
+    }
+
+    .menu.active {
+        display: flex !important;
+    }
+
+    .menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu li a {
+        display: block;
+        width: 100%;
+        padding: 14px 10px;
+        box-sizing: border-box;
+        color: white;
+    }
+}
