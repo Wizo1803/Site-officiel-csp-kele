@@ -11,7 +11,7 @@ body{
 }
 
 body{
-    padding-top:90px;
+    padding-top:60px;
 }
 /* Titres */
 
@@ -144,24 +144,6 @@ rgba(255,255,255,0.4);
 .menu a:hover::after{
     width:100%;
 }
-@media (max-width: 768px) {
-
-    /* ===== BARRE DE NAVIGATION MOBILE ===== */
-
-    .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 60px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 2000;
-        box-sizing: border-box;
-    }
-
     /* Espace pour que le contenu ne passe pas sous la barre */
     body {
         padding-top: 60px;
@@ -720,5 +702,82 @@ header {
         width: 100%;
         padding: 12px 10px;
         box-sizing: border-box;
+    }
+}
+/* ===== CORRECTION FINALE DU MENU MOBILE ===== */
+
+@media (max-width: 768px) {
+
+    html,
+    body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    /* Barre fixe */
+    .navbar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 9999;
+        box-sizing: border-box;
+    }
+
+    /* Le contenu commence sous la barre */
+    .hero {
+        margin-top: 60px;
+    }
+
+    /* Bouton hamburger */
+    .menu-toggle {
+        display: block !important;
+        margin-left: auto;
+        margin-right: 15px;
+        font-size: 28px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 10001;
+    }
+
+    /* Menu fermé */
+    .menu {
+        display: none !important;
+        position: fixed !important;
+        top: 60px;
+        right: 0;
+        width: 220px;
+        padding: 10px 0;
+        margin: 0;
+        flex-direction: column;
+        gap: 0;
+        background: #0b3d91;
+        z-index: 10000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    /* Menu ouvert */
+    .menu.active {
+        display: flex !important;
+    }
+
+    .menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu li a {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        color: white;
     }
 }
