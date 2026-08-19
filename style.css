@@ -847,3 +847,70 @@ header {
         color: white;
     }
 }
+/* ===== AJUSTEMENT FINAL DU MENU ===== */
+
+/* ORDINATEUR */
+@media (min-width: 769px) {
+
+    .navbar {
+        width: 100%;
+        box-sizing: border-box;
+        overflow: visible !important;
+    }
+
+    .menu {
+        display: flex !important;
+        flex-wrap: nowrap;
+        gap: 8px;
+        overflow: visible !important;
+        white-space: nowrap;
+    }
+
+    .menu li {
+        flex-shrink: 0;
+    }
+
+    .menu a {
+        padding: 6px 7px;
+        font-size: 14px;
+    }
+}
+
+/* TÉLÉPHONE */
+@media (max-width: 768px) {
+
+    .menu {
+        display: none !important;
+        position: fixed !important;
+        top: 60px;
+        right: 0;
+        width: 260px;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex-direction: column;
+        padding: 5px 0 15px 0;
+        background: #004080;
+        z-index: 10000;
+    }
+
+    .menu.active {
+        display: flex !important;
+    }
+
+    .menu li {
+        display: block;
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .menu li a {
+        display: block;
+        width: 100%;
+        padding: 13px 10px;
+        box-sizing: border-box;
+        color: white;
+        font-size: 15px;
+        white-space: normal;
+    }
+}
