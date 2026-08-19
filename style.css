@@ -642,3 +642,65 @@ header {
     font-size: 16px;
     font-weight: bold;
 }
+/* ===== MENU HAMBURGER - VERSION MOBILE ===== */
+
+.menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .navbar {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 28px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px 12px;
+        margin-left: auto;
+        z-index: 2000;
+    }
+
+    .menu {
+        display: none !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 10px 0;
+        margin: 0;
+        gap: 0;
+        z-index: 1999;
+        box-sizing: border-box;
+    }
+
+    .menu.active {
+        display: flex !important;
+    }
+
+    .menu li {
+        display: block;
+        width: 100%;
+        margin: 0 !important;
+        padding: 0;
+        text-align: center;
+    }
+
+    .menu li a {
+        display: block;
+        width: 100%;
+        padding: 12px 10px;
+        box-sizing: border-box;
+    }
+}
