@@ -113,33 +113,35 @@
 </style>
 <body>
  <nav class="navbar">
-   <div class="logo">
-    <img src="banner2.png" alt="Logo CSP/CCMTF KELE">
 
-    <div class="logo-text">
-        <span>CSP/CCMTF KELE</span>
-        <small>Former aujourd'hui, bâtir demain</small>
+    <div class="logo">
+        <img src="banner2.png" alt="Logo CSP/CCMTF KELE">
+
+        <div class="logo-text">
+            <span>CSP/CCMTF KELE</span>
+            <small>Former aujourd'hui, bâtir demain</small>
+        </div>
     </div>
-</div>
 
-   <button class="menu-toggle" id="menu-toggle">
-☰
-</button>
+    <button class="menu-toggle" id="menu-toggle" type="button">
+        ☰
+    </button>
 
-<ul class="menu" id="menu">
-    <li><a href="#accueil">Accueil</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="annuaire">Annuaire</a></li>
-    <li><a href="#galerie">Galerie</a></li>
-    <li><a href="#filières et programmes">Filères et Programmes</a></li>
-    <li><a href="centres de formation">Centres de formation</a></li>
-    <li><a href="cours">Cours</a></li>
-    <li><a href="mise en place">Mise en place</a></li>
-    <li><a href="documents officiels">Documents officiels</a></li>
-    <li><a href="nos autorités">Nos autorités</a></li>
-    <li><a href="activités S/Coordination">Activités S/Coordination</a></li>
-</ul>
-</nav>  
+    <ul class="menu" id="menu">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="annuaire.html">Annuaire</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#filieres">Filières et Programmes</a></li>
+        <li><a href="centres.html">Centres de formation</a></li>
+        <li><a href="cours.html">Cours et vidéos</a></li>
+        <li><a href="mise-en-place.html">Mise en place</a></li>
+        <li><a href="documents-officiels.html">Documents officiels</a></li>
+        <li><a href="autorites.html">Nos autorités</a></li>
+        <li><a href="activites.html">Activités S/Coordination</a></li>
+    </ul>
+
+</nav>
  <section id="accueil" class="hero">
 
     <div class="hero-content">
@@ -692,13 +694,6 @@ if ("serviceWorker" in navigator) {
     });
 }
 </script>
-<script>
-const menuToggle = document.getElementById('menu-toggle');
-const menu = document.getElementById('menu');
-
-menuToggle.addEventListener('click', function () {
-    menu.classList.toggle('active');
-});
 </script>
 </body>
 </html>
