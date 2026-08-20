@@ -2,562 +2,1137 @@
 <html lang="fr">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>Annuaire - CSP KELE / CCMTF</title>
 
-    <title>Annuaire - CSP/CCMTF KELE</title>
+    <style>
 
-    <link rel="stylesheet" href="style.css">
+        * {
+            box-sizing: border-box;
+        }
 
-    <link rel="manifest" href="manifest.json">
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <meta name="theme-color" content="#0b3d91">
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+        }
 
+        /* =========================
+           BARRE DU HAUT
+        ========================= */
+
+        .topbar {
+            background: #0b3d91;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .topbar-left img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .topbar-title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar-title strong {
+            font-size: 18px;
+        }
+
+        .topbar-title small {
+            color: #dce8ff;
+            font-size: 12px;
+        }
+
+        .retour {
+            background: white;
+            color: #0b3d91;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .retour:hover {
+            background: #ffd700;
+            color: #0b3d91;
+        }
+
+        /* =========================
+           TITRE
+        ========================= */
+
+        .entete {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .entete h1 {
+            color: #0b3d91;
+            margin-bottom: 10px;
+            font-size: 38px;
+        }
+
+        .entete p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           RECHERCHE
+        ========================= */
+
+        .recherche {
+            width: 90%;
+            max-width: 800px;
+            margin: 10px auto 35px;
+        }
+
+        .recherche input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #0b3d91;
+            border-radius: 30px;
+            font-size: 17px;
+            outline: none;
+        }
+
+        .recherche input:focus {
+            box-shadow: 0 0 8px rgba(11,61,145,0.35);
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section-annuaire {
+            width: 92%;
+            max-width: 1250px;
+            margin: 0 auto 45px;
+        }
+
+        .section-titre {
+            background: #0b3d91;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        /* =========================
+           CARTES
+        ========================= */
+
+        .annuaire-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .personne {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            border-top: 5px solid #0b3d91;
+            transition: 0.3s;
+        }
+
+        .personne:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        }
+
+        .personne h3 {
+            margin: 0 0 10px;
+            color: #0b3d91;
+            font-size: 19px;
+        }
+
+        .fonction {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .information {
+            line-height: 1.7;
+            margin: 7px 0;
+        }
+
+        .information strong {
+            color: #0b3d91;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .btn-appel,
+        .btn-email {
+            display: inline-block;
+            padding: 9px 13px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .btn-appel {
+            background: #198754;
+            color: white;
+        }
+
+        .btn-email {
+            background: #0b3d91;
+            color: white;
+        }
+
+        .btn-appel:hover,
+        .btn-email:hover {
+            opacity: 0.85;
+        }
+
+        /* =========================
+           PIED DE PAGE
+        ========================= */
+
+        footer {
+            background: #0b3d91;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 7px;
+        }
+
+        /* =========================
+           RESPONSIVE TABLETTE
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .annuaire-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        /* =========================
+           RESPONSIVE TELEPHONE
+        ========================= */
+
+        @media (max-width: 650px) {
+
+            .topbar {
+                padding: 10px 12px;
+            }
+
+            .topbar-left img {
+                width: 38px;
+                height: 38px;
+            }
+
+            .topbar-title strong {
+                font-size: 15px;
+            }
+
+            .topbar-title small {
+                font-size: 10px;
+            }
+
+            .retour {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .entete {
+                padding: 30px 15px 20px;
+            }
+
+            .entete h1 {
+                font-size: 28px;
+            }
+
+            .entete p {
+                font-size: 15px;
+            }
+
+            .section-annuaire {
+                width: 94%;
+            }
+
+            .section-titre {
+                font-size: 18px;
+                padding: 13px 15px;
+            }
+
+            .annuaire-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .personne {
+                padding: 18px;
+            }
+
+            .personne h3 {
+                font-size: 18px;
+            }
+
+            .fonction {
+                font-size: 15px;
+            }
+
+        }
+
+    </style>
 </head>
-
 
 <body>
 
+<!-- =========================
+     BARRE DU HAUT
+========================= -->
 
-<!-- =====================================================
-     BARRE DE NAVIGATION
-     ===================================================== -->
+<header class="topbar">
 
-<nav class="navbar">
+    <div class="topbar-left">
 
-    <div class="logo">
+        <img src="banner2.png" alt="Logo CSP KELE">
 
-        <img src="banner2.png"
-             alt="Logo CSP/CCMTF KELE">
-
-        <div class="logo-text">
-
-            <span>CSP/CCMTF KELE</span>
-
-            <small>
-                Former aujourd'hui, bâtir demain
-            </small>
-
+        <div class="topbar-title">
+            <strong>CSP / CCMTF KELE</strong>
+            <small>Former aujourd'hui, bâtir demain</small>
         </div>
 
     </div>
 
+    <a href="index.html" class="retour">
+        ⬅ Accueil
+    </a>
 
-    <!-- BOUTON HAMBURGER -->
-
-    <button
-        class="menu-toggle"
-        id="menu-toggle"
-        type="button">
-
-        ☰
-
-    </button>
+</header>
 
 
-    <!-- MENU -->
+<!-- =========================
+     TITRE
+========================= -->
 
-    <ul class="menu" id="menu">
+<section class="entete">
 
-        <li>
-            <a href="index.html#accueil">
-                Accueil
-            </a>
-        </li>
-
-        <li>
-            <a href="annuaire.html">
-                Annuaire
-            </a>
-        </li>
-
-        <li>
-            <a href="index.html#galerie">
-                Galerie
-            </a>
-        </li>
-
-        <li>
-            <a href="filieres.html">
-                Filières et Programme
-            </a>
-        </li>
-
-        <li>
-            <a href="centres.html">
-                Centres de formation
-            </a>
-        </li>
-
-        <li>
-            <a href="cours.html">
-                Cours
-            </a>
-        </li>
-
-        <li>
-            <a href="documents-officiels.html">
-                Documents officiels
-            </a>
-        </li>
-
-        <li>
-            <a href="activites.html">
-                Activité CSP
-            </a>
-        </li>
-
-    </ul>
-
-</nav>
-
-
-
-<!-- =====================================================
-     CONTENU DE LA PAGE
-     ===================================================== -->
-
-<main>
-
-
-<section class="apropos">
-
-    <h1>
-        📋 Annuaire
-    </h1>
+    <h1>📋 Annuaire officiel</h1>
 
     <p>
-
-        Bienvenue dans l'annuaire officiel de la
-        Coordination Sous-Provinciale des EC-CCMTF
-        de KELE.
-
-    </p>
-
-    <p>
-
-        Cette page présente progressivement les
-        responsables, les services, les centres de
-        formation et les différentes structures
-        relevant de la Coordination.
-
+        Retrouvez les responsables de la Coordination,
+        les services administratifs et les chefs des centres
+        de formation de la CSP / CCMTF KELE.
     </p>
 
 </section>
 
 
+<!-- =========================
+     RECHERCHE
+========================= -->
 
-<!-- =====================================================
-     RESPONSABLES
-     ===================================================== -->
+<div class="recherche">
 
-<section class="filieres">
+    <input
+        type="text"
+        id="recherche"
+        placeholder="🔎 Rechercher un nom, une fonction ou un centre..."
+        onkeyup="rechercherPersonne()"
+    >
 
-    <div class="container">
+</div>
 
-        <h2>
-            👥 Responsables de la Coordination
-        </h2>
 
+<!-- =========================================================
+     1. COORDINATION
+========================================================= -->
 
-        <div class="cartes">
+<section class="section-annuaire">
 
-
-            <div class="carte">
-
-                <h3>
-                    Coordination
-                </h3>
-
-                <p>
-                    <strong>
-                        Coordinateur Sous-Provincial
-                    </strong>
-                </p>
-
-                <p>
-                    Nom : __________________________
-                </p>
-
-                <p>
-                    Téléphone : ___________________
-                </p>
-
-                <p>
-                    E-mail : _______________________
-                </p>
-
-            </div>
-
-
-
-            <div class="carte">
-
-                <h3>
-                    Administration
-                </h3>
-
-                <p>
-                    <strong>
-                        Chef de bureau
-                    </strong>
-                </p>
-
-                <p>
-                    Nom : __________________________
-                </p>
-
-                <p>
-                    Téléphone : ___________________
-                </p>
-
-                <p>
-                    E-mail : _______________________
-                </p>
-
-            </div>
-
-
-
-            <div class="carte">
-
-                <h3>
-                    Secrétariat
-                </h3>
-
-                <p>
-                    <strong>
-                        Secrétaire
-                    </strong>
-                </p>
-
-                <p>
-                    Nom : __________________________
-                </p>
-
-                <p>
-                    Téléphone : ___________________
-                </p>
-
-                <p>
-                    E-mail : _______________________
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     TABLEAU DES SERVICES
-     ===================================================== -->
-
-<section class="apropos">
-
-    <div class="container">
-
-        <h2>
-            🏢 Services et bureaux
-        </h2>
-
-
-        <div style="overflow-x:auto;">
-
-            <table
-                style="
-                    width:100%;
-                    border-collapse:collapse;
-                    margin-top:25px;
-                    background:white;
-                ">
-
-                <thead>
-
-                    <tr
-                        style="
-                            background:#0b3d91;
-                            color:white;
-                        ">
-
-                        <th style="padding:12px;">
-                            N°
-                        </th>
-
-                        <th style="padding:12px;">
-                            Service / Bureau
-                        </th>
-
-                        <th style="padding:12px;">
-                            Responsable
-                        </th>
-
-                        <th style="padding:12px;">
-                            Contact
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    <tr>
-
-                        <td style="padding:12px;text-align:center;">
-                            1
-                        </td>
-
-                        <td style="padding:12px;">
-                            Coordination
-                        </td>
-
-                        <td style="padding:12px;">
-                            À compléter
-                        </td>
-
-                        <td style="padding:12px;">
-                            À compléter
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td style="padding:12px;text-align:center;">
-                            2
-                        </td>
-
-                        <td style="padding:12px;">
-                            Administration
-                        </td>
-
-                        <td style="padding:12px;">
-                            À compléter
-                        </td>
-
-                        <td style="padding:12px;">
-                            À compléter
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td style="padding:12px;text-align:center;">
-                            3
-                        </td>
-
-                        <td style="padding:12px;">
-                            Secrétariat
-                        </td>
-
-                        <td style="padding:12px;">
-                            À compléter
-                        </td>
-
-                        <td style="padding:12px;">
-                            À compléter
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td style="padding:12px;text-align:center;">
-                            4
-                        </td>
-
-                        <td style="padding:12px;">
-                            Formation
-                        </td>
-
-                        <td style="padding:12px;">
-                            À compléter
-                        </td>
-
-                        <td style="padding:12px;">
-                            À compléter
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     CENTRES
-     ===================================================== -->
-
-<section class="filieres">
-
-    <div class="container">
-
-        <h2>
-            🏫 Centres de formation
-        </h2>
-
-        <p>
-
-            Retrouvez ici la liste des centres de
-            formation relevant de la Coordination
-            Sous-Provinciale de KELE.
-
-        </p>
-
-
-        <div class="cartes">
-
-
-            <div class="carte">
-
-                <h3>
-                    Centre N°1
-                </h3>
-
-                <p>
-                    Nom du centre :
-                    ______________________
-                </p>
-
-                <p>
-                    Responsable :
-                    ______________________
-                </p>
-
-                <p>
-                    Localisation :
-                    ______________________
-                </p>
-
-            </div>
-
-
-
-            <div class="carte">
-
-                <h3>
-                    Centre N°2
-                </h3>
-
-                <p>
-                    Nom du centre :
-                    ______________________
-                </p>
-
-                <p>
-                    Responsable :
-                    ______________________
-                </p>
-
-                <p>
-                    Localisation :
-                    ______________________
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     CONTACT
-     ===================================================== -->
-
-<section
-    style="
-        text-align:center;
-        padding:50px 20px;
-        background:white;
-    ">
-
-    <h2>
-        📞 Contact de la Coordination
+    <h2 class="section-titre">
+        🏛 Coordination et responsables provinciaux
     </h2>
 
-    <p>
-        📍 Av. Tshela Bwadi n°340
-    </p>
+    <div class="annuaire-grid">
 
-    <p>
-        📍 Commune de Mabondo
-    </p>
 
-    <p>
-        📞 +243 814 448 090
-    </p>
+        <!-- 1 -->
 
-    <p>
-        📞 +243 890 089 321
-    </p>
+        <div class="personne">
 
-    <p>
-        📞 +243 973 486 826
-    </p>
+            <h3>David NDONDJI IFUPA</h3>
 
-    <p>
-        📧 cosprokelefpmccmtf@gmail.com
-    </p>
+            <div class="fonction">
+                Coordinateur National et Représentant Légal / CCMTF
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0820499493 – 0810890164 – 0978628138
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0820499493">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 2 -->
+
+        <div class="personne">
+
+            <h3>Pascal SANTU FUAMBA</h3>
+
+            <div class="fonction">
+                Coordinateur Provincial Kasai 1
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0971685272 – 0990629767
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0971685272">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 3 -->
+
+        <div class="personne">
+
+            <h3>Christos TSHISHIMBI WETU-NGANY</h3>
+
+            <div class="fonction">
+                Coordinateur Sous-Provincial KELE
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0814448090 – 0890089321 – 0973486826
+            </div>
+
+            <div class="information">
+                ✉️ <strong>E-mail :</strong><br>
+                christostshiwe@gmail.com<br>
+                christostsh172@gmail.com
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0814448090">
+                    📞 Appeler
+                </a>
+
+                <a class="btn-email" href="mailto:christostshiwe@gmail.com">
+                    ✉️ E-mail
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 4 -->
+
+        <div class="personne">
+
+            <h3>Clément KAYEMBE</h3>
+
+            <div class="fonction">
+                PROVED (Directeur Provincial FPM)
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                09722903020
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:09722903020">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 5 -->
+
+        <div class="personne">
+
+            <h3>Alfred YAMBU</h3>
+
+            <div class="fonction">
+                Inspecteur Principal Provincial Kasai 1
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0998069396
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0998069396">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 6 -->
+
+        <div class="personne">
+
+            <h3>Michel MAPENA MAPENA</h3>
+
+            <div class="fonction">
+                Diprosenacepeef Kasai 1
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0992473161
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0992473161">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 7 -->
+
+        <div class="personne">
+
+            <h3>Celestin KADIANDANDA</h3>
+
+            <div class="fonction">
+                Chef de Cellule Tshikapa 2
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-</main>
+<!-- =========================================================
+     2. CHEFS DE BUREAU
+========================================================= -->
+
+<section class="section-annuaire">
+
+    <h2 class="section-titre">
+        🏢 Chefs de Bureau
+    </h2>
+
+    <div class="annuaire-grid">
 
 
+        <!-- 8 -->
 
-<!-- =====================================================
+        <div class="personne">
+
+            <h3>Crispin BAKAJIKA KABEYA</h3>
+
+            <div class="fonction">
+                Chef de Bureau - Secrétariat
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0816373074
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0816373074">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 9 -->
+
+        <div class="personne">
+
+            <h3>Pauline KASANGANAYI KABENGU</h3>
+
+            <div class="fonction">
+                Chef de Bureau – Administration et Finance
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0827699846
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0827699846">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 10 -->
+
+        <div class="personne">
+
+            <h3>Vaners MUNGANGA KINKU</h3>
+
+            <div class="fonction">
+                Chef de Bureau – Formation Professionnelle, Apprentissage et Métiers
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0820499493 – 0810890164 – 0978628138
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0820499493">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 11 -->
+
+        <div class="personne">
+
+            <h3>Cedrick KABUYI MUSEMENE</h3>
+
+            <div class="fonction">
+                Chef de Bureau – Planification et Statistique
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0975052045
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0975052045">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+
+        <!-- 12 -->
+
+        <div class="personne">
+
+            <h3>Gentile KULENGA LETA</h3>
+
+            <div class="fonction">
+                Chef de Bureau – Identification, Insertion et Réinsertion
+            </div>
+
+            <div class="information">
+                📞 <strong>Téléphone :</strong><br>
+                0992644511 – 0829394021
+            </div>
+
+            <div class="actions">
+                <a class="btn-appel" href="tel:0992644511">
+                    📞 Appeler
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     3. CHEFS DE CENTRE
+========================================================= -->
+
+<section class="section-annuaire">
+
+    <h2 class="section-titre">
+        🏫 Chefs des Centres de Formation
+    </h2>
+
+    <div class="annuaire-grid">
+
+
+        <!-- 13 -->
+
+        <div class="personne">
+            <h3>Hervé BAYINA KASONGO</h3>
+            <div class="fonction">Chef de Centre TECH - TRAINING</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0977707688</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0977707688">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 14 -->
+
+        <div class="personne">
+            <h3>Norbert TSHITADI TSHITADI</h3>
+            <div class="fonction">Chef de Centre IMPOT MOTORS SERVICES</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0817912751</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0817912751">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 15 -->
+
+        <div class="personne">
+            <h3>Jermie MUTEBA NGINDU</h3>
+            <div class="fonction">Chef de Centre LE BENIS</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0997496399</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0997496399">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 16 -->
+
+        <div class="personne">
+            <h3>Jacques KAYEMBE MUAMBI</h3>
+            <div class="fonction">Chef de Centre HAUTE COUTURE</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0974815975</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0974815975">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 17 -->
+
+        <div class="personne">
+            <h3>Christos KADIEBUE BAKA</h3>
+            <div class="fonction">Chef de Centre BAKA TSHISHIMBI</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0820087353 – 0821764020</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0820087353">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 18 -->
+
+        <div class="personne">
+            <h3>Jean LUBUKU</h3>
+            <div class="fonction">Chef de Centre NOUVELLE GENERATION</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0848845651</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0848845651">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 19 -->
+
+        <div class="personne">
+            <h3>Boniface DIPA DIPA</h3>
+            <div class="fonction">Chef de Centre DINANGA</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0990787451</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0990787451">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 20 -->
+
+        <div class="personne">
+            <h3>Lazard MUPANGILA KAPINGA</h3>
+            <div class="fonction">Chef de Centre DISUMINYINA</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0998442292</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0998442292">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 21 -->
+
+        <div class="personne">
+            <h3>Jean MPUTU MPANDA</h3>
+            <div class="fonction">Chef de Centre DITEKEMENA</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0970687740</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0970687740">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 22 -->
+
+        <div class="personne">
+            <h3>Deborha FONO LUKEKU</h3>
+            <div class="fonction">Chef de Centre LE SOUVENIR</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0827699846</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0827699846">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 23 -->
+
+        <div class="personne">
+            <h3>Charlotte MBAKI KISANGALA</h3>
+            <div class="fonction">Chef de Centre ELIKIA</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0814447342</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0814447342">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 24 -->
+
+        <div class="personne">
+            <h3>Adele MBOMBO</h3>
+            <div class="fonction">Chef de Centre SAINT PAUL</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0819004849</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0819004849">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 25 -->
+
+        <div class="personne">
+            <h3>Alphonse LUSAMBA KABUE</h3>
+            <div class="fonction">Chef de Centre SAINT CHRIS</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0999363588</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0999363588">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 26 -->
+
+        <div class="personne">
+            <h3>Romain TUBADI TSHIPAMBA</h3>
+            <div class="fonction">Chef de Centre UKWELI</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0814443606</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0814443606">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 27 -->
+
+        <div class="personne">
+            <h3>François TUMUTEKE KAZADI</h3>
+            <div class="fonction">Chef de Centre MON AVENIR</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0975754542</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0975754542">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 28 -->
+
+        <div class="personne">
+            <h3>Evangeli MBAMBU MUANZA</h3>
+            <div class="fonction">Chef de Centre EVANGELI MOTORS</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0820499493 – 0810890164 – 0978628138</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0820499493">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 29 -->
+
+        <div class="personne">
+            <h3>Fabrice MFUAMBA MUAMBA</h3>
+            <div class="fonction">Chef de Centre FABRICE TECH</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0890089321</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0890089321">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 30 -->
+
+        <div class="personne">
+            <h3>Mireille MISENGA KUBUANGANYI</h3>
+            <div class="fonction">Chef de Centre LA PROVIDENCE</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0824240969</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0824240969">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 31 -->
+
+        <div class="personne">
+            <h3>Monique MUABENE TSHITENGE</h3>
+            <div class="fonction">Chef de Centre FAYOL</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0814443547</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0814443547">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 32 -->
+
+        <div class="personne">
+            <h3>Felix BAKADIASA TSHIMANGA</h3>
+            <div class="fonction">Chef de Centre SACRE CŒUR BAKA</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0977896527</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0977896527">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 33 -->
+
+        <div class="personne">
+            <h3>Jean TSHIFUAKA MATANGA</h3>
+            <div class="fonction">Chef de Centre NTUMBA KAPONDO</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0826213885</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0826213885">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 34 -->
+
+        <div class="personne">
+            <h3>Benoit MISENGA MISENGA</h3>
+            <div class="fonction">Chef de Centre SHALOM</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0979283830</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0979283830">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 35 -->
+
+        <div class="personne">
+            <h3>Marthe LISUNGI YAMBAYAMBA</h3>
+            <div class="fonction">Chef de Centre LISUNGI</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0973486826</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0973486826">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 36 -->
+
+        <div class="personne">
+            <h3>Wizo KISIMBA KITUNGA</h3>
+            <div class="fonction">Chef de Centre UMOJA</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0825798090</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0825798090">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 37 -->
+
+        <div class="personne">
+            <h3>Benonie TSHIMUANGA MUAMBA</h3>
+            <div class="fonction">Chef de Centre JEHOVAH MA FORTERESSE</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0825402103</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0825402103">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 38 -->
+
+        <div class="personne">
+            <h3>MUJANGI KATALAYI</h3>
+            <div class="fonction">Chef de Centre LA VICTOIRE</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0810479499</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0810479499">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 39 -->
+
+        <div class="personne">
+            <h3>Jackson MPUTU KALAMBA</h3>
+            <div class="fonction">Chef de Centre JUBILE</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0975545093</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0975545093">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 40 -->
+
+        <div class="personne">
+            <h3>Edouard MULAMBA KABENGA</h3>
+            <div class="fonction">Centre de Centre MPUTU FBK</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0857302424</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0857302424">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 41 -->
+
+        <div class="personne">
+            <h3>Augustin KANKU TSHITADI</h3>
+            <div class="fonction">Chef de Centre SEMENCE</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0832323504</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0832323504">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 42 -->
+
+        <div class="personne">
+            <h3>Godefroid KANKONDE KABASELE</h3>
+            <div class="fonction">Chef de Centre FK</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0974308769</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0974308769">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 43 -->
+
+        <div class="personne">
+            <h3>Inness BOKANGA BOKANGA</h3>
+            <div class="fonction">Chef de Centre KILIMA</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0838045820</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0838045820">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 44 -->
+
+        <div class="personne">
+            <h3>TSHIMANGA BAKADIASA</h3>
+            <div class="fonction">Chef de Centre BEDEL</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0977896527</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0977896527">📞 Appeler</a>
+            </div>
+        </div>
+
+
+        <!-- 45 -->
+
+        <div class="personne">
+            <h3>Donatien ILUNGA ILUNGA</h3>
+            <div class="fonction">Chef de Centre LA GRACE DIVINE</div>
+            <div class="information">📞 <strong>Téléphone :</strong><br>0970878636</div>
+            <div class="actions">
+                <a class="btn-appel" href="tel:0970878636">📞 Appeler</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
      PIED DE PAGE
-     ===================================================== -->
+========================= -->
 
-<footer
-    style="
-        background:#0b3d91;
-        color:white;
-        padding:30px 20px;
-        text-align:center;
-    ">
-
-    <h3>
-        🏛 CSP / CCMTF KELE
-    </h3>
+<footer>
 
     <p>
-        <strong>
-            Bâtir des vies par la parole et le travail
-        </strong>
+        <strong>CSP / CCMTF KELE</strong>
     </p>
 
     <p>
-        © 2026 Coordination Sous-Provinciale
-        EC-CCMTF KELE
+        Former aujourd'hui, bâtir demain
+    </p>
+
+    <p>
+        © 2026 Coordination Sous-Provinciale de KELE / EC-CCMTF
     </p>
 
     <p>
@@ -567,29 +1142,44 @@
 </footer>
 
 
-
-<!-- =====================================================
-     JAVASCRIPT MENU HAMBURGER
-     ===================================================== -->
+<!-- =========================
+     RECHERCHE JAVASCRIPT
+========================= -->
 
 <script>
 
-const menuToggle =
-    document.getElementById("menu-toggle");
+function rechercherPersonne() {
 
-const menu =
-    document.getElementById("menu");
+    const recherche =
+        document
+        .getElementById("recherche")
+        .value
+        .toLowerCase()
+        .trim();
 
+    const personnes =
+        document.querySelectorAll(".personne");
 
-menuToggle.addEventListener("click", function () {
+    personnes.forEach(function(personne) {
 
-    menu.classList.toggle("active");
+        const texte =
+            personne.innerText.toLowerCase();
 
-});
+        if (texte.includes(recherche)) {
+
+            personne.style.display = "";
+
+        } else {
+
+            personne.style.display = "none";
+
+        }
+
+    });
+
+}
 
 </script>
 
-
 </body>
-
 </html>
