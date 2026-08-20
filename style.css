@@ -969,6 +969,10 @@ img {
    18. ORDINATEUR — MENU NORMAL
    ========================================================= */
 
+/* =========================================================
+   ORDINATEUR — MENU COMPLET
+   ========================================================= */
+
 @media screen and (min-width: 769px) {
 
     .menu {
@@ -978,13 +982,17 @@ img {
 
         width: auto;
 
+        max-width: calc(100% - 250px);
+
         background: transparent;
 
         flex-direction: row;
 
         align-items: center;
 
-        gap: 12px;
+        justify-content: flex-end;
+
+        gap: 6px;
 
         padding: 0;
 
@@ -993,9 +1001,40 @@ img {
         box-shadow: none;
 
         max-height: none;
+
+        flex-wrap: nowrap;
+    }
+
+    .menu li {
+        flex-shrink: 0;
+    }
+
+    .menu a {
+        padding: 7px 6px;
+
+        font-size: 14px;
+
+        white-space: nowrap;
     }
 
     .menu-toggle {
         display: none !important;
+    }
+}
+
+
+/* =========================================================
+   TÉLÉPHONE — MENU PLUS COMPACT
+   ========================================================= */
+
+@media screen and (max-width: 768px) {
+
+    .menu li a {
+        padding: 9px 18px;
+        line-height: 1.2;
+    }
+
+    .menu {
+        padding: 5px 0;
     }
 }
