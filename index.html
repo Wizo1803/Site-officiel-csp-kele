@@ -577,26 +577,7 @@ formspree('initForm', {
 </script>
 
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script> 
-<script>
-function afficherGalerie() {
-    const photos = document.querySelectorAll('.photo-cachee');
-    const bouton = document.getElementById('voirPlusBtn');
 
-    if (photos[0].style.display === 'block') {
-        photos.forEach(photo => {
-            photo.style.display = 'none';
-        });
-
-        bouton.textContent = 'Voir plus';
-    } else {
-        photos.forEach(photo => {
-            photo.style.display = 'block';
-        });
-
-        bouton.textContent = 'Voir moins';
-    }
-}
-</script>
 <script>
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
