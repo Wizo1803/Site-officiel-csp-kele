@@ -1,871 +1,931 @@
-</html>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Filières et programmes de formation professionnelle de la Coordination Provinciale du Kasaï 1 / Tshikapa.">
-<title>Filières et programmes de formation | CSP Kele</title>
-<style>
-:root {
-  --primary:#0b5d3b;
-  --primary-dark:#08472e;
-  --accent:#f0b429;
-  --bg:#f5f7f6;
-  --card:#ffffff;
-  --text:#1e293b;
-  --muted:#64748b;
-  --border:#e2e8f0;
-  --shadow:0 8px 24px rgba(15,23,42,.08);
-}
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
-body {
-  margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--text);
-  background:var(--bg); line-height:1.6;
-}
-header {
-  background:linear-gradient(135deg,var(--primary-dark),var(--primary));
-  color:white; padding:28px 18px 36px; text-align:center;
-}
-.header-inner {max-width:1150px;margin:auto}
-header h1 {margin:0 0 8px;font-size:clamp(1.7rem,4vw,2.6rem)}
-header p {margin:0 auto 22px;max-width:800px;opacity:.92}
-.back {
-  display:inline-block;color:white;text-decoration:none;border:1px solid rgba(255,255,255,.45);
-  padding:9px 15px;border-radius:999px;font-weight:700
-}
-.toolbar {
-  position:sticky;top:0;z-index:20;background:white;border-bottom:1px solid var(--border);
-  padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,.04)
-}
-.toolbar-inner {max-width:1150px;margin:auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.search {
-  flex:1;min-width:220px;padding:12px 15px;border:1px solid #cbd5e1;border-radius:10px;font-size:1rem;
-}
-.count {color:var(--muted);font-weight:700;white-space:nowrap}
-main {max-width:1150px;margin:32px auto;padding:0 18px}
-.intro {
-  background:white;border:1px solid var(--border);border-radius:16px;padding:22px;
-  box-shadow:var(--shadow);margin-bottom:28px
-}
-.intro h2 {margin-top:0;color:var(--primary)}
-.category {margin:34px 0}
-.category h2 {
-  color:var(--primary-dark);font-size:1.35rem;border-left:5px solid var(--accent);
-  padding-left:12px;margin-bottom:16px
-}
-.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.filiere-card {
-  background:var(--card);border:1px solid var(--border);border-radius:15px;
-  padding:18px;display:flex;gap:14px;box-shadow:var(--shadow);transition:.2s
-}
-.filiere-card:hover {transform:translateY(-3px)}
-.card-icon {
-  flex:0 0 44px;height:44px;border-radius:12px;background:#e7f5ee;
-  display:grid;place-items:center;font-size:22px
-}
-.card-body {min-width:0;flex:1}
-.card-body h3 {margin:0 0 4px;font-size:1.08rem;color:#0f172a}
-.card-body p {margin:0 0 10px;color:var(--muted);font-size:.9rem}
-.durations {display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.durations span {
-  background:#fff7df;border:1px solid #f4d27a;color:#7a5200;
-  border-radius:999px;padding:3px 8px;font-size:.76rem;font-weight:700
-}
-.btn {
-  display:inline-block;background:var(--primary);color:white;text-decoration:none;
-  padding:9px 12px;border-radius:9px;font-weight:700;font-size:.88rem
-}
-.btn:hover {background:var(--primary-dark)}
-.empty {display:none;text-align:center;padding:35px;color:var(--muted)}
-footer {
-  margin-top:45px;background:#0f172a;color:#cbd5e1;text-align:center;padding:25px 18px;font-size:.9rem
-}
-@media(max-width:600px) {
-  header {padding:24px 14px 30px}
-  main {padding:0 12px;margin-top:22px}
-  .toolbar {padding:10px 12px}
-  .filiere-card {padding:15px}
-  .category h2 {font-size:1.15rem}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Filières et programmes de formation de la Coordination Provinciale du Kasaï 1 / Tshikapa.">
+  <title>Filières et programmes — CSP Kele</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Styles propres à la page Filières.
+       Ils complètent style.css sans modifier le reste du site. */
+    .filieres-page {
+      width: min(1200px, 94%);
+      margin: 0 auto;
+      padding: 35px 0 60px;
+    }
+
+    .filieres-hero {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .filieres-hero h1 {
+      margin-bottom: 10px;
+    }
+
+    .filieres-hero p {
+      max-width: 850px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .filieres-tools {
+      display: flex;
+      justify-content: center;
+      margin: 25px auto 30px;
+    }
+
+    #recherche-filiere {
+      width: min(650px, 100%);
+      padding: 14px 18px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .filieres-count {
+      text-align: center;
+      margin: 0 0 20px;
+      font-weight: 600;
+    }
+
+    .filieres-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .filiere-card {
+      background: #fff;
+      border: 1px solid #e3e3e3;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.07);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .filiere-icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .filiere-card h2 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      line-height: 1.25;
+    }
+
+    .filiere-card p {
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .programme-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 15px 0 12px;
+    }
+
+    .programme-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 6px;
+      border-radius: 9px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .trois-mois { background: #198754; }
+    .six-mois { background: #0d6efd; }
+    .douze-mois { background: #6f42c1; }
+
+    .programme-btn:hover {
+      filter: brightness(.92);
+      transform: translateY(-1px);
+    }
+
+    .pdf-link {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      border-radius: 9px;
+      background: #f2f2f2;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .filiere-card.hidden {
+      display: none;
+    }
+
+    .aucun-resultat {
+      display: none;
+      text-align: center;
+      padding: 30px;
+      grid-column: 1 / -1;
+    }
+
+    .aucun-resultat.visible {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .filieres-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .filieres-page {
+        width: min(94%, 520px);
+        padding-top: 25px;
+      }
+
+      .filieres-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .programme-actions {
+        gap: 6px;
+      }
+
+      .programme-btn {
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <div class="header-inner">
-    <a class="back" href="index.html">← Retour à l'accueil</a>
-    <h1>Filières &amp; Programmes de Formation</h1>
-    <p>Découvrez les filières proposées et consultez les programmes de formation de 3 mois, 6 mois et 12 mois.</p>
-  </div>
-</header>
 
-<div class="toolbar">
-  <div class="toolbar-inner">
-    <input id="search" class="search" type="search" placeholder="🔎 Rechercher une filière..." aria-label="Rechercher une filière">
-    <span id="count" class="count"></span>
-  </div>
-</div>
+  <!--
+    IMPORTANT :
+    Conservez ici votre en-tête/menu actuel si votre site utilise un
+    header commun. Cette page utilise le même style.css.
+  -->
 
-<main>
-  <div class="intro">
-    <h2>Choisissez votre filière</h2>
-    <p>
-      Les programmes détaillés sont disponibles dans les documents officiels fournis par la Coordination.
-      Chaque filière présente les parcours de <strong>3 mois, 6 mois et 12 mois</strong>.
-      Cliquez sur <strong>Consulter le programme complet</strong> pour ouvrir le document correspondant.
+  <main class="filieres-page">
+    <section class="filieres-hero">
+      <h1>Filières et programmes de formation</h1>
+      <p>
+        Découvrez les filières proposées par la Coordination.
+        Pour chaque filière, un seul fichier PDF contient le programme
+        complet de <strong>3 mois, 6 mois et 12 mois</strong>.
+      </p>
+    </section>
+
+    <div class="filieres-tools">
+      <input
+        type="search"
+        id="recherche-filiere"
+        placeholder="🔎 Rechercher une filière..."
+        aria-label="Rechercher une filière"
+      >
+    </div>
+
+    <p class="filieres-count">
+      <span id="nombre-resultats">63</span> filières disponibles
     </p>
-  </div>
 
-  <div id="catalogue">
-    
-    <section class="category" data-category="agriculture, élevage et alimentation">
-      <h2>Agriculture, élevage et alimentation</h2>
-      <div class="grid">
-        <article class="filiere-card" data-name="agriculture agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Agriculture</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/AGRICULTURE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="agro-alimentaire agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Agro-Alimentaire</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/Agro-alimentaire.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="agro-veterinaire agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Agro-Veterinaire</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/AGRO-VETERINAIRE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="art culinnaire agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Art Culinnaire</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/ART CULINNAIRE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="boulangerie agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Boulangerie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/BOULANGERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="boulangerie et patisserie agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Boulangerie Et Patisserie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/BOULANGERIE ET PATISSERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="cuisine locale agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Cuisine Locale</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/CUISINE LOCALE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="elevage agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Elevage</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/ELEVAGE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="hotellerie et restauration agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Hotellerie Et Restauration</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/HOTELLERIE ET RESTAURATION.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="nutrition agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Nutrition</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/NUTRITION.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="peche agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Peche</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/PECHE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="pisciculture agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Pisciculture</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/PISCICULTURE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="savonnerie agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Savonnerie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/SAVONNERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="service hotellier agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Service Hotellier</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/SERVICE HOTELLIER.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="traiteur et evenementiel agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Traiteur Et Evenementiel</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/TRAITEUR ET EVENEMENTIEL.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="transformation des produits agroalimentaires agriculture, élevage et alimentation">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Transformation Des Produits Agroalimentaires</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/TRANSFORMATION DES PRODUITS AGROALIMENTAIRES.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article></div>
-    </section>
-    <section class="category" data-category="bâtiment, construction et artisanat">
-      <h2>Bâtiment, construction et artisanat</h2>
-      <div class="grid">
-        <article class="filiere-card" data-name="ajustage bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Ajustage</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/AJUSTAGE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="briqueterie bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Briqueterie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/BRIQUETERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="carrelage bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Carrelage</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/CARRELAGE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="charpenterie bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Charpenterie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/CHARPENTERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="construction bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Construction</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/CONSTRUCTION.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="coordonnerie bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Coordonnerie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/COORDONNERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="maconnerie bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Maconnerie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/MACONNERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="menuiserie bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Menuiserie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/MENUISERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="peinture et decoration bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Peinture Et Decoration</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/PEINTURE ET DECORATION.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="plomberie bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Plomberie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/PLOMBERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="serrurerie bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Serrurerie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/SERRURERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="soudure bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Soudure</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/SOUDURE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="vitrier bâtiment, construction et artisanat">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Vitrier</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/VITRIER.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article></div>
-    </section>
-    <section class="category" data-category="électricité, électronique et froid">
-      <h2>Électricité, électronique et froid</h2>
-      <div class="grid">
-        <article class="filiere-card" data-name="bobinage electrique électricité, électronique et froid">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Bobinage Electrique</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/BOBINAGE ELECTRIQUE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="climatisation électricité, électronique et froid">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Climatisation</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/CLIMATISATION.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="electricite électricité, électronique et froid">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Electricite</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/ELECTRICITE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="electricite automobile électricité, électronique et froid">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Electricite Automobile</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/ELECTRICITE AUTOMOBILE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="electronique électricité, électronique et froid">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Electronique</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/ELECTRONIQUE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="froid électricité, électronique et froid">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Froid</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/FROID.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="installation antenne parabolique électricité, électronique et froid">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Installation Antenne Parabolique</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/INSTALLATION ANTENNE PARABOLIQUE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="installation camera électricité, électronique et froid">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Installation Camera</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/INSTALLATION CAMERA.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article></div>
-    </section>
-    <section class="category" data-category="informatique, communication et services">
-      <h2>Informatique, communication et services</h2>
-      <div class="grid">
-        <article class="filiere-card" data-name="informatique informatique, communication et services">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Informatique</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/INFORMATIQUE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="logistique et gestion de stock informatique, communication et services">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Logistique Et Gestion De Stock</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/LOGISTIQUE ET GESTION DE STOCK.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="logistique et transport informatique, communication et services">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Logistique Et Transport</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/LOGISTIQUE ET TRANSPORT.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="photographie informatique, communication et services">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Photographie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/PHOTOGRAPHIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="reparateur televiseur informatique, communication et services">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Reparateur Televiseur</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/REPARATEUR TELEVISEUR.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="reparation telephones informatique, communication et services">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Reparation Telephones</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/REPARATION TELEPHONES.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article></div>
-    </section>
-    <section class="category" data-category="mécanique et automobile">
-      <h2>Mécanique et automobile</h2>
-      <div class="grid">
-        <article class="filiere-card" data-name="conduite automobile mécanique et automobile">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Conduite Automobile</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/CONDUITE AUTOMOBILE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="mecanique automobile mécanique et automobile">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Mecanique Automobile</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/MECANIQUE AUTOMOBILE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="mecanique entretien mécanique et automobile">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Mecanique Entretien</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/MECANIQUE ENTRETIEN.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="mecanique generale mécanique et automobile">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Mecanique Generale</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/MECANIQUE GENERALE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="reparation motos mécanique et automobile">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Reparation Motos</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/REPARATION MOTOS.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article></div>
-    </section>
-    <section class="category" data-category="beauté, mode et esthétique">
-      <h2>Beauté, mode et esthétique</h2>
-      <div class="grid">
-        <article class="filiere-card" data-name="coifure beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Coifure</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/COIFURE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="coupe et couture beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Coupe Et Couture</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/COUPE ET COUTURE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="decoration et esthetique beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Decoration Et Esthetique</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/DECORATION ET ESTHETIQUE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="esthetique et coiffure beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Esthetique Et Coiffure</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/ESTHETIQUE ET COIFFURE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="manucure et pedicure beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Manucure Et Pedicure</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/MANUCURE ET PEDICURE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="maquillage beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Maquillage</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/MAQUILLAGE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="perlage (bijoux en perles) beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Perlage (Bijoux En Perles)</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/PERLAGE(BIJOUX EN PERLES).docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="tatouage beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Tatouage</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/TATOUAGE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="tressage beauté, mode et esthétique">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Tressage</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/TRESSAGE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article></div>
-    </section>
-    <section class="category" data-category="santé, éducation et sécurité">
-      <h2>Santé, éducation et sécurité</h2>
-      <div class="grid">
-        <article class="filiere-card" data-name="alphabetisation santé, éducation et sécurité">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Alphabetisation</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/ALPHABETISATION.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="sage femme santé, éducation et sécurité">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Sage Femme</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/SAGE FEMME.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="sapeur pompier santé, éducation et sécurité">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Sapeur Pompier</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/SAPEUR POMPIER.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article>
-        <article class="filiere-card" data-name="sciences infirmieres santé, éducation et sécurité">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Sciences Infirmieres</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/SCIENCES INFIRMIERES.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article></div>
-    </section>
-    <section class="category" data-category="autres métiers">
-      <h2>Autres métiers</h2>
-      <div class="grid">
-        <article class="filiere-card" data-name="horlogerie autres métiers">
-          <div class="card-icon">📘</div>
-          <div class="card-body">
-            <h3>Horlogerie</h3>
-            <p>Un seul document contient les programmes de 3 mois, 6 mois et 12 mois.</p>
-            <div class="durations">
-              <span>3 mois</span><span>6 mois</span><span>12 mois</span>
-            </div>
-            <a class="btn" href="Programmes-formations/HORLOGERIE.docx" target="_blank" rel="noopener">Consulter le programme complet</a>
-          </div>
-        </article></div>
-    </section>
-  </div>
-  <div id="empty" class="empty">Aucune filière ne correspond à votre recherche.</div>
-</main>
+    <section class="filieres-grid" id="liste-filieres">
 
-<footer>
-  <div>Coordination Provinciale du Kasaï 1 / Tshikapa — Formation professionnelle</div>
-</footer>
+      <article class="filiere-card" data-filiere="agriculture">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Agriculture</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/AGRICULTURE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/AGRICULTURE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/AGRICULTURE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/AGRICULTURE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="agro-alimentaire">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Agro-Alimentaire</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/AGRO-ALIMENTAIRE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/AGRO-ALIMENTAIRE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/AGRO-ALIMENTAIRE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/AGRO-ALIMENTAIRE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="agro-veterinaire">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Agro-Veterinaire</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/AGRO-VETERINAIRE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/AGRO-VETERINAIRE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/AGRO-VETERINAIRE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/AGRO-VETERINAIRE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="ajustage">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Ajustage</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/AJUSTAGE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/AJUSTAGE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/AJUSTAGE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/AJUSTAGE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="alphabetisation">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Alphabetisation</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/ALPHABETISATION.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/ALPHABETISATION.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/ALPHABETISATION.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/ALPHABETISATION.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="art culinaire">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Art culinaire</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/ART%20CULINNAIRE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/ART%20CULINNAIRE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/ART%20CULINNAIRE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/ART%20CULINNAIRE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="bobinage electrique">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Bobinage Electrique</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/BOBINAGE%20ELECTRIQUE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/BOBINAGE%20ELECTRIQUE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/BOBINAGE%20ELECTRIQUE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/BOBINAGE%20ELECTRIQUE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="boulangerie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Boulangerie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/BOULANGERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/BOULANGERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/BOULANGERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/BOULANGERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="boulangerie et pâtisserie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Boulangerie et pâtisserie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/BOULANGERIE%20ET%20PATISSERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/BOULANGERIE%20ET%20PATISSERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/BOULANGERIE%20ET%20PATISSERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/BOULANGERIE%20ET%20PATISSERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="briqueterie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Briqueterie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/BRIQUETERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/BRIQUETERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/BRIQUETERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/BRIQUETERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="carrelage">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Carrelage</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/CARRELAGE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/CARRELAGE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/CARRELAGE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/CARRELAGE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="charpenterie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Charpenterie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/CHARPENTERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/CHARPENTERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/CHARPENTERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/CHARPENTERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="climatisation">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Climatisation</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/CLIMATISATION.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/CLIMATISATION.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/CLIMATISATION.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/CLIMATISATION.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="coiffure">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Coiffure</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/COIFURE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/COIFURE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/COIFURE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/COIFURE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="conduite automobile">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Conduite Automobile</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/CONDUITE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/CONDUITE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/CONDUITE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/CONDUITE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="construction">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Construction</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/CONSTRUCTION.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/CONSTRUCTION.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/CONSTRUCTION.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/CONSTRUCTION.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="coordonnerie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Coordonnerie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/COORDONNERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/COORDONNERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/COORDONNERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/COORDONNERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="coupe et couture">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Coupe et couture</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/COUPE%20ET%20COUTURE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/COUPE%20ET%20COUTURE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/COUPE%20ET%20COUTURE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/COUPE%20ET%20COUTURE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="cuisine locale">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Cuisine Locale</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/CUISINE%20LOCALE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/CUISINE%20LOCALE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/CUISINE%20LOCALE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/CUISINE%20LOCALE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="decoration et esthetique">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Decoration Et Esthetique</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/DECORATION%20ET%20ESTHETIQUE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/DECORATION%20ET%20ESTHETIQUE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/DECORATION%20ET%20ESTHETIQUE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/DECORATION%20ET%20ESTHETIQUE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="electricite">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Electricite</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/ELECTRICITE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/ELECTRICITE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/ELECTRICITE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/ELECTRICITE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="electricite automobile">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Electricite Automobile</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/ELECTRICITE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/ELECTRICITE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/ELECTRICITE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/ELECTRICITE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="electronique">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Electronique</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/ELECTRONIQUE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/ELECTRONIQUE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/ELECTRONIQUE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/ELECTRONIQUE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="elevage">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Elevage</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/ELEVAGE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/ELEVAGE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/ELEVAGE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/ELEVAGE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="esthétique et coiffure">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Esthétique et coiffure</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/ESTHETIQUE%20ET%20COIFFURE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/ESTHETIQUE%20ET%20COIFFURE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/ESTHETIQUE%20ET%20COIFFURE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/ESTHETIQUE%20ET%20COIFFURE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="froid">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Froid</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/FROID.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/FROID.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/FROID.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/FROID.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="horlogerie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Horlogerie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/HORLOGERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/HORLOGERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/HORLOGERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/HORLOGERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="hôtellerie et restauration">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Hôtellerie et restauration</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/HOTELLERIE%20ET%20RESTAURATION.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/HOTELLERIE%20ET%20RESTAURATION.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/HOTELLERIE%20ET%20RESTAURATION.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/HOTELLERIE%20ET%20RESTAURATION.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="informatique">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Informatique</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/INFORMATIQUE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/INFORMATIQUE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/INFORMATIQUE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/INFORMATIQUE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="installation d&#x27;antenne parabolique">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Installation d&#x27;antenne parabolique</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/INSTALLATION%20ANTENNE%20PARABOLIQUE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/INSTALLATION%20ANTENNE%20PARABOLIQUE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/INSTALLATION%20ANTENNE%20PARABOLIQUE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/INSTALLATION%20ANTENNE%20PARABOLIQUE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="installation caméra">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Installation caméra</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/INSTALLATION%20CAMERA.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/INSTALLATION%20CAMERA.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/INSTALLATION%20CAMERA.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/INSTALLATION%20CAMERA.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="logistique et gestion de stock">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Logistique et gestion de stock</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/LOGISTIQUE%20ET%20GESTION%20DE%20STOCK.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/LOGISTIQUE%20ET%20GESTION%20DE%20STOCK.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/LOGISTIQUE%20ET%20GESTION%20DE%20STOCK.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/LOGISTIQUE%20ET%20GESTION%20DE%20STOCK.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="logistique et transport">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Logistique et transport</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/LOGISTIQUE%20ET%20TRANSPORT.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/LOGISTIQUE%20ET%20TRANSPORT.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/LOGISTIQUE%20ET%20TRANSPORT.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/LOGISTIQUE%20ET%20TRANSPORT.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="maconnerie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Maconnerie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/MACONNERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/MACONNERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/MACONNERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/MACONNERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="manucure et pedicure">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Manucure Et Pedicure</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/MANUCURE%20ET%20PEDICURE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/MANUCURE%20ET%20PEDICURE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/MANUCURE%20ET%20PEDICURE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/MANUCURE%20ET%20PEDICURE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="maquillage">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Maquillage</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/MAQUILLAGE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/MAQUILLAGE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/MAQUILLAGE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/MAQUILLAGE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="mecanique automobile">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Mecanique Automobile</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/MECANIQUE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/MECANIQUE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/MECANIQUE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/MECANIQUE%20AUTOMOBILE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="mecanique entretien">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Mecanique Entretien</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/MECANIQUE%20ENTRETIEN.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/MECANIQUE%20ENTRETIEN.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/MECANIQUE%20ENTRETIEN.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/MECANIQUE%20ENTRETIEN.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="mecanique generale">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Mecanique Generale</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/MECANIQUE%20GENERALE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/MECANIQUE%20GENERALE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/MECANIQUE%20GENERALE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/MECANIQUE%20GENERALE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="mécanique des machines à coudre">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Mécanique des machines à coudre</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/MECANIQUE%20MACHINES%20A%20COUDRE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/MECANIQUE%20MACHINES%20A%20COUDRE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/MECANIQUE%20MACHINES%20A%20COUDRE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/MECANIQUE%20MACHINES%20A%20COUDRE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="menuiserie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Menuiserie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/MENUISERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/MENUISERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/MENUISERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/MENUISERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="nutrition">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Nutrition</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/NUTRITION.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/NUTRITION.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/NUTRITION.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/NUTRITION.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="peche">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Peche</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/PECHE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/PECHE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/PECHE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/PECHE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="peinture et decoration">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Peinture Et Decoration</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/PEINTURE%20ET%20DECORATION.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/PEINTURE%20ET%20DECORATION.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/PEINTURE%20ET%20DECORATION.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/PEINTURE%20ET%20DECORATION.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="perlage (bijoux en perles)">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Perlage (bijoux en perles)</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/PERLAGE(BIJOUX%20EN%20PERLES).pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/PERLAGE(BIJOUX%20EN%20PERLES).pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/PERLAGE(BIJOUX%20EN%20PERLES).pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/PERLAGE(BIJOUX%20EN%20PERLES).pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="photographie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Photographie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/PHOTOGRAPHIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/PHOTOGRAPHIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/PHOTOGRAPHIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/PHOTOGRAPHIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="pisciculture">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Pisciculture</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/PISCICULTURE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/PISCICULTURE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/PISCICULTURE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/PISCICULTURE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="plomberie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Plomberie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/PLOMBERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/PLOMBERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/PLOMBERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/PLOMBERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="réparation de téléviseurs">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Réparation de téléviseurs</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/REPARATEUR%20TELEVISEUR.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/REPARATEUR%20TELEVISEUR.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/REPARATEUR%20TELEVISEUR.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/REPARATEUR%20TELEVISEUR.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="réparation motos">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Réparation motos</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/REPARATION%20MOTOS.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/REPARATION%20MOTOS.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/REPARATION%20MOTOS.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/REPARATION%20MOTOS.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="réparation de téléphones">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Réparation de téléphones</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/REPARATION%20TELEPHONES.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/REPARATION%20TELEPHONES.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/REPARATION%20TELEPHONES.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/REPARATION%20TELEPHONES.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="sage-femme">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Sage-femme</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/SAGE%20FEMME.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/SAGE%20FEMME.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/SAGE%20FEMME.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/SAGE%20FEMME.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="sapeur pompier">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Sapeur Pompier</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/SAPEUR%20POMPIER.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/SAPEUR%20POMPIER.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/SAPEUR%20POMPIER.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/SAPEUR%20POMPIER.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="savonnerie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Savonnerie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/SAVONNERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/SAVONNERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/SAVONNERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/SAVONNERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="sciences infirmières">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Sciences infirmières</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/SCIENCES%20INFIRMIERES.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/SCIENCES%20INFIRMIERES.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/SCIENCES%20INFIRMIERES.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/SCIENCES%20INFIRMIERES.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="serrurerie">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Serrurerie</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/SERRURERIE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/SERRURERIE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/SERRURERIE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/SERRURERIE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="service hôtelier">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Service hôtelier</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/SERVICE%20HOTELLIER.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/SERVICE%20HOTELLIER.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/SERVICE%20HOTELLIER.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/SERVICE%20HOTELLIER.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="soudure">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Soudure</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/SOUDURE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/SOUDURE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/SOUDURE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/SOUDURE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="tatouage">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Tatouage</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/TATOUAGE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/TATOUAGE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/TATOUAGE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/TATOUAGE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="traiteur et événementiel">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Traiteur et événementiel</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/TRAITEUR%20ET%20EVENEMENTIEL.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/TRAITEUR%20ET%20EVENEMENTIEL.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/TRAITEUR%20ET%20EVENEMENTIEL.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/TRAITEUR%20ET%20EVENEMENTIEL.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="transformation des produits agroalimentaires">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Transformation des produits agroalimentaires</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/TRANSFORMATION%20DES%20PRODUITS%20AGROALIMENTAIRES.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/TRANSFORMATION%20DES%20PRODUITS%20AGROALIMENTAIRES.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/TRANSFORMATION%20DES%20PRODUITS%20AGROALIMENTAIRES.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/TRANSFORMATION%20DES%20PRODUITS%20AGROALIMENTAIRES.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="tressage">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Tressage</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/TRESSAGE.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/TRESSAGE.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/TRESSAGE.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/TRESSAGE.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <article class="filiere-card" data-filiere="vitrier">
+        <div class="filiere-icon" aria-hidden="true">📘</div>
+        <h2>Vitrier</h2>
+        <p>Programme complet comprenant les formations de <strong>3 mois, 6 mois et 12 mois</strong>.</p>
+        <div class="programme-actions">
+          <a class="programme-btn trois-mois" href="Programmes-formations/VITRIER.pdf" target="_blank" rel="noopener">3 mois</a>
+          <a class="programme-btn six-mois" href="Programmes-formations/VITRIER.pdf" target="_blank" rel="noopener">6 mois</a>
+          <a class="programme-btn douze-mois" href="Programmes-formations/VITRIER.pdf" target="_blank" rel="noopener">12 mois</a>
+        </div>
+        <a class="pdf-link" href="Programmes-formations/VITRIER.pdf" target="_blank" rel="noopener">📄 Consulter le programme complet</a>
+      </article>
+      <div class="aucun-resultat" id="aucun-resultat">
+        <strong>Aucune filière trouvée.</strong><br>
+        Essayez un autre mot-clé.
+      </div>
+    </section>
+  </main>
 
-<script>
-const search = document.getElementById('search');
-const cards = [...document.querySelectorAll('.filiere-card')];
-const categories = [...document.querySelectorAll('.category')];
-const count = document.getElementById('count');
-const empty = document.getElementById('empty');
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const recherche = document.getElementById("recherche-filiere");
+      const cartes = Array.from(document.querySelectorAll(".filiere-card"));
+      const compteur = document.getElementById("nombre-resultats");
+      const aucun = document.getElementById("aucun-resultat");
 
-function filterFiliers() {
-  const q = search.value.trim().toLowerCase();
-  let visible = 0;
-  cards.forEach(card => {
-    const match = !q || card.dataset.name.includes(q);
-    card.style.display = match ? 'flex' : 'none';
-    if (match) visible++;
-  });
-  categories.forEach(section => {
-    const hasVisible = [...section.querySelectorAll('.filiere-card')]
-      .some(card => card.style.display !== 'none');
-    section.style.display = hasVisible ? '' : 'none';
-  });
-  count.textContent = visible + ' filière' + (visible > 1 ? 's' : '') + ' disponible' + (visible > 1 ? 's' : '');
-  empty.style.display = visible ? 'none' : 'block';
-}
-search.addEventListener('input', filterFiliers);
-filterFiliers();
-</script>
+      recherche.addEventListener("input", function () {
+        const terme = this.value.trim().toLowerCase();
+        let visibles = 0;
+
+        cartes.forEach(function (carte) {
+          const nom = carte.dataset.filiere || "";
+          const correspond = nom.includes(terme);
+
+          carte.classList.toggle("hidden", !correspond);
+
+          if (correspond) visibles++;
+        });
+
+        compteur.textContent = visibles;
+        aucun.classList.toggle("visible", visibles === 0);
+      });
+    });
+  </script>
+
 </body>
 </html>
