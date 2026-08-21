@@ -1,0 +1,707 @@
+# galerie.html — Galerie officielle CSP/CCMTF KELE
+
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Galerie | CSP / CCMTF KELE</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+        /* =========================
+           BARRE DE NAVIGATION
+        ========================== */
+
+        .galerie-navbar {
+            background: #004080;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 25px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .galerie-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .galerie-logo img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .galerie-logo-text {
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .galerie-logo-text strong {
+            font-size: 18px;
+        }
+
+        .galerie-logo-text small {
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .galerie-home {
+            background: white;
+            color: #004080;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .galerie-home:hover {
+            background: #90ee90;
+            color: #003060;
+        }
+
+        /* =========================
+           EN-TÊTE
+        ========================== */
+
+        .galerie-header {
+            background: linear-gradient(
+                rgba(0,64,128,0.85),
+                rgba(0,100,0,0.85)
+            ),
+            url("Facade.jpg") center/cover;
+
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .galerie-header h1 {
+            margin: 0 0 15px;
+            font-size: clamp(30px, 5vw, 52px);
+        }
+
+        .galerie-header p {
+            margin: 0;
+            font-size: clamp(16px, 2.5vw, 21px);
+        }
+
+        /* =========================
+           CONTENU
+        ========================== */
+
+        .galerie-container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 45px auto;
+        }
+
+        .galerie-introduction {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .galerie-introduction h2 {
+            color: #006400;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .galerie-introduction p {
+            color: #555;
+            font-size: 17px;
+        }
+
+        /* =========================
+           GRILLE DES PHOTOS
+        ========================== */
+
+        .galerie-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.22);
+        }
+
+        .photo-container {
+            position: relative;
+            width: 100%;
+            height: 270px;
+            overflow: hidden;
+            background: #ddd;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+
+        .photo-card:hover .photo-container img {
+            transform: scale(1.06);
+        }
+
+        /* =========================
+           BANDE GRISE + ÉCRITEAU
+        ========================== */
+
+        .photo-caption {
+            background: #707070;
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .photo-caption span {
+            display: inline-block;
+            background: white;
+            color: #222;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+
+        /* =========================
+           FENÊTRE PHOTO AGRANDIE
+        ========================== */
+
+        .photo-modal {
+            display: none;
+            position: fixed;
+            z-index: 5000;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .photo-modal.active {
+            display: flex;
+        }
+
+        .photo-modal img {
+            max-width: 95%;
+            max-height: 88vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 45px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-title {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #222;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* =========================
+           PIED DE PAGE
+        ========================== */
+
+        .galerie-footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        .galerie-footer p {
+            margin: 6px 0;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .galerie-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .photo-container {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .galerie-navbar {
+                padding: 10px 15px;
+            }
+
+            .galerie-logo img {
+                width: 45px;
+                height: 45px;
+            }
+
+            .galerie-logo-text strong {
+                font-size: 15px;
+            }
+
+            .galerie-logo-text small {
+                font-size: 10px;
+            }
+
+            .galerie-home {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .galerie-header {
+                padding: 60px 15px;
+            }
+
+            .galerie-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .photo-container {
+                height: 260px;
+            }
+
+            .galerie-container {
+                width: 94%;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav class="galerie-navbar">
+
+        <div class="galerie-logo">
+
+            <img src="banner2.png"
+                 alt="Logo CSP / CCMTF KELE">
+
+            <div class="galerie-logo-text">
+                <strong>CSP / CCMTF KELE</strong>
+                <small>Former aujourd'hui, bâtir demain</small>
+            </div>
+
+        </div>
+
+        <a href="index.html" class="galerie-home">
+            ⬅ Accueil
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         EN-TÊTE
+    ========================== -->
+
+    <header class="galerie-header">
+
+        <h1>📸 Notre Galerie</h1>
+
+        <p>
+            Découvrez en images les activités et les infrastructures
+            de la CSP / CCMTF KELE.
+        </p>
+
+    </header>
+
+
+    <!-- =========================
+         GALERIE
+    ========================== -->
+
+    <main class="galerie-container">
+
+        <div class="galerie-introduction">
+
+            <h2>Moments et souvenirs</h2>
+
+            <p>
+                Retrouvez ici quelques images de notre coordination,
+                de nos centres et de nos différentes activités.
+            </p>
+
+        </div>
+
+
+        <div class="galerie-grid">
+
+
+            <!-- PHOTO 1 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="Facade.jpg"
+                         alt="Façade de la CSP / CCMTF KELE"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Façade de la CSP / CCMTF KELE</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 2 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="Bureau Coord.jpg"
+                         alt="Bureau de la Coordination"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Bureau de la Coordination</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 3 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="IMG1.jfif"
+                         alt="Activité CSP / CCMTF"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Activité de la Coordination</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 4 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="IMG2.jfif"
+                         alt="Activité de formation"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Activité de formation</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 5 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="IMG3.jpg"
+                         alt="Activité de la CSP"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Activité de la CSP</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 6 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="IMG4.jfif"
+                         alt="Formation professionnelle"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Formation professionnelle</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 7 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="IMG5.jfif"
+                         alt="Centre de formation"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Centre de formation</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 8 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="IMG6.jfif"
+                         alt="Activité de la Coordination"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Activité de la Coordination</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 9 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="IMG7.jfif"
+                         alt="Formation et encadrement"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Formation et encadrement</span>
+                </div>
+
+            </div>
+
+
+            <!-- PHOTO 10 -->
+
+            <div class="photo-card">
+
+                <div class="photo-container">
+
+                    <img src="IMG8.jfif"
+                         alt="Activités CSP / CCMTF"
+                         onclick="ouvrirPhoto(this)">
+
+                </div>
+
+                <div class="photo-caption">
+                    <span>Activités CSP / CCMTF</span>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         MODALE PHOTO
+    ========================== -->
+
+    <div class="photo-modal"
+         id="photoModal"
+         onclick="fermerPhoto(event)">
+
+        <span class="modal-close"
+              onclick="fermerPhoto()">
+            ×
+        </span>
+
+        <img id="photoGrande"
+             src=""
+             alt="Photo agrandie">
+
+        <div class="modal-title"
+             id="photoTitre">
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         PIED DE PAGE
+    ========================== -->
+
+    <footer class="galerie-footer">
+
+        <p>
+            © 2026 Coordination Sous-Provinciale
+            EC-CCMTF KELE
+        </p>
+
+        <p>
+            Tous droits réservés.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        function ouvrirPhoto(image) {
+
+            const modal =
+                document.getElementById("photoModal");
+
+            const grande =
+                document.getElementById("photoGrande");
+
+            const titre =
+                document.getElementById("photoTitre");
+
+            grande.src = image.src;
+
+            titre.textContent = image.alt;
+
+            modal.classList.add("active");
+
+            document.body.style.overflow = "hidden";
+        }
+
+
+        function fermerPhoto(event) {
+
+            if (
+                event &&
+                event.target &&
+                event.target.id !== "photoModal" &&
+                !event.target.classList.contains("modal-close")
+            ) {
+                return;
+            }
+
+            const modal =
+                document.getElementById("photoModal");
+
+            modal.classList.remove("active");
+
+            document.body.style.overflow = "";
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    const modal =
+                        document.getElementById("photoModal");
+
+                    modal.classList.remove("active");
+
+                    document.body.style.overflow = "";
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
+```
