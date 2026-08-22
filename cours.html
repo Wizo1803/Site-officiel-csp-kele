@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cours et travaux pratiques - CSP/CCMTF KELE</title>
+<title>Cours et vidéos - CSP/CCMTF KELE</title>
 <link rel="stylesheet" href="style.css">
 <style>
 *{box-sizing:border-box}
@@ -21,23 +21,30 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;paddin
 .cours-menu a.active{color:#ffd600;border-bottom:3px solid #ffd600;background:rgba(0,0,0,.08)}
 .cours-header{text-align:center;background:#fff;padding:22px 20px 24px}
 .cours-header h1{margin:0;color:#0752a5;font-size:36px;text-transform:uppercase}
-.cours-header p{max-width:850px;margin:10px auto 0;font-size:17px;color:#444;line-height:1.5}
-.cours-header .sous-titre{font-size:13px;color:#777;margin-top:8px}
-.cours-container{width:94%;max-width:1250px;margin:auto;padding:18px 0 45px}
+.cours-header p{max-width:900px;margin:10px auto 0;font-size:17px;color:#444;line-height:1.5}
+.cours-container{width:94%;max-width:1250px;margin:auto;padding:20px 0 45px}
+.section-title{color:#0752a5;text-align:center;font-size:28px;margin:5px 0 20px}
+.video-card{background:#fff;border:1px solid #d9e1ea;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.12);margin-bottom:38px}
+.video-wrap{background:#111;width:100%}
+.video-wrap video{display:block;width:100%;max-height:650px;margin:auto}
+.video-info{padding:18px 20px}
+.video-info .tag{font-size:11px;font-weight:bold;color:#777;letter-spacing:.6px}
+.video-info h2{color:#0752a5;font-size:22px;margin:6px 0 8px}
+.video-info p{font-size:14px;line-height:1.5;color:#444;margin:0}
+.cours-note{margin:0 0 20px;background:#fff;border-left:4px solid #06439a;border-radius:7px;padding:12px 15px;color:#444;font-size:14px}
 .cours-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .cours-card{background:#fff;border:1px solid #d9e1ea;border-radius:13px;overflow:hidden;box-shadow:0 4px 13px rgba(0,0,0,.12);display:flex;flex-direction:column;transition:.25s}
 .cours-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.18)}
-.cours-icon{height:95px;background:linear-gradient(135deg,#06439a,#0a67b8);display:flex;align-items:center;justify-content:center;font-size:42px}
+.cours-icon{height:90px;background:linear-gradient(135deg,#06439a,#0a67b8);display:flex;align-items:center;justify-content:center;font-size:40px}
 .cours-body{padding:17px;display:flex;flex-direction:column;flex:1}
 .cours-num{font-size:11px;color:#777;font-weight:bold;letter-spacing:.6px}
-.cours-body h2{color:#0752a5;font-size:19px;margin:6px 0 10px}
+.cours-body h3{color:#0752a5;font-size:18px;margin:6px 0 10px}
 .cours-body p{font-size:14px;line-height:1.45;color:#444;flex:1;margin:0 0 16px}
 .cours-btn{display:block;text-align:center;text-decoration:none;background:#06439a;color:#fff;font-weight:bold;border-radius:7px;padding:10px 12px;font-size:13px}
 .cours-btn:hover{background:#0752a5;color:#ffd600}
-.cours-note{margin:0 0 20px;background:#fff;border-left:4px solid #06439a;border-radius:7px;padding:12px 15px;color:#444;font-size:14px}
 .cours-footer{background:#06439a;color:#fff;text-align:center;padding:18px;border-top:2px solid #ffd600;font-size:14px}
 @media(max-width:1050px){.cours-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cours-menu a{font-size:12px;padding:0 7px}}
-@media(max-width:720px){.cours-nav{height:62px;min-height:62px;padding:7px 12px}body{padding-top:62px!important}.cours-logo img{width:42px;height:42px}.cours-logo-text strong{font-size:14px}.cours-logo-text small{font-size:9px}.cours-menu{display:none}.cours-header{padding:18px 14px}.cours-header h1{font-size:27px}.cours-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.cours-nav{height:62px;min-height:62px;padding:7px 12px}body{padding-top:62px!important}.cours-logo img{width:42px;height:42px}.cours-logo-text strong{font-size:14px}.cours-logo-text small{font-size:9px}.cours-menu{display:none}.cours-header{padding:18px 14px}.cours-header h1{font-size:27px}.cours-grid{grid-template-columns:1fr}.video-wrap video{max-height:none}}
 </style>
 </head>
 <body>
@@ -56,121 +63,52 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;paddin
     <a href="galerie.html">Galerie</a>
     <a href="filieres.html">Filières et Programme</a>
     <a href="centres.html">Centres de formation</a>
-    <a href="cours.html" class="active">Cours</a>
+    <a href="cours.html" class="active">Cours et vidéos</a>
     <a href="documents-officiels.html">Documents officiels</a>
     <a href="activites.html">Activité CSP</a>
   </div>
 </nav>
 
 <header class="cours-header">
-  <h1>Cours et travaux pratiques</h1>
-  <p>Ressources pédagogiques et travaux pratiques mis à disposition pour l'apprentissage et l'entraînement.</p>
-  <div class="sous-titre">Ressources Excel disponibles</div>
+  <h1>Cours et vidéos</h1>
+  <p>Ressources pédagogiques, cours vidéo et travaux pratiques pour accompagner l'apprentissage.</p>
 </header>
 
 <main class="cours-container">
+
+  <h2 class="section-title">🎬 Cours vidéo</h2>
+
+  <section class="video-card">
+    <div class="video-wrap">
+      <video controls preload="metadata">
+        <source src="cours/01 - Bienvenue dans « Excel  Le VBA pour les débutants ».mp4" type="video/mp4">
+        Votre navigateur ne prend pas en charge la lecture vidéo.
+      </video>
+    </div>
+    <div class="video-info">
+      <div class="tag">COURS VIDÉO 01</div>
+      <h2>Bienvenue dans « Excel — Le VBA pour les débutants »</h2>
+      <p>Vidéo d'introduction au cours Excel et VBA pour les débutants.</p>
+    </div>
+  </section>
+
+  <h2 class="section-title">📊 Travaux pratiques Excel</h2>
+
   <div class="cours-note">
     <strong>📘 Utilisation :</strong> cliquez sur « Ouvrir le fichier Excel » pour consulter ou télécharger chaque ressource.
   </div>
+
   <section class="cours-grid">
-    
-    <article class="cours-card">
-      <div class="cours-icon">📊</div>
-      <div class="cours-body">
-        <div class="cours-num">RESSOURCE 01</div>
-        <h2>Matricule automatique</h2>
-        <p>Création automatique d&#x27;un matricule à partir du nom, des prénoms et de la date de naissance.</p>
-        <a class="cours-btn" href="cours/Matricule%20Automatique.xlsx" target="_blank" rel="noopener">
-          Ouvrir le fichier Excel
-        </a>
-      </div>
-    </article>
-    
-    <article class="cours-card">
-      <div class="cours-icon">📊</div>
-      <div class="cours-body">
-        <div class="cours-num">RESSOURCE 02</div>
-        <h2>TP 01 — Fonctions Excel</h2>
-        <p>Travaux pratiques avec salaires, chiffre d&#x27;affaires, ventes/avoirs, fonctions SI et tableaux croisés.</p>
-        <a class="cours-btn" href="cours/TP%2001.xlsx" target="_blank" rel="noopener">
-          Ouvrir le fichier Excel
-        </a>
-      </div>
-    </article>
-    
-    <article class="cours-card">
-      <div class="cours-icon">📊</div>
-      <div class="cours-body">
-        <div class="cours-num">RESSOURCE 03</div>
-        <h2>TP 02 — Gestion immobilière</h2>
-        <p>Calcul des loyers, gains mensuels et gains annuels selon les zones.</p>
-        <a class="cours-btn" href="cours/TP%2002.xlsx" target="_blank" rel="noopener">
-          Ouvrir le fichier Excel
-        </a>
-      </div>
-    </article>
-    
-    <article class="cours-card">
-      <div class="cours-icon">📊</div>
-      <div class="cours-body">
-        <div class="cours-num">RESSOURCE 04</div>
-        <h2>TP 03 — TVA</h2>
-        <p>Exercice d&#x27;application sur le calcul de la TVA et du chiffre d&#x27;affaires TTC.</p>
-        <a class="cours-btn" href="cours/TP%2003.xlsx" target="_blank" rel="noopener">
-          Ouvrir le fichier Excel
-        </a>
-      </div>
-    </article>
-    
-    <article class="cours-card">
-      <div class="cours-icon">📊</div>
-      <div class="cours-body">
-        <div class="cours-num">RESSOURCE 05</div>
-        <h2>TP 04 — Tableaux</h2>
-        <p>Exercice utilisant des quantités et plusieurs catégories de produits : table, chaise, armoire, bureau et tabouret.</p>
-        <a class="cours-btn" href="cours/TP%2004.xlsx" target="_blank" rel="noopener">
-          Ouvrir le fichier Excel
-        </a>
-      </div>
-    </article>
-    
-    <article class="cours-card">
-      <div class="cours-icon">📊</div>
-      <div class="cours-body">
-        <div class="cours-num">RESSOURCE 06</div>
-        <h2>TP 05 — Recherche avec critères</h2>
-        <p>Exercice sur les prénoms, le genre, le revenu, la situation et les critères de recherche.</p>
-        <a class="cours-btn" href="cours/TP%2005.xlsx" target="_blank" rel="noopener">
-          Ouvrir le fichier Excel
-        </a>
-      </div>
-    </article>
-    
-    <article class="cours-card">
-      <div class="cours-icon">📊</div>
-      <div class="cours-body">
-        <div class="cours-num">RESSOURCE 07</div>
-        <h2>TP 06 — Vente de billets</h2>
-        <p>Calcul du nombre total de billets vendus et du chiffre d&#x27;affaires à partir des données mensuelles par destination.</p>
-        <a class="cours-btn" href="cours/TP%2006.xlsx" target="_blank" rel="noopener">
-          Ouvrir le fichier Excel
-        </a>
-      </div>
-    </article>
-    
-    <article class="cours-card">
-      <div class="cours-icon">📊</div>
-      <div class="cours-body">
-        <div class="cours-num">RESSOURCE 08</div>
-        <h2>TP d&#x27;entraînement</h2>
-        <p>Exercice sur les ventes, commissions, nombre de vendeurs et identification du meilleur et du moins bon vendeur.</p>
-        <a class="cours-btn" href="cours/TP-Entrainement.xlsx" target="_blank" rel="noopener">
-          Ouvrir le fichier Excel
-        </a>
-      </div>
-    </article>
-    
+    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 01</div><h3>Matricule automatique</h3><p>Création automatique d'un matricule à partir des informations d'identité.</p><a class="cours-btn" href="cours/Matricule%20Automatique.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
+    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 02</div><h3>TP 01 — Fonctions Excel</h3><p>Travaux pratiques sur les salaires, le chiffre d'affaires, les ventes/avoirs et les tableaux.</p><a class="cours-btn" href="cours/TP%2001.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
+    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 03</div><h3>TP 02 — Gestion immobilière</h3><p>Calcul des loyers, gains mensuels et gains annuels selon les zones.</p><a class="cours-btn" href="cours/TP%2002.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
+    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 04</div><h3>TP 03 — TVA</h3><p>Exercice d'application sur le calcul de la TVA et du chiffre d'affaires TTC.</p><a class="cours-btn" href="cours/TP%2003.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
+    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 05</div><h3>TP 04 — Tableaux</h3><p>Exercice utilisant des quantités et plusieurs catégories de produits.</p><a class="cours-btn" href="cours/TP%2004.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
+    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 06</div><h3>TP 05 — Recherche avec critères</h3><p>Exercice sur les prénoms, le genre, le revenu, la situation et les critères de recherche.</p><a class="cours-btn" href="cours/TP%2005.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
+    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 07</div><h3>TP 06 — Vente de billets</h3><p>Calcul du nombre total de billets vendus et du chiffre d'affaires par destination.</p><a class="cours-btn" href="cours/TP%2006.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
+    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 08</div><h3>TP d'entraînement</h3><p>Exercice sur les ventes, commissions et identification des meilleurs vendeurs.</p><a class="cours-btn" href="cours/TP-Entrainement.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
   </section>
+
 </main>
 
 <footer class="cours-footer">
