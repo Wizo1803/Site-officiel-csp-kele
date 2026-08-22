@@ -43,6 +43,23 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;paddin
 .cours-footer{background:#06439a;color:#fff;text-align:center;padding:18px;border-top:2px solid #ffd600;font-size:14px}
 @media(max-width:1050px){.cours-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cours-menu a{font-size:12px;padding:0 7px}}
 @media(max-width:720px){.cours-nav{height:62px;min-height:62px;padding:7px 12px}body{padding-top:62px!important}.cours-logo img{width:42px;height:42px}.cours-logo-text strong{font-size:14px}.cours-logo-text small{font-size:9px}.cours-menu{display:none}.cours-header{padding:18px 14px}.cours-header h1{font-size:27px}.cours-grid{grid-template-columns:1fr}.video-wrap video{max-height:none}}
+
+.transport-resource{margin:30px 0}
+.resource-card{background:#fff;border:1px solid #d9e1ea;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.12);display:flex;align-items:stretch}
+.resource-icon{width:150px;background:linear-gradient(135deg,#06439a,#0a67b8);color:#fff;display:flex;align-items:center;justify-content:center;font-size:52px;flex-shrink:0}
+.resource-body{padding:18px 20px;flex:1}
+.resource-body h3{color:#0752a5;font-size:21px;margin:6px 0 9px}
+.resource-body p{font-size:14px;line-height:1.5;color:#444;margin:0 0 15px}
+.resource-buttons{display:flex;gap:10px;flex-wrap:wrap}
+.resource-buttons .cours-btn{min-width:210px}
+.resource-buttons .secondary{background:#555}
+@media(max-width:720px){
+  .resource-card{display:block}
+  .resource-icon{width:100%;height:85px}
+  .resource-buttons{display:block}
+  .resource-buttons .cours-btn{margin-top:8px}
+}
+
 </style>
 </head>
 <body>
@@ -295,6 +312,23 @@ Votre navigateur ne prend pas en charge la lecture vidéo.
 <div class="video-info"><div class="tag">COURS VIDÉO 30</div>
 <h2>Conclure sur le VBA pour les débutants</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
 </article>
+
+<section class="transport-resource">
+  <h2 class="section-title">📦 Ressource pratique — Calculer le prix du transport</h2>
+  <div class="resource-card">
+    <div class="resource-icon">📦</div>
+    <div class="resource-body">
+      <div class="cours-num">RESSOURCE PÉDAGOGIQUE</div>
+      <h3>Calculer prix transport</h3>
+      <p>Support de présentation et schéma Visio consacrés au calcul du prix du transport.</p>
+      <div class="resource-buttons">
+        <a class="cours-btn" href="cours/Calculer%20prix%20transport_VF.pptx" target="_blank">📽️ Ouvrir le PowerPoint</a>
+        <a class="cours-btn secondary" href="cours/Calculer%20prix%20transport_VF.vsdx" target="_blank">📐 Ouvrir le schéma Visio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <h2 class="section-title">📊 Travaux pratiques Excel</h2>
 <div class="cours-note"><strong>📘 Utilisation :</strong> cliquez sur « Ouvrir le fichier Excel » pour consulter ou télécharger chaque ressource.</div>
 <section class="cours-grid">
