@@ -1063,11 +1063,8 @@ body {
 
 function ouvrirPhoto(image) {
 
-    const modal =
-        document.getElementById("photoModal");
-
-    const grande =
-        document.getElementById("photoGrande");
+    const modal = document.getElementById("photoModal");
+    const grande = document.getElementById("photoGrande");
 
     grande.src = image.src;
 
@@ -1088,8 +1085,7 @@ function fermerPhoto(event) {
         return;
     }
 
-    const modal =
-        document.getElementById("photoModal");
+    const modal = document.getElementById("photoModal");
 
     modal.classList.remove("active");
 
@@ -1097,24 +1093,24 @@ function fermerPhoto(event) {
 }
 
 
-document.addEventListener(
-    "keydown",
-    function(event) {
+document.addEventListener("keydown", function(event) {
 
-        if (event.key === "Escape") {
+    if (event.key === "Escape") {
 
-            document
-                .getElementById("photoModal")
-                .classList.remove("active");
+        document
+            .getElementById("photoModal")
+            .classList.remove("active");
 
-            document.body.style.overflow = "";
-
-        }
+        document.body.style.overflow = "";
 
     }
-);
+
+});
 
 </script>
+
+</body>
+</html>
 
 
 </body>
