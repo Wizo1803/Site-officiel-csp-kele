@@ -33,15 +33,13 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;paddin
 .video-info p{font-size:14px;line-height:1.5;color:#444;margin:0}
 .cours-note{margin:0 0 20px;background:#fff;border-left:4px solid #06439a;border-radius:7px;padding:12px 15px;color:#444;font-size:14px}
 .cours-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.cours-card{background:#fff;border:1px solid #d9e1ea;border-radius:13px;overflow:hidden;box-shadow:0 4px 13px rgba(0,0,0,.12);display:flex;flex-direction:column;transition:.25s}
-.cours-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.cours-card{background:#fff;border:1px solid #d9e1ea;border-radius:13px;overflow:hidden;box-shadow:0 4px 13px rgba(0,0,0,.12);display:flex;flex-direction:column}
 .cours-icon{height:90px;background:linear-gradient(135deg,#06439a,#0a67b8);display:flex;align-items:center;justify-content:center;font-size:40px}
 .cours-body{padding:17px;display:flex;flex-direction:column;flex:1}
 .cours-num{font-size:11px;color:#777;font-weight:bold;letter-spacing:.6px}
 .cours-body h3{color:#0752a5;font-size:18px;margin:6px 0 10px}
 .cours-body p{font-size:14px;line-height:1.45;color:#444;flex:1;margin:0 0 16px}
 .cours-btn{display:block;text-align:center;text-decoration:none;background:#06439a;color:#fff;font-weight:bold;border-radius:7px;padding:10px 12px;font-size:13px}
-.cours-btn:hover{background:#0752a5;color:#ffd600}
 .cours-footer{background:#06439a;color:#fff;text-align:center;padding:18px;border-top:2px solid #ffd600;font-size:14px}
 @media(max-width:1050px){.cours-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cours-menu a{font-size:12px;padding:0 7px}}
 @media(max-width:720px){.cours-nav{height:62px;min-height:62px;padding:7px 12px}body{padding-top:62px!important}.cours-logo img{width:42px;height:42px}.cours-logo-text strong{font-size:14px}.cours-logo-text small{font-size:9px}.cours-menu{display:none}.cours-header{padding:18px 14px}.cours-header h1{font-size:27px}.cours-grid{grid-template-columns:1fr}.video-wrap video{max-height:none}}
@@ -49,446 +47,259 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#222;paddin
 </head>
 <body>
 <nav class="cours-nav">
-  <div class="cours-logo">
-    <img src="banner2.png" alt="Logo CSP/CCMTF KELE">
-    <div class="cours-logo-text"><strong>CSP/CCMTF KELE</strong><small>Former aujourd'hui, bâtir demain</small></div>
-  </div>
-  <div class="cours-menu">
-    <a href="index.html">Accueil</a>
-    <a href="annuaire.html">Annuaire</a>
-    <a href="galerie.html">Galerie</a>
-    <a href="filieres.html">Filières et Programme</a>
-    <a href="centres.html">Centres de formation</a>
-    <a href="cours.html" class="active">Cours et vidéos</a>
-    <a href="documents-officiels.html">Documents officiels</a>
-    <a href="activites.html">Activité CSP</a>
-  </div>
+<div class="cours-logo"><img src="banner2.png" alt="Logo CSP/CCMTF KELE"><div class="cours-logo-text"><strong>CSP/CCMTF KELE</strong><small>Former aujourd'hui, bâtir demain</small></div></div>
+<div class="cours-menu">
+<a href="index.html">Accueil</a><a href="annuaire.html">Annuaire</a><a href="galerie.html">Galerie</a><a href="filieres.html">Filières et Programme</a><a href="centres.html">Centres de formation</a><a href="cours.html" class="active">Cours et vidéos</a><a href="documents-officiels.html">Documents officiels</a><a href="activites.html">Activité CSP</a>
+</div>
 </nav>
-<header class="cours-header">
-  <h1>Cours et vidéos</h1>
-  <p>Ressources pédagogiques, cours vidéo et travaux pratiques pour accompagner l'apprentissage.</p>
-</header>
+<header class="cours-header"><h1>Cours et vidéos</h1><p>Ressources pédagogiques, cours vidéo et travaux pratiques pour accompagner l'apprentissage.</p></header>
 <main class="cours-container">
-  <h2 class="section-title">🎬 Cours vidéo — Excel et VBA</h2>
-  
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/01 - Bienvenue dans « Excel  Le VBA pour les débutants ».mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 00</div>
-        <h2>Bienvenue dans « Excel — Le VBA pour les débutants »</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/01 - Parler le langage VBA.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 01</div>
-        <h2>Parler le langage VBA</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/02 - Dessiner, c'est mieux.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 02</div>
-        <h2>Dessiner, c'est mieux</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/03 - Accéder aux macros.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 03</div>
-        <h2>Accéder aux macros</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/04 - Décrire l'environnement.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 04</div>
-        <h2>Décrire l'environnement</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/05 - Choisir sa voie.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 05</div>
-        <h2>Choisir sa voie</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/01 - Créer sa première macro.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 07</div>
-        <h2>Créer sa première macro</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/02 - S'inspirer de sa première macro.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 08</div>
-        <h2>S'inspirer de sa première macro</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/03 - Écrire correctement.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 09</div>
-        <h2>Écrire correctement</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/04 - Appliquer valeurs et formules.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 10</div>
-        <h2>Appliquer valeurs et formules</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/05 - Changer la cellule active.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 11</div>
-        <h2>Changer la cellule active</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/06 - Bouger ou pas.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 12</div>
-        <h2>Bouger ou pas</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/07 - Déboguer le code.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 13</div>
-        <h2>Déboguer le code</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/08 - Espionner le code.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 14</div>
-        <h2>Espionner le code</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/09 - Afficher un message.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 15</div>
-        <h2>Afficher un message</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/10 - Personnaliser Excel.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 16</div>
-        <h2>Personnaliser Excel</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/01 - Déclarer et typer.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 17</div>
-        <h2>Déclarer et typer</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/02 - Passer des informations.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 18</div>
-        <h2>Passer des informations</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/03 - Retourner un résultat.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 19</div>
-        <h2>Retourner un résultat</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/04 - Choisir les fonctions.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 20</div>
-        <h2>Choisir les fonctions</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/06 - Énumérer des données.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 21</div>
-        <h2>Énumérer des données</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/08 - Interagir avec l'utilisateur.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 22</div>
-        <h2>Interagir avec l'utilisateur</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/09 - Exécuter une macro.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 23</div>
-        <h2>Exécuter une macro</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/10 - Enregistrer un classeur.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 24</div>
-        <h2>Enregistrer un classeur</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/01 - Mettre en majuscule.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 25</div>
-        <h2>Mettre en majuscule</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/02 - Appliquer à une sélection.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 26</div>
-        <h2>Appliquer à une sélection</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/03 - Appeler Excel depuis le VBA.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 27</div>
-        <h2>Appeler Excel depuis le VBA</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/04 - Colorer du texte.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 28</div>
-        <h2>Colorer du texte</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-    <article class="video-card">
-      <div class="video-wrap">
-        <video controls preload="metadata" playsinline>
-          <source src="cours/05 - Utiliser une autre feuille.mp4" type="video/mp4">
-          Votre navigateur ne prend pas en charge la lecture vidéo.
-        </video>
-      </div>
-      <div class="video-info">
-        <div class="tag">COURS VIDÉO 29</div>
-        <h2>Utiliser une autre feuille</h2>
-        <p>Formation Excel et VBA — vidéo pédagogique.</p>
-      </div>
-    </article>
-    
-  <h2 class="section-title">📊 Travaux pratiques Excel</h2>
-  <div class="cours-note"><strong>📘 Utilisation :</strong> cliquez sur « Ouvrir le fichier Excel » pour consulter ou télécharger chaque ressource.</div>
-  <section class="cours-grid">
-    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 01</div><h3>Matricule automatique</h3><p>Création automatique d'un matricule à partir des informations d'identité.</p><a class="cours-btn" href="cours/Matricule%20Automatique.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
-    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 02</div><h3>TP 01 — Fonctions Excel</h3><p>Travaux pratiques sur les salaires, le chiffre d'affaires, les ventes/avoirs et les tableaux.</p><a class="cours-btn" href="cours/TP%2001.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
-    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 03</div><h3>TP 02 — Gestion immobilière</h3><p>Calcul des loyers, gains mensuels et gains annuels selon les zones.</p><a class="cours-btn" href="cours/TP%2002.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
-    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 04</div><h3>TP 03 — TVA</h3><p>Exercice d'application sur le calcul de la TVA et du chiffre d'affaires TTC.</p><a class="cours-btn" href="cours/TP%2003.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
-    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 05</div><h3>TP 04 — Tableaux</h3><p>Exercice utilisant des quantités et plusieurs catégories de produits.</p><a class="cours-btn" href="cours/TP%2004.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
-    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 06</div><h3>TP 05 — Recherche avec critères</h3><p>Exercice sur les prénoms, le genre, le revenu, la situation et les critères de recherche.</p><a class="cours-btn" href="cours/TP%2005.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
-    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 07</div><h3>TP 06 — Vente de billets</h3><p>Calcul du nombre total de billets vendus et du chiffre d'affaires par destination.</p><a class="cours-btn" href="cours/TP%2006.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
-    <article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 08</div><h3>TP d'entraînement</h3><p>Exercice sur les ventes, commissions et identification des meilleurs vendeurs.</p><a class="cours-btn" href="cours/TP-Entrainement.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
-  </section>
+<h2 class="section-title">🎬 Cours vidéo — Excel et VBA</h2>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/01 - Bienvenue dans « Excel  Le VBA pour les débutants ».mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 00</div>
+<h2>Bienvenue dans « Excel — Le VBA pour les débutants »</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/01 - Parler le langage VBA.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 01</div>
+<h2>Parler le langage VBA</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/02 - Dessiner, c'est mieux.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 02</div>
+<h2>Dessiner, c'est mieux</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/03 - Accéder aux macros.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 03</div>
+<h2>Accéder aux macros</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/04 - Décrire l'environnement.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 04</div>
+<h2>Décrire l'environnement</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/05 - Choisir sa voie.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 05</div>
+<h2>Choisir sa voie</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/01 - Créer sa première macro.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 07</div>
+<h2>Créer sa première macro</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/02 - S'inspirer de sa première macro.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 08</div>
+<h2>S'inspirer de sa première macro</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/03 - Écrire correctement.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 09</div>
+<h2>Écrire correctement</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/04 - Appliquer valeurs et formules.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 10</div>
+<h2>Appliquer valeurs et formules</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/05 - Changer la cellule active.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 11</div>
+<h2>Changer la cellule active</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/06 - Bouger ou pas.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 12</div>
+<h2>Bouger ou pas</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/07 - Déboguer le code.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 13</div>
+<h2>Déboguer le code</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/08 - Espionner le code.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 14</div>
+<h2>Espionner le code</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/09 - Afficher un message.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 15</div>
+<h2>Afficher un message</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/10 - Personnaliser Excel.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 16</div>
+<h2>Personnaliser Excel</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/01 - Déclarer et typer.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 17</div>
+<h2>Déclarer et typer</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/02 - Passer des informations.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 18</div>
+<h2>Passer des informations</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/03 - Retourner un résultat.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 19</div>
+<h2>Retourner un résultat</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/04 - Choisir les fonctions.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 20</div>
+<h2>Choisir les fonctions</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/06 - Énumérer des données.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 21</div>
+<h2>Énumérer des données</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/08 - Interagir avec l'utilisateur.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 22</div>
+<h2>Interagir avec l'utilisateur</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/09 - Exécuter une macro.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 23</div>
+<h2>Exécuter une macro</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/10 - Enregistrer un classeur.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 24</div>
+<h2>Enregistrer un classeur</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/01 - Mettre en majuscule.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 25</div>
+<h2>Mettre en majuscule</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/02 - Appliquer à une sélection.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 26</div>
+<h2>Appliquer à une sélection</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/03 - Appeler Excel depuis le VBA.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 27</div>
+<h2>Appeler Excel depuis le VBA</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/04 - Colorer du texte.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 28</div>
+<h2>Colorer du texte</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/05 - Utiliser une autre feuille.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 29</div>
+<h2>Utiliser une autre feuille</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<article class="video-card">
+<div class="video-wrap"><video controls preload="metadata" playsinline>
+<source src="cours/01 - Conclure sur le VBA pour les débutants.mp4" type="video/mp4">
+Votre navigateur ne prend pas en charge la lecture vidéo.
+</video></div>
+<div class="video-info"><div class="tag">COURS VIDÉO 30</div>
+<h2>Conclure sur le VBA pour les débutants</h2><p>Formation Excel et VBA — vidéo pédagogique.</p></div>
+</article>
+<h2 class="section-title">📊 Travaux pratiques Excel</h2>
+<div class="cours-note"><strong>📘 Utilisation :</strong> cliquez sur « Ouvrir le fichier Excel » pour consulter ou télécharger chaque ressource.</div>
+<section class="cours-grid">
+<article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 01</div><h3>Matricule automatique</h3><p>Création automatique d'un matricule à partir des informations d'identité.</p><a class="cours-btn" href="cours/Matricule%20Automatique.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article><article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 02</div><h3>TP 01 — Fonctions Excel</h3><p>Travaux pratiques sur les salaires, le chiffre d'affaires, les ventes/avoirs et les tableaux.</p><a class="cours-btn" href="cours/TP%2001.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article><article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 03</div><h3>TP 02 — Gestion immobilière</h3><p>Calcul des loyers, gains mensuels et gains annuels selon les zones.</p><a class="cours-btn" href="cours/TP%2002.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article><article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 04</div><h3>TP 03 — TVA</h3><p>Exercice d'application sur le calcul de la TVA et du chiffre d'affaires TTC.</p><a class="cours-btn" href="cours/TP%2003.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article><article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 05</div><h3>TP 04 — Tableaux</h3><p>Exercice utilisant des quantités et plusieurs catégories de produits.</p><a class="cours-btn" href="cours/TP%2004.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article><article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 06</div><h3>TP 05 — Recherche avec critères</h3><p>Exercice sur les prénoms, le genre, le revenu, la situation et les critères de recherche.</p><a class="cours-btn" href="cours/TP%2005.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article><article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 07</div><h3>TP 06 — Vente de billets</h3><p>Calcul du nombre total de billets vendus et du chiffre d'affaires par destination.</p><a class="cours-btn" href="cours/TP%2006.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article><article class="cours-card"><div class="cours-icon">📊</div><div class="cours-body"><div class="cours-num">RESSOURCE 08</div><h3>TP d'entraînement</h3><p>Exercice sur les ventes, commissions et identification des meilleurs vendeurs.</p><a class="cours-btn" href="cours/TP-Entrainement.xlsx" target="_blank">Ouvrir le fichier Excel</a></div></article>
+</section>
 </main>
 <footer class="cours-footer">© 2026 Coordination Sous-Provinciale EC-CCMTF KELE — Tous droits réservés.</footer>
 </body>
