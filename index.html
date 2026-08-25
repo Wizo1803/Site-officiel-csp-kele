@@ -591,19 +591,125 @@ if ("serviceWorker" in navigator) {
 </script>
 </script>
 <script>
-document.getElementById("btn-quitter").addEventListener("click", function(e) {
+<!-- FENÊTRE DE CONFIRMATION QUITTER -->
+<div id="quitter-modal" class="quitter-modal">
 
+    <div class="quitter-box">
+
+        <h2>⚠️ Confirmation</h2>
+
+        <p>ÊTES-VOUS SÛR DE QUITTER ?</p>
+
+        <div class="quitter-buttons">
+
+            <button id="quitter-oui">
+                OUI
+            </button>
+
+            <button id="quitter-non">
+                NON
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+.quitter-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    z-index:10000;
+    align-items:center;
+    justify-content:center;
+}
+
+.quitter-box{
+    width:90%;
+    max-width:420px;
+    background:white;
+    border-radius:12px;
+    padding:28px 22px;
+    text-align:center;
+    box-shadow:0 8px 30px rgba(0,0,0,0.3);
+}
+
+.quitter-box h2{
+    margin:0 0 15px;
+    color:#0b3d91;
+}
+
+.quitter-box p{
+    font-size:18px;
+    font-weight:bold;
+    color:#333;
+    margin:15px 0 25px;
+}
+
+.quitter-buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+.quitter-buttons button{
+    min-width:100px;
+    padding:10px 20px;
+    border:none;
+    border-radius:7px;
+    font-weight:bold;
+    font-size:15px;
+    cursor:pointer;
+}
+
+#quitter-oui{
+    background:#0b3d91;
+    color:white;
+}
+
+#quitter-non{
+    background:#ddd;
+    color:#333;
+}
+
+#quitter-oui:hover{
+    background:#ffd600;
+    color:#0b3d91;
+}
+
+#quitter-non:hover{
+    background:#ffd600;
+    color:#0b3d91;
+}
+</style>
+
+
+<script>
+const btnQuitter = document.getElementById("btn-quitter");
+const quitterModal = document.getElementById("quitter-modal");
+const quitterOui = document.getElementById("quitter-oui");
+const quitterNon = document.getElementById("quitter-non");
+
+btnQuitter.addEventListener("click", function(e){
     e.preventDefault();
+    quitterModal.style.display = "flex";
+});
 
-    const confirmation = confirm("ÊTES-VOUS SÛR DE QUITTER ?");
+quitterNon.addEventListener("click", function(){
+    quitterModal.style.display = "none";
+});
 
-    if (confirmation) {
-        window.close();
+quitterOui.addEventListener("click", function(){
 
-        setTimeout(function() {
-            window.location.href = "about:blank";
-        }, 100);
-    }
+    window.close();
+
+    setTimeout(function(){
+        window.location.href = "about:blank";
+    }, 100);
 
 });
 </script>
