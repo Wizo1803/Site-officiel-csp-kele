@@ -590,5 +590,22 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 </script>
+<script>
+document.getElementById("btn-quitter").addEventListener("click", function(e) {
+
+    e.preventDefault();
+
+    const confirmation = confirm("ÊTES-VOUS SÛR DE QUITTER ?");
+
+    if (confirmation) {
+        window.close();
+
+        setTimeout(function() {
+            window.location.href = "about:blank";
+        }, 100);
+    }
+
+});
+</script>
 </body>
 </html>
