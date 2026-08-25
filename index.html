@@ -590,8 +590,8 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 </script>
-<script>
 <!-- FENÊTRE DE CONFIRMATION QUITTER -->
+
 <div id="quitter-modal" class="quitter-modal">
 
     <div class="quitter-box">
@@ -618,6 +618,7 @@ if ("serviceWorker" in navigator) {
 
 
 <style>
+
 .quitter-modal{
     display:none;
     position:fixed;
@@ -676,42 +677,51 @@ if ("serviceWorker" in navigator) {
     color:#333;
 }
 
-#quitter-oui:hover{
-    background:#ffd600;
-    color:#0b3d91;
-}
-
+#quitter-oui:hover,
 #quitter-non:hover{
     background:#ffd600;
     color:#0b3d91;
 }
+
 </style>
 
 
 <script>
+
 const btnQuitter = document.getElementById("btn-quitter");
 const quitterModal = document.getElementById("quitter-modal");
 const quitterOui = document.getElementById("quitter-oui");
 const quitterNon = document.getElementById("quitter-non");
 
+
 btnQuitter.addEventListener("click", function(e){
+
     e.preventDefault();
+
     quitterModal.style.display = "flex";
+
 });
 
+
 quitterNon.addEventListener("click", function(){
+
     quitterModal.style.display = "none";
+
 });
+
 
 quitterOui.addEventListener("click", function(){
 
     window.close();
 
     setTimeout(function(){
+
         window.location.href = "about:blank";
+
     }, 100);
 
 });
+
 </script>
 </body>
 </html>
