@@ -139,6 +139,92 @@
         padding-left: 25px;
     }
 }
+/* ================================
+   MISE EN FORME DE LA PRÉSENTATION
+   ================================ */
+
+.A-propos {
+    width: 90%;
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 35px 45px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+    box-sizing: border-box;
+}
+
+/* Titres */
+.A-propos h2 {
+    color: #0b3d91;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+/* Premier titre */
+.A-propos h2:first-child {
+    margin-top: 0;
+}
+
+/* Paragraphes */
+.A-propos p {
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    margin: 12px 0;
+    color: #333;
+}
+
+/* Listes */
+.A-propos ul {
+    padding-left: 35px;
+    margin: 15px 0 30px;
+}
+
+.A-propos li {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* Liens */
+.A-propos a {
+    color: #0b3d91;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.A-propos a:hover {
+    text-decoration: underline;
+}
+
+/* Affichage sur téléphone */
+@media (max-width: 600px) {
+
+    .A-propos {
+        width: 94%;
+        padding: 25px 18px;
+        margin: 25px auto;
+    }
+
+    .A-propos h2 {
+        font-size: 21px;
+        margin-top: 25px;
+    }
+
+    .A-propos p,
+    .A-propos li {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .A-propos ul {
+        padding-left: 25px;
+    }
+}
     </style>
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
