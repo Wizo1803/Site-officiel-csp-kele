@@ -57,6 +57,88 @@
         h2{
             color:#006400;
         }
+    /* Mise en forme de la présentation */
+.A-propos,
+.A\ propos {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+    box-sizing: border-box;
+}
+
+.A-propos h2,
+.A\ propos h2 {
+    color: #0b3d91;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.A-propos p,
+.A\ propos p {
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    margin: 12px 0;
+}
+
+.A-propos ul,
+.A\ propos ul {
+    padding-left: 35px;
+    margin-bottom: 25px;
+}
+
+.A-propos li,
+.A\ propos li {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 8px;
+}
+
+.A-propos a,
+.A\ propos a {
+    color: #0b3d91;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.A-propos a:hover,
+.A\ propos a:hover {
+    text-decoration: underline;
+}
+
+/* Affichage adapté aux téléphones */
+@media (max-width: 600px) {
+
+    .A-propos,
+    .A\ propos {
+        width: 94%;
+        padding: 20px 15px;
+        margin: 20px auto;
+    }
+
+    .A-propos h2,
+    .A\ propos h2 {
+        font-size: 21px;
+    }
+
+    .A-propos p,
+    .A\ propos p,
+    .A-propos li,
+    .A\ propos li {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .A-propos ul,
+    .A\ propos ul {
+        padding-left: 25px;
+    }
+}
     </style>
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
