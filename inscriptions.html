@@ -1,0 +1,357 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inscriptions des apprenants - CSP Kele</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        header {
+            background: #0b3d91;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header img {
+            width: 100%;
+            max-width: 900px;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        header h1 {
+            margin: 10px 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1000px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+        }
+
+        h2 {
+            color: #0b3d91;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .champ {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .champ.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 7px;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #0b3d91;
+        }
+
+        .boutons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        button,
+        .bouton-retour {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .enregistrer {
+            background: #0b3d91;
+            color: white;
+        }
+
+        .enregistrer:hover {
+            background: #062b68;
+        }
+
+        .annuler {
+            background: #ddd;
+            color: #333;
+        }
+
+        .annuler:hover {
+            background: #bbb;
+        }
+
+        .bouton-retour {
+            background: #006400;
+            color: white;
+        }
+
+        .bouton-retour:hover {
+            background: #004d00;
+        }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: 94%;
+                padding: 20px 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .champ.full {
+                grid-column: auto;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <img src="Facade.jpg" alt="Coordination Sous-Provinciale de Kele">
+
+    <h1>COORDINATION SOUS-PROVINCIALE DE KELE</h1>
+
+    <p>Gestion des inscriptions des apprenants</p>
+
+</header>
+
+
+<div class="container">
+
+    <h2>📝 Inscription d'un apprenant</h2>
+
+    <form id="form-inscription">
+
+        <div class="form-grid">
+
+            <div class="champ">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+
+            <div class="champ">
+                <label for="postnom">Postnom</label>
+                <input type="text" id="postnom" name="postnom" required>
+            </div>
+
+            <div class="champ">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required>
+            </div>
+
+            <div class="champ">
+                <label for="sexe">Sexe</label>
+                <select id="sexe" name="sexe" required>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="Masculin">Masculin</option>
+                    <option value="Féminin">Féminin</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label for="dateNaissance">Date de naissance</label>
+                <input type="date" id="dateNaissance" name="dateNaissance" required>
+            </div>
+
+            <div class="champ">
+                <label for="centre">Centre de formation</label>
+                <select id="centre" name="centre" required>
+                    <option value="">-- Sélectionner le centre --</option>
+                    <option value="Centre 1">Centre 1</option>
+                    <option value="Centre 2">Centre 2</option>
+                    <option value="Centre 3">Centre 3</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label for="filiere">Filière</label>
+                <select id="filiere" name="filiere" required>
+                    <option value="">-- Sélectionner la filière --</option>
+                    <option value="Informatique">Informatique</option>
+                    <option value="Coupe et Couture">Coupe et Couture</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Electricité">Electricité</option>
+                    <option value="Mécanique Automobile">Mécanique Automobile</option>
+                    <option value="Maçonnerie">Maçonnerie</option>
+                    <option value="Plomberie">Plomberie</option>
+                    <option value="Coiffure">Coiffure</option>
+                    <option value="Cuisine Locale">Cuisine Locale</option>
+                    <option value="Autre">Autre</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label for="duree">Durée de formation</label>
+                <select id="duree" name="duree" required>
+                    <option value="">-- Sélectionner --</option>
+                    <option value="3 mois">3 mois</option>
+                    <option value="6 mois">6 mois</option>
+                    <option value="12 mois">12 mois</option>
+                </select>
+            </div>
+
+            <div class="champ">
+                <label for="annee">Année de formation</label>
+                <input type="number"
+                       id="annee"
+                       name="annee"
+                       min="2020"
+                       max="2100"
+                       placeholder="Exemple : 2026"
+                       required>
+            </div>
+
+            <div class="champ">
+                <label for="dateInscription">Date d'inscription</label>
+                <input type="date"
+                       id="dateInscription"
+                       name="dateInscription"
+                       required>
+            </div>
+
+            <div class="champ">
+                <label for="telephone">Téléphone</label>
+                <input type="tel"
+                       id="telephone"
+                       name="telephone"
+                       placeholder="+243..."
+                >
+            </div>
+
+        </div>
+
+
+        <div class="boutons">
+
+            <button type="submit" class="enregistrer">
+                💾 Enregistrer l'inscription
+            </button>
+
+            <button type="reset" class="annuler">
+                ↻ Réinitialiser
+            </button>
+
+            <a href="index.html" class="bouton-retour">
+                🏠 Retour à l'accueil
+            </a>
+
+        </div>
+
+    </form>
+
+
+    <div id="message" class="message"></div>
+
+</div>
+
+
+<footer>
+
+    © 2026 Coordination Sous-Provinciale de KELE / EC-CCMTF<br>
+    Tous droits réservés.
+
+</footer>
+
+
+<script>
+
+const form = document.getElementById("form-inscription");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    message.style.display = "block";
+    message.style.background = "#e8f5e9";
+    message.style.color = "#2e7d32";
+
+    message.textContent =
+        "Formulaire prêt. La connexion à la base de données sera ajoutée à l'étape suivante.";
+
+});
+
+</script>
+
+</body>
+</html>
+```
