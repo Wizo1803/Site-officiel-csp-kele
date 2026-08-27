@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -331,28 +330,22 @@
 
 </footer>
 
-
-```html id="q5z4r8"
 <script>
 
 const form = document.getElementById("form-inscription");
 const message = document.getElementById("message");
 
-/* Adresse de votre application Web Google Apps Script */
 const URL_SCRIPT =
 "https://script.google.com/macros/s/AKfycbz2dLVAZH-VT8jpcACX8RE-oIko4DOf-l1RYBvPPHBpPWO9RhQyPOXyFZdwm9FExoqK/exec";
-
 
 form.addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
-    const bouton =
-        form.querySelector(".enregistrer");
+    const bouton = form.querySelector(".enregistrer");
 
     bouton.disabled = true;
     bouton.textContent = "⏳ Enregistrement...";
-
 
     const donnees = {
 
@@ -370,48 +363,26 @@ form.addEventListener("submit", async function(event) {
 
     };
 
-
     try {
 
-        const reponse = await fetch(URL_SCRIPT, {
-
+        await fetch(URL_SCRIPT, {
             method: "POST",
-
+            mode: "no-cors",
             body: JSON.stringify(donnees)
-
         });
 
+        message.style.display = "block";
+        message.style.background = "#e8f5e9";
+        message.style.color = "#2e7d32";
 
-        const resultat = await reponse.json();
+        message.innerHTML =
+            "✅ <strong>Inscription envoyée avec succès.</strong><br>" +
+            "Les données sont en cours d'enregistrement.";
 
+        form.reset();
 
-        if (resultat.success) {
-
-            message.style.display = "block";
-            message.style.background = "#e8f5e9";
-            message.style.color = "#2e7d32";
-
-            message.innerHTML =
-                "✅ <strong>Inscription enregistrée avec succès !</strong><br>" +
-                "Numéro d'inscription : <strong>" +
-                resultat.numeroInscription +
-                "</strong>";
-
-
-            form.reset();
-
-
-            /* Remet automatiquement l'année actuelle */
-            document.getElementById("annee").value =
-                new Date().getFullYear();
-
-
-        } else {
-
-            throw new Error(resultat.message);
-
-        }
-
+        document.getElementById("annee").value =
+            new Date().getFullYear();
 
     } catch (erreur) {
 
@@ -425,14 +396,12 @@ form.addEventListener("submit", async function(event) {
 
     }
 
-
     bouton.disabled = false;
     bouton.textContent = "💾 Enregistrer l'inscription";
 
 });
 
 </script>
-```
 
 
 </body>
