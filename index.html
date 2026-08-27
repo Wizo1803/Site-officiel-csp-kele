@@ -15,13 +15,91 @@
             background:#f4f4f4;
         }
 
-        header{
-            background:#006400;
-            color:white;
-            padding:20px;
-            text-align:center;
-        }
+       header {
+    position: relative;
+    background: #006400;
+    color: white;
+    padding: 0 0 25px 0;
+    text-align: center;
+    overflow: hidden;
+}
 
+header > img {
+    display: block;
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+/* Zone contenant les textes */
+header h1,
+header h2,
+header p {
+    position: relative;
+    z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Titre principal */
+header h1 {
+    display: table;
+    margin-top: -75px;
+    margin-bottom: 12px;
+    padding: 12px 22px;
+    background: rgba(0, 70, 0, 0.82);
+    color: #ffffff;
+    border-radius: 8px;
+    font-size: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+/* Site Officiel */
+header h2 {
+    display: table;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    padding: 8px 18px;
+    background: rgba(0, 70, 0, 0.75);
+    color: #ffffff;
+    border-radius: 6px;
+    font-size: 22px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Slogan */
+header p {
+    display: table;
+    margin-top: 5px;
+    padding: 7px 16px;
+    background: rgba(0, 70, 0, 0.70);
+    color: #fff8c5;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+/* Adaptation téléphone */
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 20px;
+        padding: 10px 12px;
+        margin-top: -55px;
+    }
+
+    header h2 {
+        font-size: 17px;
+        padding: 7px 12px;
+    }
+
+    header p {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+}
         nav{
             background:#004080;
             text-align:center;
