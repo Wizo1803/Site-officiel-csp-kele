@@ -332,25 +332,108 @@
 </footer>
 
 
+```html id="q5z4r8"
 <script>
 
 const form = document.getElementById("form-inscription");
 const message = document.getElementById("message");
 
-form.addEventListener("submit", function(event) {
+/* Adresse de votre application Web Google Apps Script */
+const URL_SCRIPT =
+"https://script.google.com/macros/s/AKfycbz2dLVAZH-VT8jpcACX8RE-oIko4DOf-l1RYBvPPHBpPWO9RhQyPOXyFZdwm9FExoqK/exec";
+
+
+form.addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
-    message.style.display = "block";
-    message.style.background = "#e8f5e9";
-    message.style.color = "#2e7d32";
+    const bouton =
+        form.querySelector(".enregistrer");
 
-    message.textContent =
-        "Formulaire prêt. La connexion à la base de données sera ajoutée à l'étape suivante.";
+    bouton.disabled = true;
+    bouton.textContent = "⏳ Enregistrement...";
+
+
+    const donnees = {
+
+        nom: document.getElementById("nom").value,
+        postnom: document.getElementById("postnom").value,
+        prenom: document.getElementById("prenom").value,
+        sexe: document.getElementById("sexe").value,
+        dateNaissance: document.getElementById("dateNaissance").value,
+        centre: document.getElementById("centre").value,
+        filiere: document.getElementById("filiere").value,
+        duree: document.getElementById("duree").value,
+        annee: document.getElementById("annee").value,
+        dateInscription: document.getElementById("dateInscription").value,
+        telephone: document.getElementById("telephone").value
+
+    };
+
+
+    try {
+
+        const reponse = await fetch(URL_SCRIPT, {
+
+            method: "POST",
+
+            body: JSON.stringify(donnees)
+
+        });
+
+
+        const resultat = await reponse.json();
+
+
+        if (resultat.success) {
+
+            message.style.display = "block";
+            message.style.background = "#e8f5e9";
+            message.style.color = "#2e7d32";
+
+            message.innerHTML =
+                "✅ <strong>Inscription enregistrée avec succès !</strong><br>" +
+                "Numéro d'inscription : <strong>" +
+                resultat.numeroInscription +
+                "</strong>";
+
+
+            form.reset();
+
+
+            /* Remet automatiquement l'année actuelle */
+            document.getElementById("annee").value =
+                new Date().getFullYear();
+
+
+        } else {
+
+            throw new Error(resultat.message);
+
+        }
+
+
+    } catch (erreur) {
+
+        message.style.display = "block";
+        message.style.background = "#ffebee";
+        message.style.color = "#c62828";
+
+        message.innerHTML =
+            "❌ <strong>Erreur lors de l'enregistrement.</strong><br>" +
+            erreur.message;
+
+    }
+
+
+    bouton.disabled = false;
+    bouton.textContent = "💾 Enregistrer l'inscription";
 
 });
 
 </script>
+```
+
 
 </body>
 </html>
