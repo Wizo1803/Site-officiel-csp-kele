@@ -558,7 +558,29 @@ function remplirFiltres() {
 
 }
 
+function formaterDate(date) {
 
+    if (!date) {
+        return "";
+    }
+
+    const d = new Date(date);
+
+    if (isNaN(d.getTime())) {
+        return date;
+    }
+
+    const jour =
+        String(d.getUTCDate()).padStart(2, "0");
+
+    const mois =
+        String(d.getUTCMonth() + 1).padStart(2, "0");
+
+    const annee =
+        d.getUTCFullYear();
+
+    return jour + "/" + mois + "/" + annee;
+}
 function afficherApprenants() {
 
     const recherche =
@@ -656,22 +678,22 @@ function afficherApprenants() {
             document.createElement("tr");
 
 
-        const valeurs = [
+      const valeurs = [
 
-            a.numero,
-            a.nom,
-            a.postnom,
-            a.prenom,
-            a.sexe,
-            a.dateNaissance,
-            a.centre,
-            a.filiere,
-            a.duree,
-            a.annee,
-            a.dateInscription,
-            a.telephone
+    a.numero,
+    a.nom,
+    a.postnom,
+    a.prenom,
+    a.sexe,
+    formaterDate(a.dateNaissance),
+    a.centre,
+    a.filiere,
+    a.duree,
+    a.annee,
+    formaterDate(a.dateInscription),
+    a.telephone
 
-        ];
+];
 
 
         valeurs.forEach(valeur => {
