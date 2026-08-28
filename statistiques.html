@@ -182,7 +182,28 @@ input {
     margin: 20px auto;
     position: relative;
 }
+.graphique-barres {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    margin: 20px auto;
+}
 
+.graphique-filieres {
+    height: 500px;
+}
+
+@media (max-width: 600px) {
+
+    .graphique-barres {
+        height: 350px;
+    }
+
+    .graphique-filieres {
+        height: 450px;
+    }
+
+}
 
 /* =========================
    TABLEAUX
@@ -624,7 +645,9 @@ footer {
 
     <h3>🏫 Effectif par centre</h3>
 
-    <div id="graphiqueCentres"></div>
+    <div class="graphique-barres">
+        <canvas id="graphiqueCentres"></canvas>
+    </div>
 
 </div>
 
@@ -638,7 +661,9 @@ footer {
 
     <h3>🎓 Effectif par filière</h3>
 
-    <div id="graphiqueFilieres"></div>
+    <div class="graphique-barres graphique-filieres">
+        <canvas id="graphiqueFilieres"></canvas>
+    </div>
 
 </div>
 
@@ -1102,16 +1127,12 @@ function afficherGraphiqueSexe(
    CENTRES
 ========================= */
 
-function afficherGraphiqueCentres(
-    resultats
-) {
+function afficherGraphiqueCentres(resultats) {
 
-    const element =
+    const canvas =
         document.getElementById("graphiqueCentres");
 
-
     const statistiques = {};
-
 
     resultats.forEach(a => {
 
@@ -1123,99 +1144,131 @@ function afficherGraphiqueCentres(
 
     });
 
-
     const lignes =
         Object.entries(statistiques)
-        .sort((a,b) => b[1] - a[1]);
+        .sort((a, b) => b[1] - a[1]);
 
+    if (window.graphiqueCentresInstance) {
+
+        window.graphiqueCentresInstance.destroy();
+
+    }
 
     if (lignes.length === 0) {
-
-        element.innerHTML =
-            "<p>Aucune donnée disponible.</p>";
 
         return;
 
     }
 
+    const noms =
+        lignes.map(x => x[0]);
 
-    const maximum =
-        Math.max(
-            ...lignes.map(x => x[1])
-        );
+    const nombres =
+        lignes.map(x => x[1]);
 
-
-    element.innerHTML = "";
-
-
-    lignes.forEach(
-        ([centre, nombre]) => {
-
-        const pourcentage =
+    const pourcentages =
+        lignes.map(x =>
             (
-                nombre /
+                x[1] /
                 resultats.length *
                 100
-            ).toFixed(1);
+            ).toFixed(1)
+        );
 
+    window.graphiqueCentresInstance =
+        new Chart(canvas, {
 
-        const barre =
-            document.createElement("div");
+            type: "bar",
 
-        barre.className =
-            "barre";
+            data: {
 
+                labels: noms,
 
-        barre.innerHTML = `
+                datasets: [{
 
-            <div class="barre-titre">
+                    label: "Nombre d'apprenants",
 
-                <span>${centre}</span>
+                    data: nombres
 
-                <span>
-                    ${nombre} (${pourcentage}%)
-                </span>
+                }]
 
-            </div>
+            },
 
+            options: {
 
-            <div class="barre-fond">
+                responsive: true,
 
-                <div
-                    class="barre-valeur"
-                    style="width:${(
-                        nombre / maximum * 100
-                    )}%">
+                maintainAspectRatio: false,
 
-                </div>
+                indexAxis: "y",
 
-            </div>
+                plugins: {
 
-        `;
+                    legend: {
 
+                        display: false
 
-        element.appendChild(barre);
+                    },
 
-    });
+                    tooltip: {
+
+                        callbacks: {
+
+                            label: function(context) {
+
+                                const index =
+                                    context.dataIndex;
+
+                                return (
+                                    nombres[index] +
+                                    " apprenant(s) — " +
+                                    pourcentages[index] +
+                                    " %"
+                                );
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            precision: 0
+
+                        },
+
+                        title: {
+
+                            display: true,
+
+                            text: "Nombre d'apprenants"
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
 
 }
+function afficherGraphiqueFilieres(resultats) {
 
-
-
-/* =========================
-   FILIERES
-========================= */
-
-function afficherGraphiqueFilieres(
-    resultats
-) {
-
-    const element =
+    const canvas =
         document.getElementById("graphiqueFilieres");
 
-
     const statistiques = {};
-
 
     resultats.forEach(a => {
 
@@ -1227,85 +1280,125 @@ function afficherGraphiqueFilieres(
 
     });
 
-
     const lignes =
         Object.entries(statistiques)
-        .sort((a,b) => b[1] - a[1]);
+        .sort((a, b) => b[1] - a[1]);
 
+    if (window.graphiqueFilieresInstance) {
+
+        window.graphiqueFilieresInstance.destroy();
+
+    }
 
     if (lignes.length === 0) {
-
-        element.innerHTML =
-            "<p>Aucune donnée disponible.</p>";
 
         return;
 
     }
 
+    const noms =
+        lignes.map(x => x[0]);
 
-    const maximum =
-        Math.max(
-            ...lignes.map(x => x[1])
-        );
+    const nombres =
+        lignes.map(x => x[1]);
 
-
-    element.innerHTML = "";
-
-
-    lignes.forEach(
-        ([filiere, nombre]) => {
-
-        const pourcentage =
+    const pourcentages =
+        lignes.map(x =>
             (
-                nombre /
+                x[1] /
                 resultats.length *
                 100
-            ).toFixed(1);
+            ).toFixed(1)
+        );
 
+    window.graphiqueFilieresInstance =
+        new Chart(canvas, {
 
-        const barre =
-            document.createElement("div");
+            type: "bar",
 
-        barre.className =
-            "barre";
+            data: {
 
+                labels: noms,
 
-        barre.innerHTML = `
+                datasets: [{
 
-            <div class="barre-titre">
+                    label: "Nombre d'apprenants",
 
-                <span>${filiere}</span>
+                    data: nombres
 
-                <span>
-                    ${nombre} (${pourcentage}%)
-                </span>
+                }]
 
-            </div>
+            },
 
+            options: {
 
-            <div class="barre-fond">
+                responsive: true,
 
-                <div
-                    class="barre-valeur"
-                    style="width:${(
-                        nombre / maximum * 100
-                    )}%">
+                maintainAspectRatio: false,
 
-                </div>
+                indexAxis: "y",
 
-            </div>
+                plugins: {
 
-        `;
+                    legend: {
 
+                        display: false
 
-        element.appendChild(barre);
+                    },
 
-    });
+                    tooltip: {
+
+                        callbacks: {
+
+                            label: function(context) {
+
+                                const index =
+                                    context.dataIndex;
+
+                                return (
+                                    nombres[index] +
+                                    " apprenant(s) — " +
+                                    pourcentages[index] +
+                                    " %"
+                                );
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            precision: 0
+
+                        },
+
+                        title: {
+
+                            display: true,
+
+                            text: "Nombre d'apprenants"
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
 
 }
-
-
-
 /* =========================
    REINITIALISATION
 ========================= */
