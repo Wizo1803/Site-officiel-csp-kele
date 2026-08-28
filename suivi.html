@@ -492,7 +492,7 @@ async function chargerApprenants() {
 }
 
 
-function remplirFiltres() {
+function remplirFiltres(listes) {
 
     const centreSelect =
         document.getElementById("centre");
@@ -501,33 +501,23 @@ function remplirFiltres() {
         document.getElementById("filiere");
 
 
+    // =========================
+    // CENTRES
+    // =========================
+
     const centres =
-        [...new Set(
-            apprenants
-                .map(a => a.centre)
-                .filter(Boolean)
-        )]
-        .sort((a,b) =>
-            a.localeCompare(b, "fr")
-        );
-
-
-    const filieres =
-        [...new Set(
-            apprenants
-                .map(a => a.filiere)
-                .filter(Boolean)
-        )]
-        .sort((a,b) =>
-            a.localeCompare(b, "fr")
-        );
+        [...listes.centres]
+        .filter(Boolean)
+        .sort(function(a, b) {
+            return a.localeCompare(b, "fr");
+        });
 
 
     centreSelect.innerHTML =
         '<option value="">Tous les centres</option>';
 
 
-    centres.forEach(centre => {
+    centres.forEach(function(centre) {
 
         const option =
             document.createElement("option");
@@ -540,11 +530,23 @@ function remplirFiltres() {
     });
 
 
+    // =========================
+    // FILIERES
+    // =========================
+
+    const filieres =
+        [...listes.filieres]
+        .filter(Boolean)
+        .sort(function(a, b) {
+            return a.localeCompare(b, "fr");
+        });
+
+
     filiereSelect.innerHTML =
         '<option value="">Toutes les filières</option>';
 
 
-    filieres.forEach(filiere => {
+    filieres.forEach(function(filiere) {
 
         const option =
             document.createElement("option");
@@ -557,7 +559,6 @@ function remplirFiltres() {
     });
 
 }
-
 function formaterDate(date) {
 
     if (!date) {
