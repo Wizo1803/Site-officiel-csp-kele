@@ -1,1 +1,755 @@
+<!DOCTYPE html>
+<html lang="fr">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Suivi des apprenants - CSP Kele</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+        }
+
+        header {
+            background: #0b3d91;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header img {
+            width: 100%;
+            max-width: 900px;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        header h1 {
+            margin: 15px 0 5px;
+            font-size: 28px;
+        }
+
+        .container {
+            width: 94%;
+            max-width: 1200px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+        }
+
+        h2 {
+            color: #0b3d91;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .filtres {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .champ {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .boutons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        button,
+        .retour {
+            padding: 11px 22px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .actualiser {
+            background: #0b3d91;
+            color: white;
+        }
+
+        .reinitialiser {
+            background: #ddd;
+            color: #333;
+        }
+
+        .retour {
+            background: #006400;
+            color: white;
+        }
+
+        .resume {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .carte {
+            background: #f4f6f8;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .carte strong {
+            display: block;
+            font-size: 28px;
+            color: #0b3d91;
+            margin-top: 5px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 9px;
+            text-align: left;
+        }
+
+        th {
+            background: #0b3d91;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f7f7f7;
+        }
+
+        .message {
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 800px) {
+
+            .filtres {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .resume {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .filtres {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <img src="Facade.jpg"
+         alt="Coordination Sous-Provinciale de Kele">
+
+    <h1>COORDINATION SOUS-PROVINCIALE DE KELE</h1>
+
+    <p>📊 Suivi des apprenants</p>
+
+</header>
+
+
+<div class="container">
+
+    <h2>📋 Liste et suivi des apprenants</h2>
+
+
+    <div class="filtres">
+
+        <div class="champ">
+
+            <label for="recherche">
+                🔎 Recherche
+            </label>
+
+            <input
+                type="text"
+                id="recherche"
+                placeholder="Nom, postnom, prénom ou numéro..."
+            >
+
+        </div>
+
+
+        <div class="champ">
+
+            <label for="centre">
+                🏫 Centre
+            </label>
+
+            <select id="centre">
+
+                <option value="">
+                    Tous les centres
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="champ">
+
+            <label for="filiere">
+                🎓 Filière
+            </label>
+
+            <select id="filiere">
+
+                <option value="">
+                    Toutes les filières
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="champ">
+
+            <label for="sexe">
+                Sexe
+            </label>
+
+            <select id="sexe">
+
+                <option value="">
+                    Tous
+                </option>
+
+                <option value="Masculin">
+                    Masculin
+                </option>
+
+                <option value="Féminin">
+                    Féminin
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="champ">
+
+            <label for="annee">
+                📅 Année
+            </label>
+
+            <input
+                type="number"
+                id="annee"
+                placeholder="Ex. 2026"
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="boutons">
+
+        <button
+            class="actualiser"
+            onclick="chargerApprenants()">
+
+            🔄 Actualiser
+
+        </button>
+
+
+        <button
+            class="reinitialiser"
+            onclick="reinitialiserFiltres()">
+
+            ↻ Réinitialiser
+
+        </button>
+
+
+        <a
+            href="index.html"
+            class="retour">
+
+            🏠 Retour à l'accueil
+
+        </a>
+
+    </div>
+
+
+    <div class="resume">
+
+        <div class="carte">
+
+            Total apprenants
+
+            <strong id="total">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="carte">
+
+            Hommes
+
+            <strong id="hommes">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="carte">
+
+            Femmes
+
+            <strong id="femmes">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div id="message" class="message">
+        Chargement des apprenants...
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>N° Inscription</th>
+                    <th>Nom</th>
+                    <th>Postnom</th>
+                    <th>Prénom</th>
+                    <th>Sexe</th>
+                    <th>Date naissance</th>
+                    <th>Centre</th>
+                    <th>Filière</th>
+                    <th>Durée</th>
+                    <th>Année</th>
+                    <th>Date inscription</th>
+                    <th>Téléphone</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tableau">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © 2026 Coordination Sous-Provinciale de KELE / EC-CCMTF<br>
+    Tous droits réservés.
+
+</footer>
+
+
+<script>
+
+const URL_SCRIPT =
+"https://script.google.com/macros/s/AKfycbz2dLVAZH-VT8jpcACX8RE-oIko4DOf-l1RYBvPPHBpPWO9RhQyPOXyFZdwm9FExoqK/exec";
+
+
+let apprenants = [];
+
+
+async function chargerApprenants() {
+
+    const message =
+        document.getElementById("message");
+
+    try {
+
+        message.textContent =
+            "⏳ Chargement des données...";
+
+        const reponse =
+            await fetch(URL_SCRIPT);
+
+        const donnees =
+            await reponse.json();
+
+        /*
+         * Pour l'instant, nous vérifions simplement
+         * que la connexion fonctionne.
+         */
+
+        if (!donnees.apprenants) {
+
+            throw new Error(
+                "Les données des apprenants ne sont pas encore disponibles."
+            );
+
+        }
+
+        apprenants =
+            donnees.apprenants;
+
+        remplirFiltres();
+
+        afficherApprenants();
+
+        message.textContent =
+            "✅ Données chargées.";
+
+    }
+
+    catch (erreur) {
+
+        console.error(erreur);
+
+        message.textContent =
+            "❌ Impossible de charger les apprenants.";
+
+    }
+
+}
+
+
+function remplirFiltres() {
+
+    const centreSelect =
+        document.getElementById("centre");
+
+    const filiereSelect =
+        document.getElementById("filiere");
+
+
+    const centres =
+        [...new Set(
+            apprenants
+                .map(a => a.centre)
+                .filter(Boolean)
+        )]
+        .sort((a,b) =>
+            a.localeCompare(b, "fr")
+        );
+
+
+    const filieres =
+        [...new Set(
+            apprenants
+                .map(a => a.filiere)
+                .filter(Boolean)
+        )]
+        .sort((a,b) =>
+            a.localeCompare(b, "fr")
+        );
+
+
+    centreSelect.innerHTML =
+        '<option value="">Tous les centres</option>';
+
+
+    centres.forEach(centre => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = centre;
+        option.textContent = centre;
+
+        centreSelect.appendChild(option);
+
+    });
+
+
+    filiereSelect.innerHTML =
+        '<option value="">Toutes les filières</option>';
+
+
+    filieres.forEach(filiere => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = filiere;
+        option.textContent = filiere;
+
+        filiereSelect.appendChild(option);
+
+    });
+
+}
+
+
+function afficherApprenants() {
+
+    const recherche =
+        document.getElementById("recherche")
+        .value
+        .toLowerCase();
+
+    const centre =
+        document.getElementById("centre").value;
+
+    const filiere =
+        document.getElementById("filiere").value;
+
+    const sexe =
+        document.getElementById("sexe").value;
+
+    const annee =
+        document.getElementById("annee").value;
+
+
+    const resultats =
+        apprenants.filter(a => {
+
+            const texte =
+                (
+                    a.numero +
+                    " " +
+                    a.nom +
+                    " " +
+                    a.postnom +
+                    " " +
+                    a.prenom
+                )
+                .toLowerCase();
+
+
+            return (
+
+                (!recherche ||
+                 texte.includes(recherche))
+
+                &&
+
+                (!centre ||
+                 a.centre === centre)
+
+                &&
+
+                (!filiere ||
+                 a.filiere === filiere)
+
+                &&
+
+                (!sexe ||
+                 a.sexe === sexe)
+
+                &&
+
+                (!annee ||
+                 String(a.annee) === String(annee))
+
+            );
+
+        });
+
+
+    document.getElementById("total")
+        .textContent =
+        resultats.length;
+
+
+    document.getElementById("hommes")
+        .textContent =
+        resultats.filter(
+            a => a.sexe === "Masculin"
+        ).length;
+
+
+    document.getElementById("femmes")
+        .textContent =
+        resultats.filter(
+            a => a.sexe === "Féminin"
+        ).length;
+
+
+    const tableau =
+        document.getElementById("tableau");
+
+    tableau.innerHTML = "";
+
+
+    resultats.forEach(a => {
+
+        const ligne =
+            document.createElement("tr");
+
+
+        const valeurs = [
+
+            a.numero,
+            a.nom,
+            a.postnom,
+            a.prenom,
+            a.sexe,
+            a.dateNaissance,
+            a.centre,
+            a.filiere,
+            a.duree,
+            a.annee,
+            a.dateInscription,
+            a.telephone
+
+        ];
+
+
+        valeurs.forEach(valeur => {
+
+            const cellule =
+                document.createElement("td");
+
+            cellule.textContent =
+                valeur || "";
+
+            ligne.appendChild(cellule);
+
+        });
+
+
+        tableau.appendChild(ligne);
+
+    });
+
+}
+
+
+function reinitialiserFiltres() {
+
+    document.getElementById("recherche").value = "";
+
+    document.getElementById("centre").value = "";
+
+    document.getElementById("filiere").value = "";
+
+    document.getElementById("sexe").value = "";
+
+    document.getElementById("annee").value = "";
+
+    afficherApprenants();
+
+}
+
+
+document.getElementById("recherche")
+    .addEventListener(
+        "input",
+        afficherApprenants
+    );
+
+
+document.getElementById("centre")
+    .addEventListener(
+        "change",
+        afficherApprenants
+    );
+
+
+document.getElementById("filiere")
+    .addEventListener(
+        "change",
+        afficherApprenants
+    );
+
+
+document.getElementById("sexe")
+    .addEventListener(
+        "change",
+        afficherApprenants
+    );
+
+
+document.getElementById("annee")
+    .addEventListener(
+        "input",
+        afficherApprenants
+    );
+
+
+chargerApprenants();
+
+</script>
+
+</body>
+
+</html>
