@@ -338,7 +338,7 @@ const message = document.getElementById("message");
 const URL_SCRIPT =
 "https://script.google.com/macros/s/AKfycbz2dLVAZH-VT8jpcACX8RE-oIko4DOf-l1RYBvPPHBpPWO9RhQyPOXyFZdwm9FExoqK/exec";
 
-form.addEventListener("submit", async function(event) {
+form.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
@@ -348,7 +348,6 @@ form.addEventListener("submit", async function(event) {
     bouton.textContent = "⏳ Enregistrement...";
 
     const donnees = {
-
         nom: document.getElementById("nom").value,
         postnom: document.getElementById("postnom").value,
         prenom: document.getElementById("prenom").value,
@@ -360,41 +359,39 @@ form.addEventListener("submit", async function(event) {
         annee: document.getElementById("annee").value,
         dateInscription: document.getElementById("dateInscription").value,
         telephone: document.getElementById("telephone").value
-
     };
 
-    try {
+    const formulaireCache = document.createElement("form");
 
-        await fetch(URL_SCRIPT, {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify(donnees)
-        });
+    formulaireCache.method = "POST";
+    formulaireCache.action = URL_SCRIPT;
+    formulaireCache.target = "fenetreInvisible";
+    formulaireCache.style.display = "none";
 
-        message.style.display = "block";
-        message.style.background = "#e8f5e9";
-        message.style.color = "#2e7d32";
+    const champ = document.createElement("input");
 
-        message.innerHTML =
-            "✅ <strong>Inscription envoyée avec succès.</strong><br>" +
-            "Les données sont en cours d'enregistrement.";
+    champ.type = "hidden";
+    champ.name = "donnees";
+    champ.value = JSON.stringify(donnees);
 
-        form.reset();
+    formulaireCache.appendChild(champ);
 
-        document.getElementById("annee").value =
-            new Date().getFullYear();
+    document.body.appendChild(formulaireCache);
 
-    } catch (erreur) {
+    formulaireCache.submit();
 
-        message.style.display = "block";
-        message.style.background = "#ffebee";
-        message.style.color = "#c62828";
+    message.style.display = "block";
+    message.style.background = "#e8f5e9";
+    message.style.color = "#2e7d32";
 
-        message.innerHTML =
-            "❌ <strong>Erreur lors de l'enregistrement.</strong><br>" +
-            erreur.message;
+    message.innerHTML =
+        "✅ <strong>Inscription envoyée.</strong><br>" +
+        "Vérifiez la base de données dans quelques secondes.";
 
-    }
+    form.reset();
+
+    document.getElementById("annee").value =
+        new Date().getFullYear();
 
     bouton.disabled = false;
     bouton.textContent = "💾 Enregistrer l'inscription";
