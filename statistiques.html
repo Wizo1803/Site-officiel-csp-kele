@@ -666,7 +666,15 @@ footer {
     </div>
 
 </div>
+<div class="graphique">
 
+    <h3>📈 Évolution des inscriptions par année</h3>
+
+    <div class="graphique-barres">
+        <canvas id="graphiqueAnnees"></canvas>
+    </div>
+
+</div>
 
 
 </div>
@@ -701,7 +709,7 @@ let apprenants = [];
 
 let graphiqueSexe = null;
 
-
+let graphiqueAnneesInstance = null;
 
 /* =========================
    CHARGEMENT
@@ -1008,9 +1016,170 @@ function afficherStatistiques() {
     afficherGraphiqueFilieres(
         resultats
     );
+afficherGraphiqueAnnees(
+    resultats
+);
+}
+function afficherGraphiqueAnnees(resultats) {
+
+    const canvas =
+        document.getElementById("graphiqueAnnees");
+
+
+    if (graphiqueAnneesInstance) {
+
+        graphiqueAnneesInstance.destroy();
+
+        graphiqueAnneesInstance = null;
+
+    }
+
+
+    const statistiques = {};
+
+
+    resultats.forEach(a => {
+
+        const annee =
+            String(a.annee || "").trim();
+
+
+        if (!annee) {
+            return;
+        }
+
+
+        statistiques[annee] =
+            (statistiques[annee] || 0) + 1;
+
+    });
+
+
+    const lignes =
+        Object.entries(statistiques)
+        .sort((a, b) =>
+            Number(a[0]) - Number(b[0])
+        );
+
+
+    if (lignes.length === 0) {
+
+        return;
+
+    }
+
+
+    const annees =
+        lignes.map(x => x[0]);
+
+
+    const nombres =
+        lignes.map(x => x[1]);
+
+
+    graphiqueAnneesInstance =
+        new Chart(canvas, {
+
+            type: "line",
+
+            data: {
+
+                labels: annees,
+
+                datasets: [{
+
+                    label: "Nombre d'apprenants",
+
+                    data: nombres,
+
+                    tension: 0.3,
+
+                    fill: false,
+
+                    pointRadius: 5,
+
+                    pointHoverRadius: 7
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+
+                        display: true,
+
+                        position: "bottom"
+
+                    },
+
+                    tooltip: {
+
+                        callbacks: {
+
+                            label: function(context) {
+
+                                return (
+                                    context.raw +
+                                    " apprenant(s)"
+                                );
+
+                            }
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
+                        title: {
+
+                            display: true,
+
+                            text: "Année"
+
+                        }
+
+                    },
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        ticks: {
+
+                            precision: 0
+
+                        },
+
+                        title: {
+
+                            display: true,
+
+                            text: "Nombre d'apprenants"
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
 
 }
-
 
 
 /* =========================
