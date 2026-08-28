@@ -992,74 +992,174 @@ img {
 
 /* =========================================================
    18. ORDINATEUR — MENU NORMAL
-   ========================================================= */
+========================================================= */
 
 /* =========================================================
-   ORDINATEUR — MENU COMPLET
-   ========================================================= */
+   ORDINATEUR — MENU COMPLET ET SANS CHEVAUCHEMENT
+========================================================= */
 
 @media screen and (min-width: 769px) {
 
-    .menu {
-        display: flex !important;
+    .navbar {
+        min-height: 80px;
 
-        position: static;
+        display: flex;
+        align-items: center;
+
+        gap: 15px;
+
+        padding: 10px 18px;
+
+        flex-wrap: nowrap;
+    }
+
+
+    /* -----------------------------------------
+       LOGO
+    ----------------------------------------- */
+
+    .logo {
+        flex: 0 0 auto;
+
+        width: 210px;
+
+        min-width: 210px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+    }
+
+    .logo-text {
+        min-width: 0;
+    }
+
+    .logo-text span {
+        font-size: 17px;
+
+        white-space: nowrap;
+    }
+
+    .logo-text small {
+        font-size: 11px;
+
+        white-space: nowrap;
+    }
+
+
+    /* -----------------------------------------
+       MENU PRINCIPAL
+    ----------------------------------------- */
+
+    .menu {
+        flex: 1 1 auto;
+
+        min-width: 0;
 
         width: auto;
 
-        max-width: calc(100% - 250px);
+        max-width: none;
 
-        background: transparent;
+        display: flex !important;
 
         flex-direction: row;
 
         align-items: center;
 
-        justify-content: flex-end;
+        justify-content: center;
 
-        gap: 6px;
+        flex-wrap: wrap;
+
+        column-gap: 4px;
+
+        row-gap: 3px;
 
         padding: 0;
 
         margin: 0;
 
+        background: transparent;
+
         box-shadow: none;
 
-        max-height: none;
-
-        flex-wrap: nowrap;
+        list-style: none;
     }
+
+
+    /* -----------------------------------------
+       ÉLÉMENTS DU MENU
+    ----------------------------------------- */
 
     .menu li {
-        flex-shrink: 0;
+        flex: 0 0 auto;
+
+        margin: 0;
+
+        padding: 0;
     }
 
-    .menu a {
-        padding: 7px 6px;
 
-        font-size: 14px;
+    .menu a {
+        display: block;
+
+        padding: 7px 7px;
+
+        font-size: 13px;
+
+        line-height: 1.2;
+
+        white-space: nowrap;
+
+        text-align: center;
+
+        border-radius: 6px;
+    }
+
+
+    /* -----------------------------------------
+       BOUTON QUITTER
+    ----------------------------------------- */
+
+    .navbar > .retour {
+
+        flex: 0 0 auto;
+
+        margin-left: 5px;
+
+        padding: 8px 12px;
+
+        font-size: 13px;
 
         white-space: nowrap;
     }
 
+
+    /* -----------------------------------------
+       HAMBURGER CACHÉ SUR ORDINATEUR
+    ----------------------------------------- */
+
     .menu-toggle {
         display: none !important;
     }
+
 }
 
 
 /* =========================================================
    TÉLÉPHONE — MENU PLUS COMPACT
-   ========================================================= */
+========================================================= */
 
 @media screen and (max-width: 768px) {
 
     .menu li a {
         padding: 9px 18px;
+
         line-height: 1.2;
     }
 
     .menu {
         padding: 5px 0;
     }
+
 }
