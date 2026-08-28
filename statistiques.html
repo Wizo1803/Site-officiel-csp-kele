@@ -121,6 +121,11 @@ input {
     margin-top: 5px;
 }
 
+
+/* =========================
+   REPARTITION SEXE
+========================= */
+
 .resume-sexe {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -153,13 +158,7 @@ input {
     margin-top: 5px;
 }
 
-@media (max-width: 600px) {
 
-    .resume-sexe {
-        grid-template-columns: 1fr;
-    }
-
-}
 /* =========================
    GRAPHIQUES
 ========================= */
@@ -174,6 +173,14 @@ input {
 .graphique h3 {
     color: #0b3d91;
     text-align: center;
+}
+
+.graphique-circulaire {
+    width: 100%;
+    max-width: 420px;
+    height: 320px;
+    margin: 20px auto;
+    position: relative;
 }
 
 
@@ -221,6 +228,7 @@ tr:nth-child(even) {
     justify-content: space-between;
     font-weight: bold;
     margin-bottom: 5px;
+    gap: 15px;
 }
 
 .barre-fond {
@@ -235,6 +243,7 @@ tr:nth-child(even) {
     height: 100%;
     background: #0b3d91;
     border-radius: 10px;
+    transition: width 0.5s ease;
 }
 
 
@@ -312,6 +321,18 @@ footer {
 
     .cartes {
         grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .resume-sexe {
+        grid-template-columns: 1fr;
+    }
+
+    .graphique-circulaire {
+        height: 280px;
     }
 
 }
@@ -445,7 +466,7 @@ footer {
 
 
 <!-- =========================
-     CARTES HOMMES FEMMES
+     CARTES PRINCIPALES
 ========================= -->
 
 <div class="cartes">
@@ -530,6 +551,7 @@ footer {
 
     <h3>👥 Répartition des apprenants par sexe</h3>
 
+
     <div class="resume-sexe">
 
         <div class="sexe-card">
@@ -538,12 +560,20 @@ footer {
                 👨 Hommes
             </div>
 
-            <div class="sexe-nombre" id="graphHommes">
+            <div
+                class="sexe-nombre"
+                id="graphHommes">
+
                 0
+
             </div>
 
-            <div class="sexe-pourcentage" id="graphPourcentageHommes">
+            <div
+                class="sexe-pourcentage"
+                id="graphPourcentageHommes">
+
                 0 %
+
             </div>
 
         </div>
@@ -555,12 +585,20 @@ footer {
                 👩 Femmes
             </div>
 
-            <div class="sexe-nombre" id="graphFemmes">
+            <div
+                class="sexe-nombre"
+                id="graphFemmes">
+
                 0
+
             </div>
 
-            <div class="sexe-pourcentage" id="graphPourcentageFemmes">
+            <div
+                class="sexe-pourcentage"
+                id="graphPourcentageFemmes">
+
                 0 %
+
             </div>
 
         </div>
@@ -568,7 +606,11 @@ footer {
     </div>
 
 
-    <div id="graphiqueSexe"></div>
+    <div class="graphique-circulaire">
+
+        <canvas id="graphiqueSexe"></canvas>
+
+    </div>
 
 </div>
 
@@ -616,6 +658,13 @@ Tous droits réservés.
 
 
 
+<!-- =========================
+     CHART.JS
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 <script>
 
 
@@ -624,6 +673,8 @@ const URL_SCRIPT =
 
 
 let apprenants = [];
+
+let graphiqueSexe = null;
 
 
 
@@ -705,7 +756,9 @@ function remplirFiltres(donnees) {
         document.getElementById("filiere");
 
 
+    // =========================
     // ANNEES
+    // =========================
 
     const annees =
         [...new Set(
@@ -734,7 +787,9 @@ function remplirFiltres(donnees) {
 
 
 
+    // =========================
     // CENTRES
+    // =========================
 
     const centres =
         [...donnees.centres]
@@ -762,7 +817,9 @@ function remplirFiltres(donnees) {
 
 
 
+    // =========================
     // FILIERES
+    // =========================
 
     const filieres =
         [...donnees.filieres]
@@ -811,7 +868,6 @@ function afficherStatistiques() {
 
     const resultats =
         apprenants.filter(a => {
-
 
             return (
 
@@ -864,6 +920,8 @@ function afficherStatistiques() {
 
 
 
+    // CARTES
+
     document.getElementById("total")
         .textContent = total;
 
@@ -874,17 +932,7 @@ function afficherStatistiques() {
 
     document.getElementById("femmes")
         .textContent = femmes;
-document.getElementById("graphHommes")
-    .textContent = hommes;
 
-document.getElementById("graphFemmes")
-    .textContent = femmes;
-
-document.getElementById("graphPourcentageHommes")
-    .textContent = pourcentageHommes + " %";
-
-document.getElementById("graphPourcentageFemmes")
-    .textContent = pourcentageFemmes + " %";
 
     document.getElementById("pourcentageHommes")
         .textContent =
@@ -896,6 +944,29 @@ document.getElementById("graphPourcentageFemmes")
         pourcentageFemmes + " %";
 
 
+
+    // REPARTITION SEXE
+
+    document.getElementById("graphHommes")
+        .textContent = hommes;
+
+
+    document.getElementById("graphFemmes")
+        .textContent = femmes;
+
+
+    document.getElementById("graphPourcentageHommes")
+        .textContent =
+        pourcentageHommes + " %";
+
+
+    document.getElementById("graphPourcentageFemmes")
+        .textContent =
+        pourcentageFemmes + " %";
+
+
+
+    // GRAPHIQUES
 
     afficherGraphiqueSexe(
         hommes,
@@ -918,7 +989,7 @@ document.getElementById("graphPourcentageFemmes")
 
 
 /* =========================
-   GRAPHIQUE SEXE
+   GRAPHIQUE CIRCULAIRE SEXE
 ========================= */
 
 function afficherGraphiqueSexe(
@@ -927,82 +998,101 @@ function afficherGraphiqueSexe(
     total
 ) {
 
-    const element =
+    const canvas =
         document.getElementById("graphiqueSexe");
 
 
-    if (total === 0) {
+    if (graphiqueSexe) {
 
-        element.innerHTML =
-            "<p>Aucune donnée disponible.</p>";
+        graphiqueSexe.destroy();
+
+        graphiqueSexe = null;
+
+    }
+
+
+    if (total === 0) {
 
         return;
 
     }
 
 
-    const pourcentageHommes =
-        ((hommes / total) * 100).toFixed(1);
+    graphiqueSexe =
+        new Chart(canvas, {
 
+            type: "doughnut",
 
-    const pourcentageFemmes =
-        ((femmes / total) * 100).toFixed(1);
+            data: {
 
+                labels: [
+                    "Hommes",
+                    "Femmes"
+                ],
 
-    element.innerHTML = `
+                datasets: [{
 
-        <div class="barre">
+                    data: [
+                        hommes,
+                        femmes
+                    ]
 
-            <div class="barre-titre">
+                }]
 
-                <span>👨 Hommes</span>
+            },
 
-                <span>
-                    ${hommes} (${pourcentageHommes}%)
-                </span>
+            options: {
 
-            </div>
+                responsive: true,
 
+                maintainAspectRatio: false,
 
-            <div class="barre-fond">
+                plugins: {
 
-                <div
-                    class="barre-valeur"
-                    style="width:${pourcentageHommes}%">
+                    legend: {
 
-                </div>
+                        position: "bottom"
 
-            </div>
+                    },
 
-        </div>
+                    tooltip: {
 
+                        callbacks: {
 
-        <div class="barre">
+                            label: function(context) {
 
-            <div class="barre-titre">
+                                const valeur =
+                                    context.raw;
 
-                <span>👩 Femmes</span>
+                                const pourcentage =
+                                    total > 0
+                                    ? (
+                                        valeur /
+                                        total *
+                                        100
+                                      ).toFixed(1)
+                                    : 0;
 
-                <span>
-                    ${femmes} (${pourcentageFemmes}%)
-                </span>
+                                return (
+                                    context.label +
+                                    " : " +
+                                    valeur +
+                                    " (" +
+                                    pourcentage +
+                                    "%)"
+                                );
 
-            </div>
+                            }
 
+                        }
 
-            <div class="barre-fond">
+                    }
 
-                <div
-                    class="barre-valeur"
-                    style="width:${pourcentageFemmes}%">
+                }
 
-                </div>
+            }
 
-            </div>
-
-        </div>
-
-    `;
+        });
 
 }
 
@@ -1058,41 +1148,53 @@ function afficherGraphiqueCentres(
     element.innerHTML = "";
 
 
-    lignes.forEach(([centre, nombre]) => {
+    lignes.forEach(
+        ([centre, nombre]) => {
 
         const pourcentage =
-            ((nombre / resultats.length) * 100)
-            .toFixed(1);
+            (
+                nombre /
+                resultats.length *
+                100
+            ).toFixed(1);
 
 
-        element.innerHTML += `
+        const barre =
+            document.createElement("div");
 
-            <div class="barre">
-
-                <div class="barre-titre">
-
-                    <span>${centre}</span>
-
-                    <span>
-                        ${nombre} (${pourcentage}%)
-                    </span>
-
-                </div>
+        barre.className =
+            "barre";
 
 
-                <div class="barre-fond">
+        barre.innerHTML = `
 
-                    <div
-                        class="barre-valeur"
-                        style="width:${(nombre / maximum) * 100}%">
+            <div class="barre-titre">
 
-                    </div>
+                <span>${centre}</span>
+
+                <span>
+                    ${nombre} (${pourcentage}%)
+                </span>
+
+            </div>
+
+
+            <div class="barre-fond">
+
+                <div
+                    class="barre-valeur"
+                    style="width:${(
+                        nombre / maximum * 100
+                    )}%">
 
                 </div>
 
             </div>
 
         `;
+
+
+        element.appendChild(barre);
 
     });
 
@@ -1150,41 +1252,53 @@ function afficherGraphiqueFilieres(
     element.innerHTML = "";
 
 
-    lignes.forEach(([filiere, nombre]) => {
+    lignes.forEach(
+        ([filiere, nombre]) => {
 
         const pourcentage =
-            ((nombre / resultats.length) * 100)
-            .toFixed(1);
+            (
+                nombre /
+                resultats.length *
+                100
+            ).toFixed(1);
 
 
-        element.innerHTML += `
+        const barre =
+            document.createElement("div");
 
-            <div class="barre">
-
-                <div class="barre-titre">
-
-                    <span>${filiere}</span>
-
-                    <span>
-                        ${nombre} (${pourcentage}%)
-                    </span>
-
-                </div>
+        barre.className =
+            "barre";
 
 
-                <div class="barre-fond">
+        barre.innerHTML = `
 
-                    <div
-                        class="barre-valeur"
-                        style="width:${(nombre / maximum) * 100}%">
+            <div class="barre-titre">
 
-                    </div>
+                <span>${filiere}</span>
+
+                <span>
+                    ${nombre} (${pourcentage}%)
+                </span>
+
+            </div>
+
+
+            <div class="barre-fond">
+
+                <div
+                    class="barre-valeur"
+                    style="width:${(
+                        nombre / maximum * 100
+                    )}%">
 
                 </div>
 
             </div>
 
         `;
+
+
+        element.appendChild(barre);
 
     });
 
