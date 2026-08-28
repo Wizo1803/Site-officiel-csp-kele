@@ -232,31 +232,18 @@
             </div>
 
             <div class="champ">
-                <label for="centre">Centre de formation</label>
-                <select id="centre" name="centre" required>
-                    <option value="">-- Sélectionner le centre --</option>
-                    <option value="Centre 1">Centre 1</option>
-                    <option value="Centre 2">Centre 2</option>
-                    <option value="Centre 3">Centre 3</option>
-                </select>
-            </div>
+    <label for="centre">Centre de formation</label>
+    <select id="centre" name="centre" required>
+        <option value="">⏳ Chargement des centres...</option>
+    </select>
+</div>
 
-            <div class="champ">
-                <label for="filiere">Filière</label>
-                <select id="filiere" name="filiere" required>
-                    <option value="">-- Sélectionner la filière --</option>
-                    <option value="Informatique">Informatique</option>
-                    <option value="Coupe et Couture">Coupe et Couture</option>
-                    <option value="Agriculture">Agriculture</option>
-                    <option value="Electricité">Electricité</option>
-                    <option value="Mécanique Automobile">Mécanique Automobile</option>
-                    <option value="Maçonnerie">Maçonnerie</option>
-                    <option value="Plomberie">Plomberie</option>
-                    <option value="Coiffure">Coiffure</option>
-                    <option value="Cuisine Locale">Cuisine Locale</option>
-                    <option value="Autre">Autre</option>
-                </select>
-            </div>
+           <div class="champ">
+    <label for="filiere">Filière</label>
+    <select id="filiere" name="filiere" required>
+        <option value="">⏳ Chargement des filières...</option>
+    </select>
+</div>
 
             <div class="champ">
                 <label for="duree">Durée de formation</label>
@@ -337,7 +324,70 @@ const message = document.getElementById("message");
 
 const URL_SCRIPT =
 "https://script.google.com/macros/s/AKfycbz2dLVAZH-VT8jpcACX8RE-oIko4DOf-l1RYBvPPHBpPWO9RhQyPOXyFZdwm9FExoqK/exec";
+async function chargerListes() {
 
+    const centreSelect = document.getElementById("centre");
+    const filiereSelect = document.getElementById("filiere");
+
+    try {
+
+        const reponse = await fetch(URL_SCRIPT);
+
+        const listes = await reponse.json();
+
+
+        // Remplir les centres
+        centreSelect.innerHTML =
+            '<option value="">-- Sélectionner le centre --</option>';
+
+        listes.centres.forEach(function(centre) {
+
+            const option = document.createElement("option");
+
+            option.value = centre;
+            option.textContent = centre;
+
+            centreSelect.appendChild(option);
+
+        });
+
+
+        // Remplir les filières
+        filiereSelect.innerHTML =
+            '<option value="">-- Sélectionner la filière --</option>';
+
+        listes.filieres.forEach(function(filiere) {
+
+            const option = document.createElement("option");
+
+            option.value = filiere;
+            option.textContent = filiere;
+
+            filiereSelect.appendChild(option);
+
+        });
+
+
+    } catch (erreur) {
+
+        centreSelect.innerHTML =
+            '<option value="">❌ Erreur de chargement</option>';
+
+        filiereSelect.innerHTML =
+            '<option value="">❌ Erreur de chargement</option>';
+
+        console.error(
+            "Erreur de chargement des listes :",
+            erreur
+        );
+
+    }
+
+}
+
+
+// Charger automatiquement les listes à l'ouverture
+chargerListes();
 form.addEventListener("submit", function(event) {
 
     event.preventDefault();
