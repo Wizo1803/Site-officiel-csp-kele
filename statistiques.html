@@ -121,7 +121,45 @@ input {
     margin-top: 5px;
 }
 
+.resume-sexe {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
 
+.sexe-card {
+    text-align: center;
+    padding: 20px;
+    background: #f4f6f8;
+    border-radius: 12px;
+}
+
+.sexe-titre {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.sexe-nombre {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0b3d91;
+    margin-top: 8px;
+}
+
+.sexe-pourcentage {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+
+    .resume-sexe {
+        grid-template-columns: 1fr;
+    }
+
+}
 /* =========================
    GRAPHIQUES
 ========================= */
@@ -490,7 +528,45 @@ footer {
 
 <div class="graphique">
 
-    <h3>👥 Répartition hommes / femmes</h3>
+    <h3>👥 Répartition des apprenants par sexe</h3>
+
+    <div class="resume-sexe">
+
+        <div class="sexe-card">
+
+            <div class="sexe-titre">
+                👨 Hommes
+            </div>
+
+            <div class="sexe-nombre" id="graphHommes">
+                0
+            </div>
+
+            <div class="sexe-pourcentage" id="graphPourcentageHommes">
+                0 %
+            </div>
+
+        </div>
+
+
+        <div class="sexe-card">
+
+            <div class="sexe-titre">
+                👩 Femmes
+            </div>
+
+            <div class="sexe-nombre" id="graphFemmes">
+                0
+            </div>
+
+            <div class="sexe-pourcentage" id="graphPourcentageFemmes">
+                0 %
+            </div>
+
+        </div>
+
+    </div>
+
 
     <div id="graphiqueSexe"></div>
 
@@ -798,7 +874,17 @@ function afficherStatistiques() {
 
     document.getElementById("femmes")
         .textContent = femmes;
+document.getElementById("graphHommes")
+    .textContent = hommes;
 
+document.getElementById("graphFemmes")
+    .textContent = femmes;
+
+document.getElementById("graphPourcentageHommes")
+    .textContent = pourcentageHommes + " %";
+
+document.getElementById("graphPourcentageFemmes")
+    .textContent = pourcentageFemmes + " %";
 
     document.getElementById("pourcentageHommes")
         .textContent =
