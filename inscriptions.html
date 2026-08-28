@@ -336,40 +336,50 @@ async function chargerListes() {
         const listes = await reponse.json();
 
 
-        // Remplir les centres
+        // ==============================
+        // CENTRES : classement A à Z
+        // ==============================
+
         centreSelect.innerHTML =
             '<option value="">-- Sélectionner le centre --</option>';
 
-       listes.centres
-    .sort(function(a, b) {
-        return a.localeCompare(b, 'fr');
-    })
-    .forEach(function(centre) {
+        listes.centres
+            .sort(function(a, b) {
+                return a.localeCompare(b, 'fr');
+            })
+            .forEach(function(centre) {
 
-            const option = document.createElement("option");
+                const option = document.createElement("option");
 
-            option.value = centre;
-            option.textContent = centre;
+                option.value = centre;
+                option.textContent = centre;
 
-            centreSelect.appendChild(option);
+                centreSelect.appendChild(option);
 
-        });
+            });
 
 
-        // Remplir les filières
+        // ==============================
+        // FILIERES : classement A à Z
+        // ==============================
+
         filiereSelect.innerHTML =
             '<option value="">-- Sélectionner la filière --</option>';
 
-        listes.filieres.forEach(function(filiere) {
+        listes.filieres
+            .sort(function(a, b) {
+                return a.localeCompare(b, 'fr');
+            })
+            .forEach(function(filiere) {
 
-            const option = document.createElement("option");
+                const option = document.createElement("option");
 
-            option.value = filiere;
-            option.textContent = filiere;
+                option.value = filiere;
+                option.textContent = filiere;
 
-            filiereSelect.appendChild(option);
+                filiereSelect.appendChild(option);
 
-        });
+            });
 
 
     } catch (erreur) {
@@ -388,7 +398,6 @@ async function chargerListes() {
     }
 
 }
-
 
 // Charger automatiquement les listes à l'ouverture
 chargerListes();
