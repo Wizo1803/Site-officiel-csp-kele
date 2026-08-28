@@ -1,1 +1,1164 @@
+<!DOCTYPE html>
+<html lang="fr">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Statistiques des apprenants - CSP Kele</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #333;
+}
+
+header {
+    background: #0b3d91;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header img {
+    width: 100%;
+    max-width: 900px;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+header h1 {
+    margin: 15px 0 5px;
+    font-size: 28px;
+}
+
+.container {
+    width: 94%;
+    max-width: 1300px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+}
+
+h2 {
+    color: #0b3d91;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   FILTRES
+========================= */
+
+.filtres {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.champ {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+
+/* =========================
+   CARTES
+========================= */
+
+.cartes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.carte {
+    background: #f4f6f8;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.carte h3 {
+    margin: 0 0 10px;
+}
+
+.carte .nombre {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0b3d91;
+}
+
+.carte .pourcentage {
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+
+/* =========================
+   GRAPHIQUES
+========================= */
+
+.graphique {
+    margin-top: 35px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+
+.graphique h3 {
+    color: #0b3d91;
+    text-align: center;
+}
+
+
+/* =========================
+   TABLEAUX
+========================= */
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 9px;
+    text-align: left;
+}
+
+th {
+    background: #0b3d91;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f7f7f7;
+}
+
+
+/* =========================
+   BARRES
+========================= */
+
+.barre {
+    margin: 12px 0;
+}
+
+.barre-titre {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.barre-fond {
+    width: 100%;
+    height: 22px;
+    background: #e5e5e5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.barre-valeur {
+    height: 100%;
+    background: #0b3d91;
+    border-radius: 10px;
+}
+
+
+/* =========================
+   BOUTONS
+========================= */
+
+.boutons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+button,
+.retour {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.actualiser {
+    background: #0b3d91;
+    color: white;
+}
+
+.reinitialiser {
+    background: #ddd;
+    color: #333;
+}
+
+.retour {
+    background: #006400;
+    color: white;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: 40px;
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .filtres {
+        grid-template-columns: 1fr;
+    }
+
+    .cartes {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <img src="Facade.jpg"
+         alt="Coordination Sous-Provinciale de Kele">
+
+    <h1>COORDINATION SOUS-PROVINCIALE DE KELE</h1>
+
+    <p>📊 Statistiques des apprenants</p>
+
+</header>
+
+
+
+<div class="container">
+
+<h2>📊 Tableau de bord des apprenants</h2>
+
+
+<!-- =========================
+     FILTRES
+========================= -->
+
+<div class="filtres">
+
+
+    <div class="champ">
+
+        <label for="annee">
+            📅 Année
+        </label>
+
+        <select id="annee">
+
+            <option value="">
+                Toutes les années
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="champ">
+
+        <label for="centre">
+            🏫 Centre
+        </label>
+
+        <select id="centre">
+
+            <option value="">
+                Tous les centres
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="champ">
+
+        <label for="filiere">
+            🎓 Filière
+        </label>
+
+        <select id="filiere">
+
+            <option value="">
+                Toutes les filières
+            </option>
+
+        </select>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="boutons">
+
+    <button
+        class="actualiser"
+        onclick="chargerStatistiques()">
+
+        🔄 Actualiser
+
+    </button>
+
+
+    <button
+        class="reinitialiser"
+        onclick="reinitialiserFiltres()">
+
+        ↻ Réinitialiser
+
+    </button>
+
+
+    <a
+        href="index.html"
+        class="retour">
+
+        🏠 Retour à l'accueil
+
+    </a>
+
+</div>
+
+
+
+<div id="message" class="message">
+
+    ⏳ Chargement des statistiques...
+
+</div>
+
+
+
+<!-- =========================
+     CARTES HOMMES FEMMES
+========================= -->
+
+<div class="cartes">
+
+
+    <div class="carte">
+
+        <h3>👥 Total</h3>
+
+        <div
+            id="total"
+            class="nombre">
+
+            0
+
+        </div>
+
+        <div class="pourcentage">
+            100 %
+        </div>
+
+    </div>
+
+
+
+    <div class="carte">
+
+        <h3>👨 Hommes</h3>
+
+        <div
+            id="hommes"
+            class="nombre">
+
+            0
+
+        </div>
+
+        <div
+            id="pourcentageHommes"
+            class="pourcentage">
+
+            0 %
+
+        </div>
+
+    </div>
+
+
+
+    <div class="carte">
+
+        <h3>👩 Femmes</h3>
+
+        <div
+            id="femmes"
+            class="nombre">
+
+            0
+
+        </div>
+
+        <div
+            id="pourcentageFemmes"
+            class="pourcentage">
+
+            0 %
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     REPARTITION SEXE
+========================= -->
+
+<div class="graphique">
+
+    <h3>👥 Répartition hommes / femmes</h3>
+
+    <div id="graphiqueSexe"></div>
+
+</div>
+
+
+
+<!-- =========================
+     CENTRES
+========================= -->
+
+<div class="graphique">
+
+    <h3>🏫 Effectif par centre</h3>
+
+    <div id="graphiqueCentres"></div>
+
+</div>
+
+
+
+<!-- =========================
+     FILIERES
+========================= -->
+
+<div class="graphique">
+
+    <h3>🎓 Effectif par filière</h3>
+
+    <div id="graphiqueFilieres"></div>
+
+</div>
+
+
+
+</div>
+
+
+
+<footer>
+
+© 2026 Coordination Sous-Provinciale de KELE / EC-CCMTF<br>
+
+Tous droits réservés.
+
+</footer>
+
+
+
+<script>
+
+
+const URL_SCRIPT =
+"https://script.google.com/macros/s/AKfycbz2dLVAZH-VT8jpcACX8RE-oIko4DOf-l1RYBvPPHBpPWO9RhQyPOXyFZdwm9FExoqK/exec";
+
+
+let apprenants = [];
+
+
+
+/* =========================
+   CHARGEMENT
+========================= */
+
+async function chargerStatistiques() {
+
+    const message =
+        document.getElementById("message");
+
+
+    try {
+
+        message.textContent =
+            "⏳ Chargement des données...";
+
+
+        const reponse =
+            await fetch(URL_SCRIPT);
+
+
+        const donnees =
+            await reponse.json();
+
+
+        if (!donnees.apprenants) {
+
+            throw new Error(
+                "Données des apprenants indisponibles."
+            );
+
+        }
+
+
+        apprenants =
+            donnees.apprenants;
+
+
+        remplirFiltres(donnees);
+
+
+        afficherStatistiques();
+
+
+        message.textContent =
+            "✅ Statistiques mises à jour.";
+
+    }
+
+    catch (erreur) {
+
+        console.error(erreur);
+
+
+        message.textContent =
+            "❌ Impossible de charger les statistiques.";
+
+    }
+
+}
+
+
+
+/* =========================
+   FILTRES
+========================= */
+
+function remplirFiltres(donnees) {
+
+    const anneeSelect =
+        document.getElementById("annee");
+
+    const centreSelect =
+        document.getElementById("centre");
+
+    const filiereSelect =
+        document.getElementById("filiere");
+
+
+    // ANNEES
+
+    const annees =
+        [...new Set(
+            apprenants
+                .map(a => a.annee)
+                .filter(Boolean)
+        )]
+        .sort();
+
+
+    anneeSelect.innerHTML =
+        '<option value="">Toutes les années</option>';
+
+
+    annees.forEach(annee => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = annee;
+        option.textContent = annee;
+
+        anneeSelect.appendChild(option);
+
+    });
+
+
+
+    // CENTRES
+
+    const centres =
+        [...donnees.centres]
+        .filter(Boolean)
+        .sort((a,b) =>
+            a.localeCompare(b, "fr")
+        );
+
+
+    centreSelect.innerHTML =
+        '<option value="">Tous les centres</option>';
+
+
+    centres.forEach(centre => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = centre;
+        option.textContent = centre;
+
+        centreSelect.appendChild(option);
+
+    });
+
+
+
+    // FILIERES
+
+    const filieres =
+        [...donnees.filieres]
+        .filter(Boolean)
+        .sort((a,b) =>
+            a.localeCompare(b, "fr")
+        );
+
+
+    filiereSelect.innerHTML =
+        '<option value="">Toutes les filières</option>';
+
+
+    filieres.forEach(filiere => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = filiere;
+        option.textContent = filiere;
+
+        filiereSelect.appendChild(option);
+
+    });
+
+}
+
+
+
+/* =========================
+   STATISTIQUES
+========================= */
+
+function afficherStatistiques() {
+
+
+    const annee =
+        document.getElementById("annee").value;
+
+    const centre =
+        document.getElementById("centre").value;
+
+    const filiere =
+        document.getElementById("filiere").value;
+
+
+    const resultats =
+        apprenants.filter(a => {
+
+
+            return (
+
+                (!annee ||
+                 String(a.annee) === String(annee))
+
+                &&
+
+                (!centre ||
+                 a.centre === centre)
+
+                &&
+
+                (!filiere ||
+                 a.filiere === filiere)
+
+            );
+
+        });
+
+
+
+    const total =
+        resultats.length;
+
+
+    const hommes =
+        resultats.filter(
+            a => a.sexe === "Masculin"
+        ).length;
+
+
+    const femmes =
+        resultats.filter(
+            a => a.sexe === "Féminin"
+        ).length;
+
+
+
+    const pourcentageHommes =
+        total > 0
+        ? ((hommes / total) * 100).toFixed(1)
+        : 0;
+
+
+    const pourcentageFemmes =
+        total > 0
+        ? ((femmes / total) * 100).toFixed(1)
+        : 0;
+
+
+
+    document.getElementById("total")
+        .textContent = total;
+
+
+    document.getElementById("hommes")
+        .textContent = hommes;
+
+
+    document.getElementById("femmes")
+        .textContent = femmes;
+
+
+    document.getElementById("pourcentageHommes")
+        .textContent =
+        pourcentageHommes + " %";
+
+
+    document.getElementById("pourcentageFemmes")
+        .textContent =
+        pourcentageFemmes + " %";
+
+
+
+    afficherGraphiqueSexe(
+        hommes,
+        femmes,
+        total
+    );
+
+
+    afficherGraphiqueCentres(
+        resultats
+    );
+
+
+    afficherGraphiqueFilieres(
+        resultats
+    );
+
+}
+
+
+
+/* =========================
+   GRAPHIQUE SEXE
+========================= */
+
+function afficherGraphiqueSexe(
+    hommes,
+    femmes,
+    total
+) {
+
+    const element =
+        document.getElementById("graphiqueSexe");
+
+
+    if (total === 0) {
+
+        element.innerHTML =
+            "<p>Aucune donnée disponible.</p>";
+
+        return;
+
+    }
+
+
+    const pourcentageHommes =
+        ((hommes / total) * 100).toFixed(1);
+
+
+    const pourcentageFemmes =
+        ((femmes / total) * 100).toFixed(1);
+
+
+    element.innerHTML = `
+
+        <div class="barre">
+
+            <div class="barre-titre">
+
+                <span>👨 Hommes</span>
+
+                <span>
+                    ${hommes} (${pourcentageHommes}%)
+                </span>
+
+            </div>
+
+
+            <div class="barre-fond">
+
+                <div
+                    class="barre-valeur"
+                    style="width:${pourcentageHommes}%">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="barre">
+
+            <div class="barre-titre">
+
+                <span>👩 Femmes</span>
+
+                <span>
+                    ${femmes} (${pourcentageFemmes}%)
+                </span>
+
+            </div>
+
+
+            <div class="barre-fond">
+
+                <div
+                    class="barre-valeur"
+                    style="width:${pourcentageFemmes}%">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =========================
+   CENTRES
+========================= */
+
+function afficherGraphiqueCentres(
+    resultats
+) {
+
+    const element =
+        document.getElementById("graphiqueCentres");
+
+
+    const statistiques = {};
+
+
+    resultats.forEach(a => {
+
+        const centre =
+            a.centre || "Non renseigné";
+
+        statistiques[centre] =
+            (statistiques[centre] || 0) + 1;
+
+    });
+
+
+    const lignes =
+        Object.entries(statistiques)
+        .sort((a,b) => b[1] - a[1]);
+
+
+    if (lignes.length === 0) {
+
+        element.innerHTML =
+            "<p>Aucune donnée disponible.</p>";
+
+        return;
+
+    }
+
+
+    const maximum =
+        Math.max(
+            ...lignes.map(x => x[1])
+        );
+
+
+    element.innerHTML = "";
+
+
+    lignes.forEach(([centre, nombre]) => {
+
+        const pourcentage =
+            ((nombre / resultats.length) * 100)
+            .toFixed(1);
+
+
+        element.innerHTML += `
+
+            <div class="barre">
+
+                <div class="barre-titre">
+
+                    <span>${centre}</span>
+
+                    <span>
+                        ${nombre} (${pourcentage}%)
+                    </span>
+
+                </div>
+
+
+                <div class="barre-fond">
+
+                    <div
+                        class="barre-valeur"
+                        style="width:${(nombre / maximum) * 100}%">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+
+/* =========================
+   FILIERES
+========================= */
+
+function afficherGraphiqueFilieres(
+    resultats
+) {
+
+    const element =
+        document.getElementById("graphiqueFilieres");
+
+
+    const statistiques = {};
+
+
+    resultats.forEach(a => {
+
+        const filiere =
+            a.filiere || "Non renseignée";
+
+        statistiques[filiere] =
+            (statistiques[filiere] || 0) + 1;
+
+    });
+
+
+    const lignes =
+        Object.entries(statistiques)
+        .sort((a,b) => b[1] - a[1]);
+
+
+    if (lignes.length === 0) {
+
+        element.innerHTML =
+            "<p>Aucune donnée disponible.</p>";
+
+        return;
+
+    }
+
+
+    const maximum =
+        Math.max(
+            ...lignes.map(x => x[1])
+        );
+
+
+    element.innerHTML = "";
+
+
+    lignes.forEach(([filiere, nombre]) => {
+
+        const pourcentage =
+            ((nombre / resultats.length) * 100)
+            .toFixed(1);
+
+
+        element.innerHTML += `
+
+            <div class="barre">
+
+                <div class="barre-titre">
+
+                    <span>${filiere}</span>
+
+                    <span>
+                        ${nombre} (${pourcentage}%)
+                    </span>
+
+                </div>
+
+
+                <div class="barre-fond">
+
+                    <div
+                        class="barre-valeur"
+                        style="width:${(nombre / maximum) * 100}%">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+
+/* =========================
+   REINITIALISATION
+========================= */
+
+function reinitialiserFiltres() {
+
+    document.getElementById("annee").value = "";
+
+    document.getElementById("centre").value = "";
+
+    document.getElementById("filiere").value = "";
+
+    afficherStatistiques();
+
+}
+
+
+
+/* =========================
+   EVENEMENTS
+========================= */
+
+document.getElementById("annee")
+    .addEventListener(
+        "change",
+        afficherStatistiques
+    );
+
+
+document.getElementById("centre")
+    .addEventListener(
+        "change",
+        afficherStatistiques
+    );
+
+
+document.getElementById("filiere")
+    .addEventListener(
+        "change",
+        afficherStatistiques
+    );
+
+
+
+/* =========================
+   DEMARRAGE
+========================= */
+
+chargerStatistiques();
+
+</script>
+
+
+</body>
+
+</html>
