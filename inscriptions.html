@@ -334,7 +334,7 @@ async function chargerListes() {
 
     try {
 
-        const reponse = await fetch(URL_SCRIPT);
+        const reponse = await fetch(URL_LECTURE);
 
         const listes = await reponse.json();
 
@@ -430,7 +430,7 @@ form.addEventListener("submit", function(event) {
     const formulaireCache = document.createElement("form");
 
     formulaireCache.method = "POST";
-    formulaireCache.action = URL_SCRIPT;
+    formulaireCache.action = URL_INSCRIPTION;
     formulaireCache.target = "fenetreInvisible";
     formulaireCache.style.display = "none";
 
