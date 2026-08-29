@@ -178,6 +178,95 @@
                 font-size: 22px;
             }
         }
+
+        /* =========================
+           ACCÈS SÉCURISÉ
+        ========================= */
+        .auth-box {
+            max-width: 520px;
+            margin: 0 auto 25px;
+            padding: 25px;
+            background: #f7f9fc;
+            border: 1px solid #d8e0ea;
+            border-radius: 12px;
+        }
+
+        .auth-box h3 {
+            margin-top: 0;
+            color: #0b3d91;
+            text-align: center;
+        }
+
+        .auth-note {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .auth-error {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #ffebee;
+            color: #b71c1c;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .auth-success {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #zone-inscription {
+            display: none;
+        }
+
+        .utilisateur-connecte {
+            display: none;
+            margin-bottom: 20px;
+            padding: 12px 15px;
+            background: #e8f5e9;
+            color: #1b5e20;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .deconnexion {
+            margin-left: 10px;
+            padding: 7px 12px;
+            border: none;
+            border-radius: 6px;
+            background: #b71c1c;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .deconnexion:hover {
+            background: #8e0000;
+        }
+
+        @media (max-width: 700px) {
+            .auth-box {
+                padding: 20px 15px;
+            }
+
+            .deconnexion {
+                display: block;
+                margin: 10px auto 0;
+            }
+        }
+
     </style>
 </head>
 
@@ -196,9 +285,54 @@
 
 <div class="container">
 
-    <h2>📝 Inscription d'un apprenant</h2>
+    <div class="auth-box" id="auth-box">
 
-    <form id="form-inscription">
+        <h3>🔐 Accès sécurisé aux inscriptions</h3>
+
+        <p class="auth-note">
+            L'enregistrement des apprenants est réservé aux utilisateurs autorisés.
+            <br>
+            Saisissez votre adresse e-mail et votre mot de passe.
+        </p>
+
+        <div class="champ">
+            <label for="emailConnexion">Adresse e-mail</label>
+            <input
+                type="email"
+                id="emailConnexion"
+                autocomplete="username"
+                placeholder="exemple@gmail.com"
+                required>
+        </div>
+
+        <div class="champ" style="margin-top:15px;">
+            <label for="motDePasseConnexion">Mot de passe</label>
+            <input
+                type="password"
+                id="motDePasseConnexion"
+                autocomplete="current-password"
+                placeholder="Votre mot de passe"
+                required>
+        </div>
+
+        <div class="boutons">
+            <button type="button" class="enregistrer" id="boutonConnexion">
+                🔐 Accéder aux inscriptions
+            </button>
+        </div>
+
+        <div id="auth-error" class="auth-error"></div>
+        <div id="auth-success" class="auth-success"></div>
+
+    </div>
+
+    <div id="zone-inscription">
+
+        <div id="utilisateur-connecte" class="utilisateur-connecte"></div>
+
+        <h2>📝 Inscription d'un apprenant</h2>
+
+        <form id="form-inscription">
 
         <div class="form-grid">
 
@@ -304,11 +438,19 @@
 
     </form>
 
+    </div>
 
     <div id="message" class="message"></div>
 
 </div>
 
+
+<iframe
+    name="fenetreInvisible"
+    id="fenetreInvisible"
+    style="display:none;"
+    title="Traitement sécurisé">
+</iframe>
 
 <footer>
 
@@ -322,11 +464,26 @@
 const form = document.getElementById("form-inscription");
 const message = document.getElementById("message");
 
+const authBox = document.getElementById("auth-box");
+const zoneInscription = document.getElementById("zone-inscription");
+const boutonConnexion = document.getElementById("boutonConnexion");
+const emailConnexion = document.getElementById("emailConnexion");
+const motDePasseConnexion = document.getElementById("motDePasseConnexion");
+const authError = document.getElementById("auth-error");
+const authSuccess = document.getElementById("auth-success");
+const utilisateurConnecte = document.getElementById("utilisateur-connecte");
+
 const URL_LECTURE =
 "https://script.google.com/macros/s/AKfycbz2dLVAZH-VT8jpcACX8RE-oIko4DOf-l1RYBvPPHBpPWO9RhQyPOXyFZdwm9FExoqK/exec";
 
 const URL_INSCRIPTION =
 "https://script.google.com/macros/s/AKfycbzPyko4i5EVlikgrHlFHGZhe034OyiR88GhTqKHKWPd_EUL9Q89QOys9z_qkZcoAm2d/exec";
+
+
+/* =========================================================
+   CHARGEMENT DES CENTRES ET FILIÈRES
+========================================================= */
+
 async function chargerListes() {
 
     const centreSelect = document.getElementById("centre");
@@ -336,17 +493,16 @@ async function chargerListes() {
 
         const reponse = await fetch(URL_LECTURE);
 
+        if (!reponse.ok) {
+            throw new Error("Impossible de charger les données.");
+        }
+
         const listes = await reponse.json();
-
-
-        // ==============================
-        // CENTRES : classement A à Z
-        // ==============================
 
         centreSelect.innerHTML =
             '<option value="">-- Sélectionner le centre --</option>';
 
-        listes.centres
+        (listes.centres || [])
             .sort(function(a, b) {
                 return a.localeCompare(b, 'fr');
             })
@@ -362,14 +518,10 @@ async function chargerListes() {
             });
 
 
-        // ==============================
-        // FILIERES : classement A à Z
-        // ==============================
-
         filiereSelect.innerHTML =
             '<option value="">-- Sélectionner la filière --</option>';
 
-        listes.filieres
+        (listes.filieres || [])
             .sort(function(a, b) {
                 return a.localeCompare(b, 'fr');
             })
@@ -383,7 +535,6 @@ async function chargerListes() {
                 filiereSelect.appendChild(option);
 
             });
-
 
     } catch (erreur) {
 
@@ -402,65 +553,257 @@ async function chargerListes() {
 
 }
 
-// Charger automatiquement les listes à l'ouverture
-chargerListes();
+
+/* =========================================================
+   CONNEXION
+   IMPORTANT :
+   Le serveur effectue la véritable vérification au moment
+   de l'enregistrement. Cette étape masque simplement le
+   formulaire tant que les identifiants ne sont pas saisis.
+========================================================= */
+
+boutonConnexion.addEventListener("click", function() {
+
+    const email = emailConnexion.value.trim().toLowerCase();
+    const motDePasse = motDePasseConnexion.value;
+
+    authError.style.display = "none";
+    authSuccess.style.display = "none";
+
+    if (!email) {
+        authError.textContent =
+            "Veuillez saisir votre adresse e-mail.";
+        authError.style.display = "block";
+        return;
+    }
+
+    if (!motDePasse) {
+        authError.textContent =
+            "Veuillez saisir votre mot de passe.";
+        authError.style.display = "block";
+        return;
+    }
+
+    if (motDePasse.length < 8) {
+        authError.textContent =
+            "Le mot de passe doit contenir au moins 8 caractères.";
+        authError.style.display = "block";
+        return;
+    }
+
+    /*
+     * Les identifiants sont conservés uniquement en mémoire
+     * dans cette page. Ils seront transmis au serveur HTTPS
+     * lors de l'enregistrement.
+     */
+    window.inscriptionEmail = email;
+    window.inscriptionMotDePasse = motDePasse;
+
+    authSuccess.textContent =
+        "✅ Identifiants saisis. Vous pouvez maintenant remplir le formulaire.";
+
+    authSuccess.style.display = "block";
+
+    utilisateurConnecte.innerHTML =
+        "🔐 Session d'inscription : " +
+        email +
+        '<button type="button" class="deconnexion" id="boutonDeconnexion">Déconnexion</button>';
+
+    utilisateurConnecte.style.display = "block";
+
+    authBox.style.display = "none";
+    zoneInscription.style.display = "block";
+
+    chargerListes();
+
+});
+
+
+/* =========================================================
+   DÉCONNEXION
+========================================================= */
+
+document.addEventListener("click", function(event) {
+
+    if (event.target && event.target.id === "boutonDeconnexion") {
+
+        window.inscriptionEmail = "";
+        window.inscriptionMotDePasse = "";
+
+        form.reset();
+
+        document.getElementById("annee").value =
+            new Date().getFullYear();
+
+        document.getElementById("dateInscription").value =
+            new Date().toISOString().split("T")[0];
+
+        zoneInscription.style.display = "none";
+        utilisateurConnecte.style.display = "none";
+
+        authBox.style.display = "block";
+
+        emailConnexion.value = "";
+        motDePasseConnexion.value = "";
+
+        authError.style.display = "none";
+        authSuccess.style.display = "none";
+
+    }
+
+});
+
+
+/* =========================================================
+   INITIALISATION
+========================================================= */
+
+document.getElementById("annee").value =
+    new Date().getFullYear();
+
+document.getElementById("dateInscription").value =
+    new Date().toISOString().split("T")[0];
+
+
+/* =========================================================
+   ENREGISTREMENT
+========================================================= */
+
 form.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
-    const bouton = form.querySelector(".enregistrer");
+    const bouton =
+        form.querySelector(".enregistrer");
+
+    if (!window.inscriptionEmail ||
+        !window.inscriptionMotDePasse) {
+
+        alert(
+            "Votre session d'inscription n'est pas ouverte."
+        );
+
+        zoneInscription.style.display = "none";
+        authBox.style.display = "block";
+
+        return;
+    }
 
     bouton.disabled = true;
-    bouton.textContent = "⏳ Enregistrement...";
+    bouton.textContent = "⏳ Vérification et enregistrement...";
+
 
     const donnees = {
-        nom: document.getElementById("nom").value,
-        postnom: document.getElementById("postnom").value,
-        prenom: document.getElementById("prenom").value,
-        sexe: document.getElementById("sexe").value,
-        dateNaissance: document.getElementById("dateNaissance").value,
-        centre: document.getElementById("centre").value,
-        filiere: document.getElementById("filiere").value,
-        duree: document.getElementById("duree").value,
-        annee: document.getElementById("annee").value,
-        dateInscription: document.getElementById("dateInscription").value,
-        telephone: document.getElementById("telephone").value
+
+        nom:
+            document.getElementById("nom").value.trim(),
+
+        postnom:
+            document.getElementById("postnom").value.trim(),
+
+        prenom:
+            document.getElementById("prenom").value.trim(),
+
+        sexe:
+            document.getElementById("sexe").value,
+
+        dateNaissance:
+            document.getElementById("dateNaissance").value,
+
+        centre:
+            document.getElementById("centre").value,
+
+        filiere:
+            document.getElementById("filiere").value,
+
+        duree:
+            document.getElementById("duree").value,
+
+        annee:
+            document.getElementById("annee").value,
+
+        dateInscription:
+            document.getElementById("dateInscription").value,
+
+        telephone:
+            document.getElementById("telephone").value.trim()
+
     };
 
-    const formulaireCache = document.createElement("form");
+
+    const formulaireCache =
+        document.createElement("form");
 
     formulaireCache.method = "POST";
     formulaireCache.action = URL_INSCRIPTION;
     formulaireCache.target = "fenetreInvisible";
     formulaireCache.style.display = "none";
 
-    const champ = document.createElement("input");
 
-    champ.type = "hidden";
-    champ.name = "donnees";
-    champ.value = JSON.stringify(donnees);
+    const champDonnees =
+        document.createElement("input");
 
-    formulaireCache.appendChild(champ);
+    champDonnees.type = "hidden";
+    champDonnees.name = "donnees";
+    champDonnees.value =
+        JSON.stringify(donnees);
+
+
+    const champEmail =
+        document.createElement("input");
+
+    champEmail.type = "hidden";
+    champEmail.name = "email";
+    champEmail.value =
+        window.inscriptionEmail;
+
+
+    const champMotDePasse =
+        document.createElement("input");
+
+    champMotDePasse.type = "hidden";
+    champMotDePasse.name = "motDePasse";
+    champMotDePasse.value =
+        window.inscriptionMotDePasse;
+
+
+    formulaireCache.appendChild(champDonnees);
+    formulaireCache.appendChild(champEmail);
+    formulaireCache.appendChild(champMotDePasse);
 
     document.body.appendChild(formulaireCache);
 
     formulaireCache.submit();
 
+
+    /*
+     * Le serveur vérifie réellement les identifiants
+     * et le centre avant d'écrire dans Google Sheets.
+     *
+     * Comme la réponse Apps Script est chargée dans un
+     * iframe invisible, le navigateur ne peut pas lire
+     * directement son contenu depuis GitHub Pages.
+     */
     message.style.display = "block";
-    message.style.background = "#e8f5e9";
-    message.style.color = "#2e7d32";
+    message.style.background = "#fff3cd";
+    message.style.color = "#856404";
 
     message.innerHTML =
-        "✅ <strong>Inscription envoyée.</strong><br>" +
-        "Vérifiez la base de données dans quelques secondes.";
+        "⏳ <strong>Demande envoyée pour vérification.</strong><br>" +
+        "Le serveur vérifie vos autorisations avant l'enregistrement.";
 
-    form.reset();
 
-    document.getElementById("annee").value =
-        new Date().getFullYear();
+    setTimeout(function() {
 
-    bouton.disabled = false;
-    bouton.textContent = "💾 Enregistrer l'inscription";
+        document.body.removeChild(
+            formulaireCache
+        );
+
+        bouton.disabled = false;
+        bouton.textContent =
+            "💾 Enregistrer l'inscription";
+
+    }, 1500);
 
 });
 
