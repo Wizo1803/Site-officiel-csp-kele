@@ -405,6 +405,13 @@
             </div>
 
             <div class="champ">
+                <label for="classe">Classe</label>
+                <select id="classe" name="classe" required disabled>
+                    <option value="">-- Sélectionner d'abord le centre, la filière et la durée --</option>
+                </select>
+            </div>
+
+            <div class="champ">
                 <label for="annee">Année de formation</label>
 
                 <input
@@ -542,6 +549,69 @@ function afficherMessage(texte, succes) {
 
 
 /* =========================================================
+   STRUCTURE DES CLASSES
+   Centre + Filière + Durée -> Classe
+========================================================= */
+
+const CODES_CENTRES = {
+    "LA PROVIDENCE":"LP","SACRE CŒUR BAKA":"SCB","SACRE COEUR BAKA":"SCB",
+    "BAKA TSHISHIMBI":"BT","FAYOL":"FYL","FABRICE TECH":"FT",
+    "EVANGELI MOTORS":"EM","IMPOT SERVICE MOTORS":"ISM","LE BENIS":"LB",
+    "TECH - TRAINING":"TT","HAUTE COUTURE":"HC","NOUVELLE GENERATION":"NG",
+    "DINANGA":"DIN","DISUMINYINA":"DIS","DITEKEMENA":"DIT","LE SOUVENIR":"LS",
+    "ELIKIA":"ELK","SAINT PAUL":"SP","SAINT CHRISTOS":"SC","UKWELI":"UKW",
+    "TUYE PAMUE":"TP","SHALOM":"SH","LISUNGI":"LIS","UMOJA":"UMO",
+    "JEHOVAH MA FORTERESSE":"JMF","KILIMA":"KIL","LA VICTOIRE":"LV",
+    "BEDEL":"BED","JUBILE":"JUB","MPUTU FBK":"MFBK","SEMENCE":"SEM",
+    "FK":"FK","NTUMBA KAPONDO":"NK","MON AVENIR":"MA","LA GRACE DIVINE":"LGD"
+};
+
+const CODES_FILIERES = {
+    "INFORMATIQUE":"INF","NUTRITION":"NUTR","COUPE ET COUTURE":"CC",
+    "LOGISTIQUE ET TRANSPORT":"LT","MENUISERIE":"MEN","PERLAGE":"PERL",
+    "SAGE FEMME":"SF","ESTHETIQUE ET DECORATION":"ESTD",
+    "ESTHETIQUE ET COIFFURE":"ESTC","MECANIQUE MACHINES A COUDRE":"MMC"
+};
+
+function normaliserClasse(v){
+    return String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+        .toUpperCase().trim().replace(/\s+/g," ");
+}
+
+function codeFiliere(f){
+    const k=normaliserClasse(f);
+    if(CODES_FILIERES[k]) return CODES_FILIERES[k];
+    const m=k.replace(/[^A-Z0-9 ]/g," ").split(/\s+/).filter(Boolean);
+    if(!m.length) return "";
+    return m.length===1 ? m[0].slice(0,5) : m.slice(0,3).map(x=>x.slice(0,3)).join("").slice(0,6);
+}
+
+function obtenirClasse(centre,filiere,duree){
+    const c=normaliserClasse(centre);
+    const cc=CODES_CENTRES[c] || c.replace(/[^A-Z0-9]/g,"").slice(0,4);
+    const cf=codeFiliere(filiere);
+    const cd=String(duree||"").replace(/\s+/g,"").toUpperCase();
+    return cc && cf && cd ? `${cc}-${cf}-${cd}` : "";
+}
+
+function actualiserClasse(){
+    const s=document.getElementById("classe");
+    const classe=obtenirClasse(
+        document.getElementById("centre").value,
+        document.getElementById("filiere").value,
+        document.getElementById("duree").value
+    );
+    s.innerHTML="";
+    if(!classe){
+        s.disabled=true;
+        s.innerHTML='<option value="">-- Sélectionner d\'abord le centre, la filière et la durée --</option>';
+        return;
+    }
+    s.disabled=false;
+    s.innerHTML=`<option value="${classe}" selected>${classe}</option>`;
+}
+
+/* =========================================================
    CHARGER CENTRES + FILIÈRES
 ========================================================= */
 
@@ -618,6 +688,10 @@ async function chargerListes() {
     }
 }
 
+
+document.getElementById("centre").addEventListener("change", actualiserClasse);
+document.getElementById("filiere").addEventListener("change", actualiserClasse);
+document.getElementById("duree").addEventListener("change", actualiserClasse);
 
 /* =========================================================
    POSTER UNE REQUÊTE DANS L'IFRAME
@@ -978,6 +1052,9 @@ formInscription.addEventListener(
 
             duree:
                 document.getElementById("duree").value,
+
+            classe:
+                document.getElementById("classe").value,
 
             annee:
                 document.getElementById("annee").value,
