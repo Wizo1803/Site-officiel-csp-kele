@@ -208,6 +208,11 @@
             background: #eef3fb;
         }
 
+        #classe:disabled {
+            background: #eef3fb;
+            cursor: not-allowed;
+        }
+
         @media (max-width: 700px) {
             .container {
                 width: 94%;
@@ -268,7 +273,10 @@
         <form id="form-connexion">
 
             <div class="champ">
-                <label for="email">Adresse e-mail</label>
+
+                <label for="email">
+                    Adresse e-mail
+                </label>
 
                 <input
                     type="email"
@@ -276,12 +284,16 @@
                     required
                     autocomplete="username"
                     placeholder="exemple@gmail.com">
+
             </div>
 
             <br>
 
             <div class="champ">
-                <label for="motDePasse">Mot de passe</label>
+
+                <label for="motDePasse">
+                    Mot de passe
+                </label>
 
                 <input
                     type="password"
@@ -289,6 +301,7 @@
                     required
                     autocomplete="current-password"
                     placeholder="Votre mot de passe">
+
             </div>
 
             <div class="boutons">
@@ -297,7 +310,9 @@
                     🔐 Accéder aux inscriptions
                 </button>
 
-                <a href="index.html" class="bouton-retour">
+                <a
+                    href="index.html"
+                    class="bouton-retour">
                     🏠 Retour à l'accueil
                 </a>
 
@@ -338,114 +353,313 @@
 
         <div class="form-grid">
 
+
+            <!-- NOM -->
+
             <div class="champ">
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" name="nom" required>
+
+                <label for="nom">
+                    Nom
+                </label>
+
+                <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    required>
+
             </div>
 
+
+            <!-- POSTNOM -->
+
             <div class="champ">
-                <label for="postnom">Postnom</label>
-                <input type="text" id="postnom" name="postnom" required>
+
+                <label for="postnom">
+                    Postnom
+                </label>
+
+                <input
+                    type="text"
+                    id="postnom"
+                    name="postnom"
+                    required>
+
             </div>
 
+
+            <!-- PRENOM -->
+
             <div class="champ">
-                <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" name="prenom" required>
+
+                <label for="prenom">
+                    Prénom
+                </label>
+
+                <input
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    required>
+
             </div>
 
-            <div class="champ">
-                <label for="sexe">Sexe</label>
 
-                <select id="sexe" name="sexe" required>
-                    <option value="">-- Sélectionner --</option>
-                    <option value="Masculin">Masculin</option>
-                    <option value="Féminin">Féminin</option>
+            <!-- SEXE -->
+
+            <div class="champ">
+
+                <label for="sexe">
+                    Sexe
+                </label>
+
+                <select
+                    id="sexe"
+                    name="sexe"
+                    required>
+
+                    <option value="">
+                        -- Sélectionner --
+                    </option>
+
+                    <option value="Masculin">
+                        Masculin
+                    </option>
+
+                    <option value="Féminin">
+                        Féminin
+                    </option>
+
                 </select>
+
             </div>
 
+
+            <!-- DATE DE NAISSANCE -->
+
             <div class="champ">
-                <label for="dateNaissance">Date de naissance</label>
+
+                <label for="dateNaissance">
+                    Date de naissance
+                </label>
 
                 <input
                     type="date"
                     id="dateNaissance"
                     name="dateNaissance"
                     required>
+
             </div>
 
+
+            <!-- LIEU DE NAISSANCE -->
+
             <div class="champ">
-                <label for="lieuNaissance">Lieu de naissance</label>
-                <input type="text" id="lieuNaissance" name="lieuNaissance" required>
+
+                <label for="lieuNaissance">
+                    Lieu de naissance
+                </label>
+
+                <input
+                    type="text"
+                    id="lieuNaissance"
+                    name="lieuNaissance"
+                    placeholder="Lieu de naissance"
+                    required>
+
             </div>
 
-            <div class="champ">
-                <label for="centre">Centre de formation</label>
 
-                <select id="centre" name="centre" required>
+            <!-- CENTRE -->
+
+            <div class="champ">
+
+                <label for="centre">
+                    Centre de formation
+                </label>
+
+                <select
+                    id="centre"
+                    name="centre"
+                    required>
+
                     <option value="">
                         ⏳ Chargement des centres...
                     </option>
+
                 </select>
+
             </div>
 
-            <div class="champ">
-                <label for="filiere">Filière</label>
 
-                <select id="filiere" name="filiere" required>
+            <!-- FILIERE -->
+
+            <div class="champ">
+
+                <label for="filiere">
+                    Filière
+                </label>
+
+                <select
+                    id="filiere"
+                    name="filiere"
+                    required>
+
                     <option value="">
                         ⏳ Chargement des filières...
                     </option>
+
                 </select>
+
             </div>
 
-            <div class="champ">
-                <label for="duree">Durée de formation</label>
 
-                <select id="duree" name="duree" required>
-                    <option value="">-- Sélectionner --</option>
-                    <option value="3 mois">3 mois</option>
-                    <option value="6 mois">6 mois</option>
-                    <option value="12 mois">12 mois</option>
+            <!-- DUREE -->
+
+            <div class="champ">
+
+                <label for="duree">
+                    Durée de formation
+                </label>
+
+                <select
+                    id="duree"
+                    name="duree"
+                    required>
+
+                    <option value="">
+                        -- Sélectionner --
+                    </option>
+
+                    <option value="3 mois">
+                        3 mois
+                    </option>
+
+                    <option value="6 mois">
+                        6 mois
+                    </option>
+
+                    <option value="12 mois">
+                        12 mois
+                    </option>
+
                 </select>
+
             </div>
 
-            <div class="champ">
-                <label for="classe">Classe</label>
-                <select id="classe" name="classe" required disabled>
-                    <option value="">-- Sélectionner d'abord le centre, la filière et la durée --</option>
-                </select>
-            </div>
+
+            <!-- CLASSE -->
 
             <div class="champ">
-                <label for="annee">Année académique</label>
-                <select id="annee" name="annee" required>
-                    <option value="">-- Sélectionner --</option>
+
+                <label for="classe">
+                    Classe
+                </label>
+
+                <select
+                    id="classe"
+                    name="classe"
+                    required
+                    disabled>
+
+                    <option value="">
+                        -- Sélectionner d'abord le centre et la filière --
+                    </option>
+
                 </select>
+
             </div>
 
+
+            <!-- ANNEE ACADEMIQUE -->
+
             <div class="champ">
-                <label for="dateInscription">Date d'inscription</label>
+
+                <label for="annee">
+                    Année académique
+                </label>
+
+                <select
+                    id="annee"
+                    name="annee"
+                    required>
+
+                    <option value="2025-2026">
+                        2025-2026
+                    </option>
+
+                    <option
+                        value="2026-2027"
+                        selected>
+                        2026-2027
+                    </option>
+
+                    <option value="2027-2028">
+                        2027-2028
+                    </option>
+
+                    <option value="2028-2029">
+                        2028-2029
+                    </option>
+
+                    <option value="2029-2030">
+                        2029-2030
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DATE INSCRIPTION -->
+
+            <div class="champ">
+
+                <label for="dateInscription">
+                    Date d'inscription
+                </label>
 
                 <input
                     type="date"
                     id="dateInscription"
                     name="dateInscription"
                     required>
+
             </div>
 
+
+            <!-- TELEPHONE -->
+
             <div class="champ">
-                <label for="telephone">Téléphone</label>
+
+                <label for="telephone">
+                    Téléphone
+                </label>
 
                 <input
                     type="tel"
                     id="telephone"
                     name="telephone"
                     placeholder="+243...">
+
             </div>
 
+
+            <!-- ADRESSE -->
+
             <div class="champ full">
-                <label for="adresse">Adresse</label>
-                <input type="text" id="adresse" name="adresse" placeholder="Adresse de résidence" required>
+
+                <label for="adresse">
+                    Adresse
+                </label>
+
+                <input
+                    type="text"
+                    id="adresse"
+                    name="adresse"
+                    placeholder="Adresse de résidence"
+                    required>
+
             </div>
 
         </div>
@@ -453,16 +667,28 @@
 
         <div class="boutons">
 
-            <button type="submit" class="enregistrer">
+            <button
+                type="submit"
+                class="enregistrer">
+
                 💾 Enregistrer l'inscription
+
             </button>
 
-            <button type="reset" class="annuler">
+            <button
+                type="reset"
+                class="annuler">
+
                 ↻ Réinitialiser
+
             </button>
 
-            <a href="index.html" class="bouton-retour">
+            <a
+                href="index.html"
+                class="bouton-retour">
+
                 🏠 Retour à l'accueil
+
             </a>
 
         </div>
@@ -470,7 +696,10 @@
     </form>
 
 
-    <div id="message" class="message"></div>
+    <div
+        id="message"
+        class="message">
+    </div>
 
 </div>
 
@@ -478,12 +707,14 @@
 <footer>
 
     © 2026 Coordination Sous-Provinciale de KELE / EC-CCMTF<br>
+
     Tous droits réservés.
 
 </footer>
 
 
 <!-- Iframe invisible servant à recevoir les réponses Apps Script -->
+
 <iframe
     name="fenetreInvisible"
     id="fenetreInvisible"
@@ -493,12 +724,20 @@
 
 <script>
 
+/* =========================================================
+   URL GOOGLE APPS SCRIPT
+========================================================= */
+
 const URL_LECTURE =
     "https://script.google.com/macros/s/AKfycbz2dLVAZH-VT8jpcACX8RE-oIko4DOf-l1RYBvPPHBpPWO9RhQyPOXyFZdwm9FExoqK/exec";
 
 const URL_INSCRIPTION =
     "https://script.google.com/macros/s/AKfycbxnxMOyBG5bdj-hpnPogsVIUB-YMOc-bMTqh0z_75_DYV6Aerr3wVObRTCitNCNlIx6/exec";
 
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 const blocConnexion =
     document.getElementById("bloc-connexion");
@@ -522,6 +761,10 @@ const message =
     document.getElementById("message");
 
 
+/* =========================================================
+   SESSION
+========================================================= */
+
 let jetonSession =
     sessionStorage.getItem("csp_kele_token") || "";
 
@@ -530,7 +773,7 @@ let utilisateurConnecte =
 
 
 /* =========================================================
-   AFFICHER UN MESSAGE
+   MESSAGE
 ========================================================= */
 
 function afficherMessage(texte, succes) {
@@ -554,118 +797,351 @@ function afficherMessage(texte, succes) {
 
 
 /* =========================================================
-   STRUCTURE DES CLASSES
-   Centre + Filière + Durée -> Classe
+   CODES DES CENTRES
 ========================================================= */
 
 const CODES_CENTRES = {
-    "LA PROVIDENCE":"LP","SACRE CŒUR BAKA":"SCB","SACRE COEUR BAKA":"SCB",
-    "BAKA TSHISHIMBI":"BT","FAYOL":"FYL","FABRICE TECH":"FT",
-    "EVANGELI MOTORS":"EM","IMPOT SERVICE MOTORS":"ISM","LE BENIS":"LB",
-    "TECH - TRAINING":"TT","HAUTE COUTURE":"HC","NOUVELLE GENERATION":"NG",
-    "DINANGA":"DIN","DISUMINYINA":"DIS","DITEKEMENA":"DIT","LE SOUVENIR":"LS",
-    "ELIKIA":"ELK","SAINT PAUL":"SP","SAINT CHRISTOS":"SC","UKWELI":"UKW",
-    "TUYE PAMUE":"TP","SHALOM":"SH","LISUNGI":"LIS","UMOJA":"UMO",
-    "JEHOVAH MA FORTERESSE":"JMF","KILIMA":"KIL","LA VICTOIRE":"LV",
-    "BEDEL":"BED","JUBILE":"JUB","MPUTU FBK":"MFBK","SEMENCE":"SEM",
-    "FK":"FK","NTUMBA KAPONDO":"NK","MON AVENIR":"MA","LA GRACE DIVINE":"LGD"
+
+    "LA PROVIDENCE": "LP",
+
+    "SACRE CŒUR BAKA": "SCB",
+    "SACRE COEUR BAKA": "SCB",
+
+    "BAKA TSHISHIMBI": "BT",
+
+    "FAYOL": "FYL",
+
+    "FABRICE TECH": "FT",
+
+    "EVANGELI MOTORS": "EM",
+
+    "IMPOT SERVICE MOTORS": "ISM",
+
+    "LE BENIS": "LB",
+
+    "TECH - TRAINING": "TT",
+
+    "HAUTE COUTURE": "HC",
+
+    "NOUVELLE GENERATION": "NG",
+
+    "DINANGA": "DIN",
+
+    "DISUMINYINA": "DIS",
+
+    "DITEKEMENA": "DIT",
+
+    "LE SOUVENIR": "LS",
+
+    "ELIKIA": "ELK",
+
+    "SAINT PAUL": "SP",
+
+    "SAINT CHRISTOS": "SC",
+
+    "UKWELI": "UKW",
+
+    "TUYE PAMUE": "TP",
+
+    "SHALOM": "SH",
+
+    "LISUNGI": "LIS",
+
+    "UMOJA": "UMO",
+
+    "JEHOVAH MA FORTERESSE": "JMF",
+
+    "KILIMA": "KIL",
+
+    "LA VICTOIRE": "LV",
+
+    "BEDEL": "BED",
+
+    "JUBILE": "JUB",
+
+    "MPUTU FBK": "MFBK",
+
+    "SEMENCE": "SEM",
+
+    "FK": "FK",
+
+    "NTUMBA KAPONDO": "NK",
+
+    "MON AVENIR": "MA",
+
+    "LA GRACE DIVINE": "LGD"
 };
+
+
+/* =========================================================
+   CODES DES FILIERES
+========================================================= */
 
 const CODES_FILIERES = {
-    "INFORMATIQUE":"INF","NUTRITION":"NUTR","COUPE ET COUTURE":"CC",
-    "LOGISTIQUE ET TRANSPORT":"LT","MENUISERIE":"MEN","PERLAGE":"PERL",
-    "SAGE FEMME":"SF","ESTHETIQUE ET DECORATION":"ESTD",
-    "ESTHETIQUE ET COIFFURE":"ESTC","MECANIQUE MACHINES A COUDRE":"MMC"
+
+    "INFORMATIQUE": "INF",
+
+    "NUTRITION": "NUTR",
+
+    "COUPE ET COUTURE": "CC",
+
+    "LOGISTIQUE ET TRANSPORT": "LT",
+
+    "MENUISERIE": "MEN",
+
+    "PERLAGE": "PERL",
+
+    "SAGE FEMME": "SF",
+
+    "ESTHETIQUE ET DECORATION": "ESTD",
+
+    "ESTHETIQUE ET COIFFURE": "ESTC",
+
+    "MECANIQUE MACHINES A COUDRE": "MMC"
 };
 
-function normaliserClasse(v){
-    return String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-        .toUpperCase().trim().replace(/\s+/g," ");
+
+/* =========================================================
+   NORMALISATION
+========================================================= */
+
+function normaliserClasse(valeur) {
+
+    return String(valeur || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase()
+        .trim()
+        .replace(/\s+/g, " ");
 }
 
-function codeFiliere(f){
-    const k=normaliserClasse(f);
-    if(CODES_FILIERES[k]) return CODES_FILIERES[k];
-    const m=k.replace(/[^A-Z0-9 ]/g," ").split(/\s+/).filter(Boolean);
-    if(!m.length) return "";
-    return m.length===1 ? m[0].slice(0,5) : m.slice(0,3).map(x=>x.slice(0,3)).join("").slice(0,6);
+
+/* =========================================================
+   CODE FILIERE
+========================================================= */
+
+function codeFiliere(filiere) {
+
+    const cle =
+        normaliserClasse(filiere);
+
+    if (CODES_FILIERES[cle]) {
+
+        return CODES_FILIERES[cle];
+
+    }
+
+    const mots =
+        cle
+        .replace(/[^A-Z0-9 ]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean);
+
+    if (!mots.length) {
+
+        return "";
+
+    }
+
+    if (mots.length === 1) {
+
+        return mots[0].slice(0, 5);
+
+    }
+
+    return mots
+        .slice(0, 3)
+        .map(function(mot) {
+
+            return mot.slice(0, 3);
+
+        })
+        .join("")
+        .slice(0, 6);
 }
 
-function construireClasses(centre,filiere){
-    const c=normaliserClasse(centre);
-    const cc=CODES_CENTRES[c] || c.replace(/[^A-Z0-9]/g,"").slice(0,4);
-    const cf=codeFiliere(filiere);
-    if(!cc || !cf) return [];
-    return ["12M","6M","3M"].map(d => `${cc}-${cf}-${d}`);
+
+/* =========================================================
+   CONSTRUIRE LES CLASSES
+========================================================= */
+
+function construireClasses(centre, filiere) {
+
+    const centreNormalise =
+        normaliserClasse(centre);
+
+    const centreCode =
+        CODES_CENTRES[centreNormalise]
+        ||
+        centreNormalise
+            .replace(/[^A-Z0-9]/g, "")
+            .slice(0, 4);
+
+    const filiereCode =
+        codeFiliere(filiere);
+
+    if (!centreCode || !filiereCode) {
+
+        return [];
+
+    }
+
+    return [
+
+        centreCode + "-" + filiereCode + "-12M",
+
+        centreCode + "-" + filiereCode + "-6M",
+
+        centreCode + "-" + filiereCode + "-3M"
+
+    ];
 }
 
-function actualiserClasses(){
-    const centre=document.getElementById("centre").value;
-    const filiere=document.getElementById("filiere").value;
-    const duree=document.getElementById("duree").value;
-    const classeSelect=document.getElementById("classe");
 
-    classeSelect.innerHTML="";
-    const classes=construireClasses(centre,filiere);
+/* =========================================================
+   ACTUALISER LA LISTE DES CLASSES
+========================================================= */
 
-    if(!classes.length){
-        classeSelect.disabled=true;
-        classeSelect.innerHTML='<option value="">-- Choisir d’abord le centre et la filière --</option>';
+function actualiserClasses() {
+
+    const centre =
+        document.getElementById("centre").value;
+
+    const filiere =
+        document.getElementById("filiere").value;
+
+    const duree =
+        document.getElementById("duree").value;
+
+    const classeSelect =
+        document.getElementById("classe");
+
+
+    classeSelect.innerHTML = "";
+
+
+    const classes =
+        construireClasses(
+            centre,
+            filiere
+        );
+
+
+    if (!classes.length) {
+
+        classeSelect.disabled = true;
+
+        classeSelect.innerHTML =
+            '<option value="">-- Sélectionner d’abord le centre et la filière --</option>';
+
         return;
     }
 
-    classeSelect.disabled=false;
-    classeSelect.innerHTML='<option value="">-- Sélectionner la classe --</option>';
 
-    classes.forEach(classe=>{
-        const option=document.createElement("option");
-        option.value=classe;
-        option.textContent=classe;
-        classeSelect.appendChild(option);
+    classeSelect.disabled = false;
+
+
+    const optionInitiale =
+        document.createElement("option");
+
+    optionInitiale.value = "";
+
+    optionInitiale.textContent =
+        "-- Sélectionner la classe --";
+
+    classeSelect.appendChild(
+        optionInitiale
+    );
+
+
+    classes.forEach(function(classe) {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            classe;
+
+        option.textContent =
+            classe;
+
+        classeSelect.appendChild(
+            option
+        );
+
     });
 
-    const classeCorrespondante = duree
-        ? classes.find(c => c.endsWith("-" + String(duree).replace(/\s+/g,"").toUpperCase()))
-        : "";
 
-    if(classeCorrespondante){
-        classeSelect.value=classeCorrespondante;
-    }
-}
+    /*
+       Sélection automatique selon la durée
+    */
 
-function synchroniserDureeDepuisClasse(){
-    const classe=document.getElementById("classe").value;
-    const duree=document.getElementById("duree");
+    if (duree) {
 
-    if(classe.endsWith("-12M")) duree.value="12 mois";
-    else if(classe.endsWith("-6M")) duree.value="6 mois";
-    else if(classe.endsWith("-3M")) duree.value="3 mois";
-}
+        const suffixe =
+            String(duree)
+                .replace(/\s+/g, "")
+                .toUpperCase();
 
-function initialiserAnneesAcademiques(){
-    const select=document.getElementById("annee");
-    if(!select) return;
 
-    const maintenant=new Date();
-    const annee=maintenant.getFullYear();
-    const mois=maintenant.getMonth()+1;
-    const debut = mois >= 9 ? annee : annee-1;
+        const classeCorrespondante =
+            classes.find(function(classe) {
 
-    select.innerHTML="";
-    for(let i=-1;i<=3;i++){
-        const a=debut+i;
-        const option=document.createElement("option");
-        option.value=String(a) + "-" + String(a+1);
-        option.textContent=String(a) + "-" + String(a+1);
-        select.appendChild(option);
+                return classe.endsWith(
+                    "-" + suffixe
+                );
+
+            });
+
+
+        if (classeCorrespondante) {
+
+            classeSelect.value =
+                classeCorrespondante;
+
+        }
+
     }
 
-    // L'année académique courante est immédiatement visible.
-    select.value=String(debut) + "-" + String(debut+1);
 }
+
 
 /* =========================================================
-   CHARGER CENTRES + FILIÈRES
+   CHANGER LA DUREE SI L'UTILISATEUR CHOISIT LA CLASSE
+========================================================= */
+
+function synchroniserDureeDepuisClasse() {
+
+    const classe =
+        document.getElementById("classe").value;
+
+    const duree =
+        document.getElementById("duree");
+
+
+    if (classe.endsWith("-12M")) {
+
+        duree.value = "12 mois";
+
+    }
+
+    else if (classe.endsWith("-6M")) {
+
+        duree.value = "6 mois";
+
+    }
+
+    else if (classe.endsWith("-3M")) {
+
+        duree.value = "3 mois";
+
+    }
+
+}
+
+
+/* =========================================================
+   CHARGER CENTRES + FILIERES
 ========================================================= */
 
 async function chargerListes() {
@@ -676,56 +1152,86 @@ async function chargerListes() {
     const filiereSelect =
         document.getElementById("filiere");
 
+
     try {
 
         const reponse =
             await fetch(URL_LECTURE);
 
+
         const listes =
             await reponse.json();
 
 
+        /* CENTRES */
+
         centreSelect.innerHTML =
             '<option value="">-- Sélectionner le centre --</option>';
 
+
         listes.centres
             .sort(function(a, b) {
-                return a.localeCompare(b, "fr");
+
+                return a.localeCompare(
+                    b,
+                    "fr"
+                );
+
             })
             .forEach(function(centre) {
 
                 const option =
                     document.createElement("option");
 
-                option.value = centre;
-                option.textContent = centre;
+                option.value =
+                    centre;
 
-                centreSelect.appendChild(option);
+                option.textContent =
+                    centre;
+
+                centreSelect.appendChild(
+                    option
+                );
 
             });
 
 
+        /* FILIERES */
+
         filiereSelect.innerHTML =
             '<option value="">-- Sélectionner la filière --</option>';
 
+
         listes.filieres
             .sort(function(a, b) {
-                return a.localeCompare(b, "fr");
+
+                return a.localeCompare(
+                    b,
+                    "fr"
+                );
+
             })
             .forEach(function(filiere) {
 
                 const option =
                     document.createElement("option");
 
-                option.value = filiere;
-                option.textContent = filiere;
+                option.value =
+                    filiere;
 
-                filiereSelect.appendChild(option);
+                option.textContent =
+                    filiere;
+
+                filiereSelect.appendChild(
+                    option
+                );
 
             });
 
 
-    } catch (erreur) {
+    }
+
+    catch (erreur) {
 
         centreSelect.innerHTML =
             '<option value="">❌ Erreur de chargement</option>';
@@ -739,16 +1245,12 @@ async function chargerListes() {
         );
 
     }
+
 }
 
 
-document.getElementById("centre").addEventListener("change", actualiserClasses);
-document.getElementById("filiere").addEventListener("change", actualiserClasses);
-document.getElementById("duree").addEventListener("change", actualiserClasses);
-document.getElementById("classe").addEventListener("change", synchroniserDureeDepuisClasse);
-
 /* =========================================================
-   POSTER UNE REQUÊTE DANS L'IFRAME
+   POSTER UNE REQUETE DANS L'IFRAME
 ========================================================= */
 
 function envoyerAuServeur(champs) {
@@ -756,209 +1258,308 @@ function envoyerAuServeur(champs) {
     const formulaire =
         document.createElement("form");
 
-    formulaire.method = "POST";
-    formulaire.action = URL_INSCRIPTION;
-    formulaire.target = "fenetreInvisible";
-    formulaire.style.display = "none";
+
+    formulaire.method =
+        "POST";
+
+    formulaire.action =
+        URL_INSCRIPTION;
+
+    formulaire.target =
+        "fenetreInvisible";
+
+    formulaire.style.display =
+        "none";
+
 
     Object.keys(champs).forEach(function(nom) {
 
         const champ =
             document.createElement("input");
 
-        champ.type = "hidden";
-        champ.name = nom;
-        champ.value = champs[nom];
+        champ.type =
+            "hidden";
 
-        formulaire.appendChild(champ);
+        champ.name =
+            nom;
+
+        champ.value =
+            champs[nom];
+
+        formulaire.appendChild(
+            champ
+        );
 
     });
 
-    document.body.appendChild(formulaire);
+
+    document.body.appendChild(
+        formulaire
+    );
+
 
     formulaire.submit();
 
+
     setTimeout(function() {
+
         formulaire.remove();
+
     }, 5000);
+
 }
 
 
 /* =========================================================
-   RÉCEPTION DE LA RÉPONSE DU SERVEUR
+   RECEPTION REPONSE SERVEUR
 ========================================================= */
 
-window.addEventListener("message", function(event) {
+window.addEventListener(
+    "message",
+    function(event) {
 
-    if (!event.data || typeof event.data !== "object") {
-        return;
-    }
-
-    const resultat = event.data;
-
-
-    /* =========================
-       CONNEXION
-    ========================= */
-
-    if (resultat.type === "login") {
-
-        if (!resultat.success) {
-
-            afficherMessage(
-                "❌ " + resultat.message,
-                false
-            );
+        if (
+            !event.data
+            ||
+            typeof event.data !== "object"
+        ) {
 
             return;
+
         }
 
 
-        jetonSession =
-            resultat.token;
-
-        sessionStorage.setItem(
-            "csp_kele_token",
-            jetonSession
-        );
+        const resultat =
+            event.data;
 
 
-        utilisateurConnecte = {
+        /* =========================
+           CONNEXION
+        ========================== */
 
-            email: resultat.email,
+        if (
+            resultat.type === "login"
+        ) {
 
-            role: resultat.role,
+            if (!resultat.success) {
 
-            centre: resultat.centre
+                afficherMessage(
+                    "❌ " +
+                    resultat.message,
+                    false
+                );
 
-        };
+                return;
 
-
-        blocConnexion.style.display =
-            "none";
-
-        formInscription.style.display =
-            "block";
-
-        profil.style.display =
-            "block";
+            }
 
 
-        profilTexte.textContent =
-            "👤 " +
-            resultat.email +
-            " — " +
-            resultat.role +
-            " — " +
-            (
-                resultat.centre === "*"
-                    ? "Tous les centres"
-                    : resultat.centre
+            jetonSession =
+                resultat.token;
+
+
+            sessionStorage.setItem(
+                "csp_kele_token",
+                jetonSession
             );
 
 
-        appliquerRestrictionCentre();
+            utilisateurConnecte = {
 
-        afficherMessage(
-            "✅ Connexion réussie. Vous pouvez maintenant enregistrer les apprenants.",
-            true
-        );
+                email:
+                    resultat.email,
 
-        return;
-    }
+                role:
+                    resultat.role,
+
+                centre:
+                    resultat.centre
+
+            };
 
 
-    /* =========================
-       INSCRIPTION
-    ========================= */
+            blocConnexion.style.display =
+                "none";
 
-    if (resultat.type === "inscription") {
+            formInscription.style.display =
+                "block";
 
-        if (!resultat.success) {
+            profil.style.display =
+                "block";
+
+
+            profilTexte.textContent =
+                "👤 " +
+                resultat.email +
+                " — " +
+                resultat.role +
+                " — " +
+                (
+                    resultat.centre === "*"
+                        ? "Tous les centres"
+                        : resultat.centre
+                );
+
+
+            appliquerRestrictionCentre();
+
 
             afficherMessage(
-                "❌ " + resultat.message,
-                false
+                "✅ Connexion réussie. Vous pouvez maintenant enregistrer les apprenants.",
+                true
             );
 
+
+            return;
+
+        }
+
+
+        /* =========================
+           INSCRIPTION
+        ========================== */
+
+        if (
+            resultat.type === "inscription"
+        ) {
+
+            if (!resultat.success) {
+
+                afficherMessage(
+                    "❌ " +
+                    resultat.message,
+                    false
+                );
+
+
+                const bouton =
+                    formInscription
+                        .querySelector(
+                            ".enregistrer"
+                        );
+
+
+                if (bouton) {
+
+                    bouton.disabled =
+                        false;
+
+                    bouton.textContent =
+                        "💾 Enregistrer l'inscription";
+
+                }
+
+
+                return;
+
+            }
+
+
+            afficherMessage(
+
+                "✅ <strong>Inscription enregistrée avec succès.</strong><br>" +
+
+                "Numéro : <strong>" +
+
+                resultat.numeroInscription +
+
+                "</strong>",
+
+                true
+
+            );
+
+
+            formInscription.reset();
+
+
+            /*
+               Réinitialiser l'année académique
+            */
+
+            document.getElementById(
+                "annee"
+            ).value = "2026-2027";
+
+
+            /*
+               Réinitialiser la date
+            */
+
+            document.getElementById(
+                "dateInscription"
+            ).value =
+                new Date()
+                    .toISOString()
+                    .split("T")[0];
+
+
+            appliquerRestrictionCentre();
+
+            actualiserClasses();
+
+
             const bouton =
-                formInscription.querySelector(".enregistrer");
+                formInscription
+                    .querySelector(
+                        ".enregistrer"
+                    );
+
 
             if (bouton) {
 
-                bouton.disabled = false;
+                bouton.disabled =
+                    false;
 
                 bouton.textContent =
                     "💾 Enregistrer l'inscription";
+
             }
 
+
             return;
+
         }
 
 
-        afficherMessage(
-            "✅ <strong>Inscription enregistrée avec succès.</strong><br>" +
-            "Numéro : <strong>" +
-            resultat.numeroInscription +
-            "</strong>",
-            true
-        );
+        /* =========================
+           DECONNEXION
+        ========================== */
+
+        if (
+            resultat.type === "logout"
+        ) {
+
+            sessionStorage.removeItem(
+                "csp_kele_token"
+            );
 
 
-        formInscription.reset();
+            jetonSession = "";
 
-        document.getElementById("annee").value =
-            new Date().getFullYear();
-
-
-        appliquerRestrictionCentre();
+            utilisateurConnecte =
+                null;
 
 
-        const bouton =
-            formInscription.querySelector(".enregistrer");
+            formInscription.style.display =
+                "none";
 
-        if (bouton) {
+            profil.style.display =
+                "none";
 
-            bouton.disabled = false;
+            blocConnexion.style.display =
+                "block";
 
-            bouton.textContent =
-                "💾 Enregistrer l'inscription";
+
+            afficherMessage(
+                "🔒 Vous êtes déconnecté.",
+                true
+            );
+
         }
 
-        return;
     }
-
-
-    /* =========================
-       DÉCONNEXION
-    ========================= */
-
-    if (resultat.type === "logout") {
-
-        sessionStorage.removeItem(
-            "csp_kele_token"
-        );
-
-        jetonSession = "";
-
-        utilisateurConnecte = null;
-
-        formInscription.style.display =
-            "none";
-
-        profil.style.display =
-            "none";
-
-        blocConnexion.style.display =
-            "block";
-
-        afficherMessage(
-            "🔒 Vous êtes déconnecté.",
-            true
-        );
-    }
-
-});
+);
 
 
 /* =========================================================
@@ -968,33 +1569,51 @@ window.addEventListener("message", function(event) {
 function appliquerRestrictionCentre() {
 
     if (!utilisateurConnecte) {
+
         return;
+
     }
+
 
     const centreSelect =
         document.getElementById("centre");
 
 
-    if (utilisateurConnecte.centre === "*") {
+    if (
+        utilisateurConnecte.centre === "*"
+    ) {
 
-        centreSelect.disabled = false;
+        centreSelect.disabled =
+            false;
 
         centreSelect.classList.remove(
             "centre-bloque"
         );
 
         return;
+
     }
 
 
     centreSelect.value =
         utilisateurConnecte.centre;
 
-    centreSelect.disabled = true;
+
+    centreSelect.disabled =
+        true;
 
     centreSelect.classList.add(
         "centre-bloque"
     );
+
+
+    /*
+       La restriction du centre doit
+       également actualiser la classe.
+    */
+
+    actualiserClasses();
+
 }
 
 
@@ -1010,9 +1629,14 @@ formConnexion.addEventListener(
 
 
         const bouton =
-            formConnexion.querySelector("button");
+            formConnexion.querySelector(
+                "button"
+            );
 
-        bouton.disabled = true;
+
+        bouton.disabled =
+            true;
+
 
         bouton.textContent =
             "⏳ Vérification...";
@@ -1026,20 +1650,26 @@ formConnexion.addEventListener(
 
         envoyerAuServeur({
 
-            action: "login",
+            action:
+                "login",
 
             email:
-                document.getElementById("email").value,
+                document.getElementById(
+                    "email"
+                ).value,
 
             motDePasse:
-                document.getElementById("motDePasse").value
+                document.getElementById(
+                    "motDePasse"
+                ).value
 
         });
 
 
         setTimeout(function() {
 
-            bouton.disabled = false;
+            bouton.disabled =
+                false;
 
             bouton.textContent =
                 "🔐 Accéder aux inscriptions";
@@ -1069,13 +1699,37 @@ formInscription.addEventListener(
             );
 
             return;
+
+        }
+
+
+        const classe =
+            document.getElementById(
+                "classe"
+            ).value;
+
+
+        if (!classe) {
+
+            afficherMessage(
+                "❌ Veuillez sélectionner une classe.",
+                false
+            );
+
+            return;
+
         }
 
 
         const bouton =
-            formInscription.querySelector(".enregistrer");
+            formInscription.querySelector(
+                ".enregistrer"
+            );
 
-        bouton.disabled = true;
+
+        bouton.disabled =
+            true;
+
 
         bouton.textContent =
             "⏳ Vérification et enregistrement...";
@@ -1084,59 +1738,90 @@ formInscription.addEventListener(
         const donnees = {
 
             nom:
-                document.getElementById("nom").value,
+                document.getElementById(
+                    "nom"
+                ).value,
 
             postnom:
-                document.getElementById("postnom").value,
+                document.getElementById(
+                    "postnom"
+                ).value,
 
             prenom:
-                document.getElementById("prenom").value,
+                document.getElementById(
+                    "prenom"
+                ).value,
 
             sexe:
-                document.getElementById("sexe").value,
+                document.getElementById(
+                    "sexe"
+                ).value,
 
             dateNaissance:
-                document.getElementById("dateNaissance").value,
+                document.getElementById(
+                    "dateNaissance"
+                ).value,
 
             lieuNaissance:
-                document.getElementById("lieuNaissance").value,
+                document.getElementById(
+                    "lieuNaissance"
+                ).value,
 
             centre:
-                document.getElementById("centre").value,
+                document.getElementById(
+                    "centre"
+                ).value,
 
             filiere:
-                document.getElementById("filiere").value,
+                document.getElementById(
+                    "filiere"
+                ).value,
 
             duree:
-                document.getElementById("duree").value,
+                document.getElementById(
+                    "duree"
+                ).value,
 
             classe:
-                document.getElementById("classe").value,
+                document.getElementById(
+                    "classe"
+                ).value,
 
             annee:
-                document.getElementById("annee").value,
+                document.getElementById(
+                    "annee"
+                ).value,
 
             dateInscription:
-                document.getElementById("dateInscription").value,
+                document.getElementById(
+                    "dateInscription"
+                ).value,
 
             telephone:
-                document.getElementById("telephone").value,
+                document.getElementById(
+                    "telephone"
+                ).value,
 
             adresse:
-                document.getElementById("adresse").value
+                document.getElementById(
+                    "adresse"
+                ).value
 
         };
 
 
         envoyerAuServeur({
 
-            action: "inscription",
+            action:
+                "inscription",
 
             token:
                 jetonSession,
 
             donnees:
-                JSON.stringify(donnees)
+                JSON.stringify(
+                    donnees
+                )
 
         });
 
@@ -1145,7 +1830,7 @@ formInscription.addEventListener(
 
 
 /* =========================================================
-   DÉCONNEXION
+   DECONNEXION
 ========================================================= */
 
 boutonDeconnexion.addEventListener(
@@ -1161,12 +1846,14 @@ boutonDeconnexion.addEventListener(
             location.reload();
 
             return;
+
         }
 
 
         envoyerAuServeur({
 
-            action: "logout",
+            action:
+                "logout",
 
             token:
                 jetonSession
@@ -1178,23 +1865,78 @@ boutonDeconnexion.addEventListener(
 
 
 /* =========================================================
-   INITIALISATION
+   EVENEMENTS CENTRE / FILIERE / DUREE / CLASSE
 ========================================================= */
 
-document.getElementById("annee").value =
-    new Date().getFullYear();
+document.getElementById(
+    "centre"
+).addEventListener(
+    "change",
+    actualiserClasses
+);
 
-document.getElementById("dateInscription").value =
-    new Date().toISOString().split("T")[0];
 
-chargerListes();
+document.getElementById(
+    "filiere"
+).addEventListener(
+    "change",
+    actualiserClasses
+);
+
+
+document.getElementById(
+    "duree"
+).addEventListener(
+    "change",
+    actualiserClasses
+);
+
+
+document.getElementById(
+    "classe"
+).addEventListener(
+    "change",
+    synchroniserDureeDepuisClasse
+);
 
 
 /* =========================================================
-   UNE SESSION EXISTANTE N'EST PAS VALIDÉE AUTOMATIQUEMENT
-   Côté serveur pour éviter une fonction supplémentaire.
-   Pour la sécurité, on repart sur une connexion à chaque
-   nouvelle ouverture de page.
+   INITIALISATION
+========================================================= */
+
+document.getElementById(
+    "dateInscription"
+).value =
+    new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+/*
+   Année académique par défaut
+*/
+
+document.getElementById(
+    "annee"
+).value =
+    "2026-2027";
+
+
+/*
+   Charger les centres et filières
+*/
+
+chargerListes().then(
+    function() {
+
+        actualiserClasses();
+
+    }
+);
+
+
+/* =========================================================
+   NOUVELLE OUVERTURE DE PAGE
 ========================================================= */
 
 if (jetonSession) {
