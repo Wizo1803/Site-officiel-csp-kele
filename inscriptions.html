@@ -412,15 +412,10 @@
             </div>
 
             <div class="champ">
-                <label for="annee">Année de formation</label>
-
-                <input
-                    type="number"
-                    id="annee"
-                    name="annee"
-                    min="2020"
-                    max="2100"
-                    required>
+                <label for="annee">Année académique</label>
+                <select id="annee" name="annee" required>
+                    <option value="">-- Sélectionner --</option>
+                </select>
             </div>
 
             <div class="champ">
@@ -586,29 +581,73 @@ function codeFiliere(f){
     return m.length===1 ? m[0].slice(0,5) : m.slice(0,3).map(x=>x.slice(0,3)).join("").slice(0,6);
 }
 
-function obtenirClasse(centre,filiere,duree){
+function construireClasses(centre,filiere){
     const c=normaliserClasse(centre);
     const cc=CODES_CENTRES[c] || c.replace(/[^A-Z0-9]/g,"").slice(0,4);
     const cf=codeFiliere(filiere);
-    const cd=String(duree||"").replace(/\s+/g,"").toUpperCase();
-    return cc && cf && cd ? `${cc}-${cf}-${cd}` : "";
+    if(!cc || !cf) return [];
+    return ["12M","6M","3M"].map(d => `${cc}-${cf}-${d}`);
 }
 
-function actualiserClasse(){
-    const s=document.getElementById("classe");
-    const classe=obtenirClasse(
-        document.getElementById("centre").value,
-        document.getElementById("filiere").value,
-        document.getElementById("duree").value
-    );
-    s.innerHTML="";
-    if(!classe){
-        s.disabled=true;
-        s.innerHTML='<option value="">-- Sélectionner d\'abord le centre, la filière et la durée --</option>';
+function actualiserClasses(){
+    const centre=document.getElementById("centre").value;
+    const filiere=document.getElementById("filiere").value;
+    const duree=document.getElementById("duree").value;
+    const classeSelect=document.getElementById("classe");
+
+    classeSelect.innerHTML="";
+    const classes=construireClasses(centre,filiere);
+
+    if(!classes.length){
+        classeSelect.disabled=true;
+        classeSelect.innerHTML='<option value="">-- Choisir d’abord le centre et la filière --</option>';
         return;
     }
-    s.disabled=false;
-    s.innerHTML=`<option value="${classe}" selected>${classe}</option>`;
+
+    classeSelect.disabled=false;
+    classeSelect.innerHTML='<option value="">-- Sélectionner la classe --</option>';
+
+    classes.forEach(classe=>{
+        const option=document.createElement("option");
+        option.value=classe;
+        option.textContent=classe;
+        classeSelect.appendChild(option);
+    });
+
+    const classeCorrespondante = duree
+        ? classes.find(c => c.endsWith("-" + String(duree).replace(/\s+/g,"").toUpperCase()))
+        : "";
+
+    if(classeCorrespondante){
+        classeSelect.value=classeCorrespondante;
+    }
+}
+
+function synchroniserDureeDepuisClasse(){
+    const classe=document.getElementById("classe").value;
+    const duree=document.getElementById("duree");
+
+    if(classe.endsWith("-12M")) duree.value="12 mois";
+    else if(classe.endsWith("-6M")) duree.value="6 mois";
+    else if(classe.endsWith("-3M")) duree.value="3 mois";
+}
+
+function initialiserAnneesAcademiques(){
+    const select=document.getElementById("annee");
+    const maintenant=new Date();
+    const annee=maintenant.getFullYear();
+    const mois=maintenant.getMonth()+1;
+    const debut = mois >= 9 ? annee : annee-1;
+
+    select.innerHTML='<option value="">-- Sélectionner --</option>';
+    for(let i=-1;i<=3;i++){
+        const a=debut+i;
+        const option=document.createElement("option");
+        option.value=`${a}-${a+1}`;
+        option.textContent=`${a}-${a+1}`;
+        select.appendChild(option);
+    }
+    select.value=`${debut}-${debut+1}`;
 }
 
 /* =========================================================
@@ -689,9 +728,10 @@ async function chargerListes() {
 }
 
 
-document.getElementById("centre").addEventListener("change", actualiserClasse);
-document.getElementById("filiere").addEventListener("change", actualiserClasse);
-document.getElementById("duree").addEventListener("change", actualiserClasse);
+document.getElementById("centre").addEventListener("change", actualiserClasses);
+document.getElementById("filiere").addEventListener("change", actualiserClasses);
+document.getElementById("duree").addEventListener("change", actualiserClasses);
+document.getElementById("classe").addEventListener("change", synchroniserDureeDepuisClasse);
 
 /* =========================================================
    POSTER UNE REQUÊTE DANS L'IFRAME
