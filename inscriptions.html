@@ -374,6 +374,11 @@
             </div>
 
             <div class="champ">
+                <label for="lieuNaissance">Lieu de naissance</label>
+                <input type="text" id="lieuNaissance" name="lieuNaissance" required>
+            </div>
+
+            <div class="champ">
                 <label for="centre">Centre de formation</label>
 
                 <select id="centre" name="centre" required>
@@ -436,6 +441,11 @@
                     id="telephone"
                     name="telephone"
                     placeholder="+243...">
+            </div>
+
+            <div class="champ full">
+                <label for="adresse">Adresse</label>
+                <input type="text" id="adresse" name="adresse" placeholder="Adresse de résidence" required>
             </div>
 
         </div>
@@ -634,20 +644,24 @@ function synchroniserDureeDepuisClasse(){
 
 function initialiserAnneesAcademiques(){
     const select=document.getElementById("annee");
+    if(!select) return;
+
     const maintenant=new Date();
     const annee=maintenant.getFullYear();
     const mois=maintenant.getMonth()+1;
     const debut = mois >= 9 ? annee : annee-1;
 
-    select.innerHTML='<option value="">-- Sélectionner --</option>';
+    select.innerHTML="";
     for(let i=-1;i<=3;i++){
         const a=debut+i;
         const option=document.createElement("option");
-        option.value=`${a}-${a+1}`;
-        option.textContent=`${a}-${a+1}`;
+        option.value=String(a) + "-" + String(a+1);
+        option.textContent=String(a) + "-" + String(a+1);
         select.appendChild(option);
     }
-    select.value=`${debut}-${debut+1}`;
+
+    // L'année académique courante est immédiatement visible.
+    select.value=String(debut) + "-" + String(debut+1);
 }
 
 /* =========================================================
@@ -1084,6 +1098,9 @@ formInscription.addEventListener(
             dateNaissance:
                 document.getElementById("dateNaissance").value,
 
+            lieuNaissance:
+                document.getElementById("lieuNaissance").value,
+
             centre:
                 document.getElementById("centre").value,
 
@@ -1103,7 +1120,10 @@ formInscription.addEventListener(
                 document.getElementById("dateInscription").value,
 
             telephone:
-                document.getElementById("telephone").value
+                document.getElementById("telephone").value,
+
+            adresse:
+                document.getElementById("adresse").value
 
         };
 
