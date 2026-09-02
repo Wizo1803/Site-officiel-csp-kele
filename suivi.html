@@ -682,23 +682,23 @@ function afficherApprenants() {
             document.createElement("tr");
 
 
-      const valeurs = [
-
+     const valeurs = [
     a.numero,
     a.nom,
     a.postnom,
     a.prenom,
     a.sexe,
     formaterDate(a.dateNaissance),
+    a.lieuNaissance,
+    a.adresse,
     a.centre,
     a.filiere,
     a.duree,
+    a.classe,
     a.annee,
     formaterDate(a.dateInscription),
     a.telephone
-
 ];
-
 
         valeurs.forEach(valeur => {
 
