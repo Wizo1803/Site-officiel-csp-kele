@@ -437,7 +437,7 @@
 
 const URL_SCRIPT =
 "https://script.google.com/macros/s/AKfycbxnxMOyBG5bdj-hpnPogsVIUB-YMOc-bMTqh0z_75_DYV6Aerr3wVObRTCitNCNlIx6/exec";
-
+    
 let apprenants = [];
 
 
@@ -446,53 +446,101 @@ async function chargerApprenants() {
     const message =
         document.getElementById("message");
 
+    const callbackName =
+        "recevoirApprenants_" +
+        Date.now();
+
     try {
 
         message.textContent =
             "⏳ Chargement des données...";
 
-        const reponse =
-            await fetch(URL_SCRIPT);
 
-        const donnees =
-            await reponse.json();
+        window[callbackName] =
+            function(donnees) {
 
-        /*
-         * Pour l'instant, nous vérifions simplement
-         * que la connexion fonctionne.
-         */
+                try {
 
-        if (!donnees.apprenants) {
+                    if (!donnees ||
+                        !donnees.apprenants) {
 
-            throw new Error(
-                "Les données des apprenants ne sont pas encore disponibles."
-            );
+                        throw new Error(
+                            "Les données des apprenants ne sont pas disponibles."
+                        );
+                    }
 
-        }
 
-        apprenants =
-            donnees.apprenants;
+                    apprenants =
+                        donnees.apprenants;
 
-       remplirFiltres(donnees);
 
-        afficherApprenants();
+                    remplirFiltres(donnees);
 
-        message.textContent =
-            "✅ Données chargées.";
+                    afficherApprenants();
 
-    }
 
-    catch (erreur) {
+                    message.textContent =
+                        "✅ Données chargées.";
+
+
+                } catch (erreur) {
+
+                    console.error(erreur);
+
+                    message.textContent =
+                        "❌ Impossible de charger les apprenants.";
+                }
+
+
+                delete window[callbackName];
+
+                if (script.parentNode) {
+                    script.parentNode.removeChild(script);
+                }
+            };
+
+
+        const script =
+            document.createElement("script");
+
+
+        script.src =
+            URL_SCRIPT +
+            "?callback=" +
+            encodeURIComponent(callbackName) +
+            "&t=" +
+            Date.now();
+
+
+        script.onerror =
+            function() {
+
+                console.error(
+                    "Erreur de connexion à Google Apps Script."
+                );
+
+                message.textContent =
+                    "❌ Impossible de charger les apprenants.";
+
+                delete window[callbackName];
+
+                if (script.parentNode) {
+                    script.parentNode.removeChild(script);
+                }
+            };
+
+
+        document.body.appendChild(script);
+
+
+    } catch (erreur) {
 
         console.error(erreur);
 
         message.textContent =
             "❌ Impossible de charger les apprenants.";
-
     }
-
 }
-
 
 function remplirFiltres(listes) {
 
