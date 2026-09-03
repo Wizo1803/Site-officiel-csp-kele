@@ -1,10 +1,9 @@
 /* =========================================================
    SERVICE WORKER — CSP KELE
-   Version corrigée
+   Version 3 — correction mobile / Google Apps Script
    ========================================================= */
 
-const CACHE_NAME = "csp-kele-v2";
-
+const CACHE_NAME = "csp-kele-v3";
 
 const FILES_TO_CACHE = [
     "./",
@@ -55,6 +54,8 @@ self.addEventListener("activate", event => {
 
                     }
 
+                    return Promise.resolve();
+
                 })
 
             );
@@ -71,29 +72,60 @@ self.addEventListener("activate", event => {
 
 
 /* =========================================================
-   CHARGEMENT DES FICHIERS
+   REQUÊTES
    ========================================================= */
 
 self.addEventListener("fetch", event => {
 
+    const request = event.request;
+    const url = new URL(request.url);
+
+
+    /* -----------------------------------------------------
+       1. Ne jamais intercepter les requêtes POST
+       ----------------------------------------------------- */
+
+    if (request.method !== "GET") {
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       2. Ne pas intercepter les sites externes
+          notamment Google Apps Script
+       ----------------------------------------------------- */
+
+    if (url.origin !== self.location.origin) {
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       3. Pour les fichiers du site :
+          réseau d'abord, cache en secours
+       ----------------------------------------------------- */
+
     event.respondWith(
 
-        fetch(event.request)
+        fetch(request)
 
             .then(response => {
 
-                /*
-                 * On récupère toujours la version
-                 * actuelle depuis Internet.
-                 */
+                if (response && response.ok) {
 
-                const responseClone = response.clone();
+                    const responseClone = response.clone();
 
-                caches.open(CACHE_NAME).then(cache => {
+                    caches.open(CACHE_NAME).then(cache => {
 
-                    cache.put(event.request, responseClone);
+                        cache.put(request, responseClone);
 
-                });
+                    });
+
+                }
 
                 return response;
 
@@ -101,12 +133,7 @@ self.addEventListener("fetch", event => {
 
             .catch(() => {
 
-                /*
-                 * Si Internet n'est pas disponible,
-                 * on utilise la version enregistrée.
-                 */
-
-                return caches.match(event.request);
+                return caches.match(request);
 
             })
 
