@@ -441,54 +441,34 @@ const URL_SCRIPT =
 let apprenants = [];
 
 
-async function chargerApprenants() {
+function chargerApprenants() {
 
     const message =
         document.getElementById("message");
 
+    message.textContent =
+        "⏳ Chargement des données...";
+
+
+    /*
+     * Une seule fonction JSONP globale.
+     * Cette méthode évite fetch() et CORS et fonctionne
+     * avec le chargement <script> des navigateurs mobiles.
+     */
+
     const callbackName =
-        "recevoirApprenants_" +
-        Date.now();
+        "recevoirApprenants";
 
-    let script = null;
-    let termine = false;
+    let ancienScript =
+        document.getElementById("script-google-apprenants");
 
-    function nettoyer() {
-
-        if (script && script.parentNode) {
-            script.parentNode.removeChild(script);
-        }
-
-        try {
-            delete window[callbackName];
-        } catch (e) {
-            window[callbackName] = undefined;
-        }
+    if (ancienScript) {
+        ancienScript.remove();
     }
 
-    function erreurChargement(erreur) {
 
-        if (termine) return;
-
-        termine = true;
-
-        console.error(erreur);
-
-        message.textContent =
-            "❌ Impossible de charger les apprenants.";
-
-        nettoyer();
-    }
-
-    try {
-
-        message.textContent =
-            "⏳ Chargement des données...";
-
-
-        window[callbackName] = function(donnees) {
-
-            if (termine) return;
+    window[callbackName] =
+        function(donnees) {
 
             try {
 
@@ -510,74 +490,97 @@ async function chargerApprenants() {
 
                 afficherApprenants();
 
-                termine = true;
-
                 message.textContent =
                     "✅ " +
                     apprenants.length +
                     " apprenant(s) chargé(s).";
 
-                nettoyer();
 
             } catch (erreur) {
 
-                erreurChargement(erreur);
+                console.error(
+                    "Erreur données apprenants :",
+                    erreur
+                );
 
+                message.textContent =
+                    "❌ Impossible de charger les apprenants.";
+
+            }
+
+
+            const script =
+                document.getElementById(
+                    "script-google-apprenants"
+                );
+
+            if (script) {
+                script.remove();
             }
 
         };
 
 
-        script =
-            document.createElement("script");
+    const script =
+        document.createElement("script");
 
-        script.async = true;
+    script.id =
+        "script-google-apprenants";
 
-        script.type =
-            "application/javascript";
+    script.type =
+        "text/javascript";
 
-        script.src =
-            URL_SCRIPT +
-            "?callback=" +
-            encodeURIComponent(callbackName) +
-            "&_=" +
-            Date.now();
+    script.async = true;
+
+    script.src =
+        URL_SCRIPT +
+        "?callback=" +
+        callbackName +
+        "&t=" +
+        Date.now();
 
 
-        script.onerror = function() {
+    script.onerror =
+        function() {
 
-            erreurChargement(
-                "Erreur lors du chargement de Google Apps Script."
+            console.error(
+                "Impossible de charger Google Apps Script."
             );
 
-        };
+            message.textContent =
+                "❌ Impossible de charger les apprenants.";
 
-
-        script.onload = function() {
-
-            setTimeout(function() {
-
-                if (!termine) {
-
-                    erreurChargement(
-                        "Apps Script chargé sans exécuter le callback."
-                    );
-
-                }
-
-            }, 1500);
+            script.remove();
 
         };
 
 
-        document.body.appendChild(script);
+    document.head.appendChild(script);
 
 
-    } catch (erreur) {
+    /*
+     * Sécurité : si Google Apps Script ne répond pas
+     * dans les 10 secondes, afficher l'erreur.
+     */
 
-        erreurChargement(erreur);
+    setTimeout(function() {
 
-    }
+        if (
+            document.getElementById(
+                "script-google-apprenants"
+            )
+        ) {
+
+            message.textContent =
+                "❌ Impossible de charger les apprenants.";
+
+            document.getElementById(
+                "script-google-apprenants"
+            ).remove();
+
+        }
+
+    }, 10000);
 
 }
 function remplirFiltres(listes) {
