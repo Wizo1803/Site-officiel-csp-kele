@@ -444,131 +444,75 @@ function chargerApprenants() {
     const message = document.getElementById("message");
     message.textContent = "⏳ Chargement des données...";
 
-    // Supprimer l'ancien iframe
     const ancienne = document.getElementById("iframeDonnees");
-    if (ancienne) {
-        ancienne.remove();
+    if (ancienne) ancienne.remove();
+
+    if (window.cspKeleMessageHandler) {
+        window.removeEventListener("message", window.cspKeleMessageHandler);
     }
 
-    // IMPORTANT : installer le récepteur AVANT de créer l'iframe
-    window.addEventListener("message", function recevoirDonnees(event) {
+    window.cspKeleMessageHandler = function(event) {
 
         if (!event.data) return;
 
         if (event.data.type === "APPRENANTS_CSP_KELE") {
-
             try {
-
                 const donnees = event.data.donnees;
 
-                if (!donnees || !donnees.apprenants) {
-                    throw new Error("Données indisponibles");
+                if (!donnees || !Array.isArray(donnees.apprenants)) {
+                    throw new Error("Données des apprenants indisponibles.");
                 }
 
                 apprenants = donnees.apprenants;
-
                 remplirFiltres(donnees);
                 afficherApprenants();
 
-                message.textContent = "✅ Données chargées.";
+                message.textContent =
+                    "✅ " + apprenants.length + " apprenant(s) chargé(s).";
 
             } catch (erreur) {
-
                 console.error(erreur);
                 message.textContent =
-                    "❌ Impossible de charger les apprenants.";
+                    "❌ Impossible de traiter les données des apprenants.";
             }
 
+            window.removeEventListener("message", window.cspKeleMessageHandler);
+            window.cspKeleMessageHandler = null;
         }
 
         if (event.data.type === "APPRENANTS_CSP_KELE_ERREUR") {
-
             console.error(event.data.message);
-
             message.textContent =
                 "❌ Erreur lors du chargement des apprenants.";
+
+            window.removeEventListener("message", window.cspKeleMessageHandler);
+            window.cspKeleMessageHandler = null;
         }
+    };
 
-    }, { once: true });
+    window.addEventListener("message", window.cspKeleMessageHandler);
 
-
-    // Créer l'iframe APRÈS avoir installé le récepteur
     const iframe = document.createElement("iframe");
-
     iframe.id = "iframeDonnees";
     iframe.style.display = "none";
-
-    iframe.src =
-        URL_SCRIPT +
-        "?mode=iframe&t=" +
-        Date.now();
+    iframe.title = "Chargement des données des apprenants";
+    iframe.src = URL_SCRIPT + "?mode=iframe&t=" + Date.now();
 
     document.body.appendChild(iframe);
-}
-
-
-    const script =
-        document.createElement("script");
-
-    script.id =
-        "script-google-apprenants";
-
-    script.type =
-        "text/javascript";
-
-    script.async = true;
-
-    script.src =
-        URL_SCRIPT +
-        "?callback=" +
-        callbackName +
-        "&t=" +
-        Date.now();
-
-
-    script.onerror =
-        function() {
-
-            console.error(
-                "Impossible de charger Google Apps Script."
-            );
-
-            message.textContent =
-                "❌ Impossible de charger les apprenants.";
-
-            script.remove();
-
-        };
-
-
-    document.head.appendChild(script);
-
-
-    /*
-     * Sécurité : si Google Apps Script ne répond pas
-     * dans les 10 secondes, afficher l'erreur.
-     */
 
     setTimeout(function() {
-
-        if (
-            document.getElementById(
-                "script-google-apprenants"
-            )
-        ) {
-
+        if (message.textContent === "⏳ Chargement des données...") {
             message.textContent =
                 "❌ Impossible de charger les apprenants.";
 
-            document.getElementById(
-                "script-google-apprenants"
-            ).remove();
-
+            if (window.cspKeleMessageHandler) {
+                window.removeEventListener("message", window.cspKeleMessageHandler);
+                window.cspKeleMessageHandler = null;
+            }
         }
-
-    }, 10000);
-
+    }, 15000);
 }
+
 function remplirFiltres(listes) {
 
     const centreSelect =
