@@ -442,19 +442,60 @@ const URL_SCRIPT =
 function chargerApprenants() {
 
     const message = document.getElementById("message");
-
     message.textContent = "⏳ Chargement des données...";
 
+    // Supprimer l'ancien iframe
     const ancienne = document.getElementById("iframeDonnees");
-
     if (ancienne) {
         ancienne.remove();
     }
 
+    // IMPORTANT : installer le récepteur AVANT de créer l'iframe
+    window.addEventListener("message", function recevoirDonnees(event) {
+
+        if (!event.data) return;
+
+        if (event.data.type === "APPRENANTS_CSP_KELE") {
+
+            try {
+
+                const donnees = event.data.donnees;
+
+                if (!donnees || !donnees.apprenants) {
+                    throw new Error("Données indisponibles");
+                }
+
+                apprenants = donnees.apprenants;
+
+                remplirFiltres(donnees);
+                afficherApprenants();
+
+                message.textContent = "✅ Données chargées.";
+
+            } catch (erreur) {
+
+                console.error(erreur);
+                message.textContent =
+                    "❌ Impossible de charger les apprenants.";
+            }
+
+        }
+
+        if (event.data.type === "APPRENANTS_CSP_KELE_ERREUR") {
+
+            console.error(event.data.message);
+
+            message.textContent =
+                "❌ Erreur lors du chargement des apprenants.";
+        }
+
+    }, { once: true });
+
+
+    // Créer l'iframe APRÈS avoir installé le récepteur
     const iframe = document.createElement("iframe");
 
     iframe.id = "iframeDonnees";
-
     iframe.style.display = "none";
 
     iframe.src =
@@ -463,96 +504,7 @@ function chargerApprenants() {
         Date.now();
 
     document.body.appendChild(iframe);
-
-    window.addEventListener("message", function recevoirDonnees(event) {
-
-        if (!event.data) {
-            return;
-        }
-
-        if (event.data.type !== "APPRENANTS_CSP_KELE") {
-            return;
-        }
-
-        try {
-
-            const donnees = event.data.donnees;
-
-            if (!donnees || !donnees.apprenants) {
-                throw new Error("Données indisponibles");
-            }
-
-            apprenants = donnees.apprenants;
-
-            remplirFiltres(donnees);
-
-            afficherApprenants();
-
-            message.textContent = "✅ Données chargées.";
-
-        } catch (erreur) {
-
-            console.error(erreur);
-
-            message.textContent =
-                "❌ Impossible de charger les apprenants.";
-        }
-
-    }, { once: true });
-
 }
-    window[callbackName] =
-        function(donnees) {
-
-            try {
-
-                if (
-                    !donnees ||
-                    !Array.isArray(donnees.apprenants)
-                ) {
-
-                    throw new Error(
-                        "Réponse Apps Script invalide."
-                    );
-
-                }
-
-                apprenants =
-                    donnees.apprenants;
-
-                remplirFiltres(donnees);
-
-                afficherApprenants();
-
-                message.textContent =
-                    "✅ " +
-                    apprenants.length +
-                    " apprenant(s) chargé(s).";
-
-
-            } catch (erreur) {
-
-                console.error(
-                    "Erreur données apprenants :",
-                    erreur
-                );
-
-                message.textContent =
-                    "❌ Impossible de charger les apprenants.";
-
-            }
-
-
-            const script =
-                document.getElementById(
-                    "script-google-apprenants"
-                );
-
-            if (script) {
-                script.remove();
-            }
-
-        };
 
 
     const script =
