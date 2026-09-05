@@ -441,30 +441,66 @@ const URL_SCRIPT =
 
 function chargerApprenants() {
 
-    const message =
-        document.getElementById("message");
+    const message = document.getElementById("message");
 
-    message.textContent =
-        "⏳ Chargement des données...";
+    message.textContent = "⏳ Chargement des données...";
 
+    const ancienne = document.getElementById("iframeDonnees");
 
-    /*
-     * Une seule fonction JSONP globale.
-     * Cette méthode évite fetch() et CORS et fonctionne
-     * avec le chargement <script> des navigateurs mobiles.
-     */
-
-    const callbackName =
-        "recevoirApprenants";
-
-    let ancienScript =
-        document.getElementById("script-google-apprenants");
-
-    if (ancienScript) {
-        ancienScript.remove();
+    if (ancienne) {
+        ancienne.remove();
     }
 
+    const iframe = document.createElement("iframe");
 
+    iframe.id = "iframeDonnees";
+
+    iframe.style.display = "none";
+
+    iframe.src =
+        URL_SCRIPT +
+        "?mode=iframe&t=" +
+        Date.now();
+
+    document.body.appendChild(iframe);
+
+    window.addEventListener("message", function recevoirDonnees(event) {
+
+        if (!event.data) {
+            return;
+        }
+
+        if (event.data.type !== "APPRENANTS_CSP_KELE") {
+            return;
+        }
+
+        try {
+
+            const donnees = event.data.donnees;
+
+            if (!donnees || !donnees.apprenants) {
+                throw new Error("Données indisponibles");
+            }
+
+            apprenants = donnees.apprenants;
+
+            remplirFiltres(donnees);
+
+            afficherApprenants();
+
+            message.textContent = "✅ Données chargées.";
+
+        } catch (erreur) {
+
+            console.error(erreur);
+
+            message.textContent =
+                "❌ Impossible de charger les apprenants.";
+        }
+
+    }, { once: true });
+
+}
     window[callbackName] =
         function(donnees) {
 
